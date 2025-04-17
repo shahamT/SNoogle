@@ -7,14 +7,11 @@ export function NoteList({ notes,onRemove }) {
 
 
     return (
-    <section className="note-list ">
+    <section className="note-list grid">
       
             {notes.map(note =>
-                <div key={note.id} className="note-list-card">
-                    <NotePreview note={note}/>
-                    <button onClick={()=>onRemove(note.id)}>Delete note</button>
+                    <NotePreview key={note.id} note={note} onRemove={onRemove}/>
 
-                </div>
             )}
 
      

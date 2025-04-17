@@ -2,9 +2,12 @@ const { useState, useEffect } = React
 const { Link } = ReactRouterDOM
 
 
-import { NoteList } from '../cmps/NoteList.jsx'
 import { noteService } from '../services/note.service.js'
 
+
+import { NoteAdd } from '../cmps/NoteAdd.jsx'
+import { NoteList } from '../cmps/NoteList.jsx'
+import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 
 
 export function NoteIndex() {
@@ -41,8 +44,9 @@ export function NoteIndex() {
 
 
     return (
-        <div className='note-index'>
-            
+        <div className='note-index grid'>
+           <NoteSideNav/>
+           <NoteAdd/> 
             <NoteList notes={notes} onRemove={onRemove} />
 
 

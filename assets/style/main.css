@@ -7,12 +7,14 @@
 @import 'base/base.css';
 @import 'base/helpers.css';
 @import 'base/layout.css';
+@import 'base/icons-font.css';
 
 /* Base-Elements*/
 @import 'base/base-elements/buttons.css';
 @import 'base/base-elements/forms.css';
 @import 'base/base-elements/modals.css';
 @import 'base/base-elements/tooltips.css';
+@import 'base/base-elements/checkboxes.css';
 
 
 /* MEDIA QUERIES */
@@ -47,4 +49,5 @@
 @import 'cmps/mail/mail-list.css';
 @import 'cmps/mail/mail-search-bar.css';
 @import 'cmps/mail/mail-side-nav.css';
-@import 'cmps/mail/mail-sort-bar.css';
+@import 'cmps/mail/mail-filter-bar.css';
+@import 'cmps/mail/mail-preview.css';

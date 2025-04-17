@@ -1,6 +1,5 @@
 .main-layout {
     grid-template-rows: 80px 1fr;
-    row-gap: 24px;
     min-height: 100vh;
 }
 

@@ -18,3 +18,84 @@
     content: "<";
     padding-inline-end: 8px;
 }
+
+
+/* icon btns */
+
+.icon-btn {
+    position: relative;
+    border-radius: var(--border-radius-round);
+    border: none;
+    background-color: transparent;
+    font-family: fa-regular;
+    color: var(--clr-gray-500);
+
+}
+
+
+/* hover animation */
+.icon-btn::before {
+    content: "";
+
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: block;
+
+    width: 20%;
+    height: 20%;
+
+    
+    background-color: var(--clr-icn-btn-hover);
+    border-radius: var(--border-radius-round);
+
+    opacity: 0;
+    transition: var(--transition-ex-fast);
+}
+
+.icon-btn:hover::before{
+    opacity: 1;
+    
+    width: 100%;
+    height: 100%;
+
+    transition: var(--transition-ex-fast);
+
+}
+
+
+/* color type */
+
+
+/* size */
+.icon-btn.small {
+    width: 48px;
+    width: 48px;
+}
+
+.icon-btn.medium {
+    width: 40px ;
+    width: 40px ;
+    font-size: 1em;
+}
+
+.icon-btn.big {
+    width: 34px;
+    width: 34px;
+}
+
+
+/* icons */
+.icon-btn::after {
+    position: relative;
+    z-index: 1;
+
+}
+
+.icon-btn.star::after {
+    content: "\f005";
+
+}

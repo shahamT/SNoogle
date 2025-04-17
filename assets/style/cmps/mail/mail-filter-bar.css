@@ -1,0 +1,6 @@
+.mail-filter-bar{
+    padding-inline: var(--px-spacing-mdl);
+    
+    background-color:var(--clr-white);
+
+}

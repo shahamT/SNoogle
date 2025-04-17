@@ -39,20 +39,20 @@ export function getRandomInRange(from = -180, to = 180, fixed = 3) {
     return +(Math.random() * (to - from) + from).toFixed(fixed)
 }
 
-export function elapsedTime(pastMs) {
-    const now = new Date()
-    const secondsPast = Math.round((now - pastMs) / 1000)
+// export function elapsedTime(pastMs) {
+//     const now = new Date()
+//     const secondsPast = Math.round((now - pastMs) / 1000)
 
-    if (secondsPast < 60 * 5) return 'just now'
-    
-    const minutesPast = Math.floor(secondsPast / 60)
-    if (minutesPast < 60) return 'last hour'
+//     if (secondsPast < 60 * 5) return 'just now'
 
-    const hoursPast = Math.floor(minutesPast / 60)
-    if (hoursPast < 24) return 'today'
+//     const minutesPast = Math.floor(secondsPast / 60)
+//     if (minutesPast < 60) return 'last hour'
 
-    return `${Math.floor(hoursPast / 24)} days ago`
-}
+//     const hoursPast = Math.floor(minutesPast / 60)
+//     if (hoursPast < 24) return 'today'
+
+//     return `${Math.floor(hoursPast / 24)} days ago`
+// }
 
 export function updateQueryParams(queryParamsObj) {
     const queryParams = new URLSearchParams()
@@ -132,11 +132,6 @@ export function debounce(func, delay = 300) {
     }
 }
 
-
-export function padNum(num) {
-    return (num > 9) ? num + '' : '0' + num
-}
-
 export function getRandomColor() {
     const letters = '0123456789ABCDEF'
     var color = '#'
@@ -153,8 +148,40 @@ export function getDayName(date, locale) {
 
 
 export function getMonthName(date) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ]
-    return monthNames[date.getMonth()]
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    return monthNames[date.getMonth()];
+}
+
+export function padNum(n) {
+    return String(n).padStart(2, '0');
+}
+
+export function elapsedTime(pastMs) {
+    const past = new Date(pastMs);
+    const now = new Date();
+    const diffSeconds = Math.round((now - past) / 1000);
+
+    // less than 5 minutes ago
+    if (diffSeconds < 60 * 5) {
+        return `just now at ${padNum(past.getHours())}:${padNum(past.getMinutes())}`;
+    }
+
+    // same calendar day
+    if (now.toDateString() === past.toDateString()) {
+        return `${padNum(past.getHours())}:${padNum(past.getMinutes())}`;
+    }
+
+    // same month of the same year
+    if (
+        now.getFullYear() === past.getFullYear() &&
+        now.getMonth() === past.getMonth()
+    ) {
+        return `${padNum(past.getDate())} ${getMonthName(past)}`;
+    }
+
+    // earlier than this month
+    return `${padNum(past.getDate())}/${padNum(past.getMonth() + 1)}/${past.getFullYear()}`;
 }

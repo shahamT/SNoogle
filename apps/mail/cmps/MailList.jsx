@@ -1,3 +1,46 @@
-export function MailList() {
-    return <div className="mail-list" >Mail list</div>
+// === React
+// const { useState, useEffect, useRef } = React
+// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
+
+// === Services
+
+// === Child Components
+import { Loader } from "../../../cmps/general/Loader.jsx";
+import { MailPreview } from "./MailPreview.jsx";
+
+
+// ====== Component ======
+// =======================
+
+export function MailList({ mails }) {
+    // === Hooks
+
+    // === Effects
+
+    // === Functions
+
+    // size = 1,
+    // width = 3,
+    // speed = 0.8,
+    // color = '#fff',
+    // type = 'inline',
+    // text = '',
+    // textSize = 1,
+    // textPad = 1,
+    // textPos = 'bottom'
+
+    if (!mails) return <Loader size={3} color="var(--clr-gray-300)" />
+    return (
+        <section className="mail-list flex flex-column" >
+            
+            {mails.map(mail=> {
+                return  <MailPreview key={mail.id} mail={mail}/>
+            })}
+
+
+        </section>
+    )
 }
+
+
+

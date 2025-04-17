@@ -1,4 +1,13 @@
-.mail-search-bar{
-    background-color: rgb(87, 196, 37);
+.mail-search-bar {
+    padding-inline: var(--px-spacing-mdl);
+    padding-block: var(--px-spacing-sm);
 
+
+    background-color: var(--clr-white);
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+}
+
+.mail-search-bar .mail-search{
+    width: 100%;
 }

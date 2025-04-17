@@ -1,4 +1,4 @@
 .mail-side-nav{
-    background-color: rgb(255, 102, 0);
+    background-color: var(--clr-bg-light-base);
 
 }

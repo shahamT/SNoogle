@@ -3,28 +3,28 @@
 
   /* === Main Colors === */
   /* blue */
---clr-blue-base: #4285F4;
---clr-blue-l: #8AB4F8;
---clr-blue-d: #1967D2;
+  --clr-blue-base: #4285F4;
+  --clr-blue-l: #8AB4F8;
+  --clr-blue-d: #1967D2;
 
-/* red */
---clr-red-base: #EA4335;
---clr-red-l: #F28B82;
---clr-red-d: #C5221F;
+  /* red */
+  --clr-red-base: #EA4335;
+  --clr-red-l: #F28B82;
+  --clr-red-d: #C5221F;
 
-/* yellow */
---clr-yellow-base: #FBBC05;
---clr-yellow-l: #FDD663;
---clr-yellow-d: #F9AB00;
+  /* yellow */
+  --clr-yellow-base: #FBBC05;
+  --clr-yellow-l: #FDD663;
+  --clr-yellow-d: #F9AB00;
 
-/* green */
---clr-green-base: #34A853;
---clr-green-l: #81C995;
---clr-green-d: #0F9D58;
+  /* green */
+  --clr-green-base: #34A853;
+  --clr-green-l: #81C995;
+  --clr-green-d: #0F9D58;
 
 
-  /* secondary */
-  --clr-secondary-base: ;
+  /* buttons */
+  --clr-icn-btn-hover: rgba(0, 0, 0, 0.05);
   --clr-secondary-l: ;
   --clr-secondary-d: ;
 
@@ -42,11 +42,15 @@
   /* === Grayscale === */
   --clr-white: #ffffff;
   --clr-gray-100: #F1F3F4;
+  --clr-gray-200: #C6CACD;
   --clr-gray-300: #9AA0A6;
+  --clr-gray-400: #7C8287;
+  --clr-gray-500: #5F6368;
+  --clr-gray-700: #3C4043;
   --clr-black: #202124;
 
   /* bg colors */
-  --clr-bg-light-base: ;
+  --clr-bg-light-base: #F8FAFD;
   --clr-bg-light-l: ;
   --clr-bg-light-d: ;
 
@@ -82,15 +86,15 @@
 
 
   /* ============ FONTS ============ */
-  --font-body: Roboto, sans-serif;
-  --font-heading: Roboto, sans-serif;
-  --font-accent: Roboto, sans-serif;
+  --font-primary: Roboto, sans-serif;
+
 
 
   /* ============ SPACING ============ */
   --px-spacing-xs: 4px;
   --px-spacing-sm: 8px;
   --px-spacing-md: 16px;
+  --px-spacing-mdl: 24px;
   --px-spacing-lg: 32px;
 
   --em-spacing-xs: 0.25em;
@@ -115,8 +119,10 @@
 
 
   /* ============ SHADOWS ============ */
-  --box-shadow-1: box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
-  --box-shadow-2: box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+  --box-shadow-1: inset 1px 0 0 rgb(218,220,224),inset -1px 0 0 rgb(218,220,224),0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15)
+  ;
+  --box-shadow-2: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  ;
   --box-shadow-3: ;
   /* ============ Z-INDEX ============ */
 
@@ -128,7 +134,7 @@
 
   /* ============ TRANSITIONS ============ */
 
-  --transition-ex-fast: 0.2s;
+  --transition-ex-fast: 0.15s;
   --transition-fast: 0.3s;
   --transition-medium: 0.5s;
   --transition-slow: 0.7s;

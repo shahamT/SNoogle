@@ -21,8 +21,8 @@ export function MailSearchBar({ /* prop1, prop2 */ }) {
 
     // if (!data) return <div>Loading...</div>
     return (
-        <section className="mail-search-bar">
-            <h1>MailSearchBar</h1>
+        <section className="mail-search-bar flex">
+            <input type="text" className="mail-search search-input" />
         </section>
     )
 }

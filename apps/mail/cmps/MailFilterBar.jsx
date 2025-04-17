@@ -12,7 +12,7 @@
 // ====== Component ======
 // =======================
 
-export function MailSortBar({ /* prop1, prop2 */ }) {
+export function MailFilterBar({ /* prop1, prop2 */ }) {
     // === Hooks
 
     // === Effects
@@ -21,8 +21,8 @@ export function MailSortBar({ /* prop1, prop2 */ }) {
 
     // if (!data) return <div>Loading...</div>
     return (
-        <section className="mail-sort-bar">
-            <h1>mail sort</h1>
+        <section className="mail-filter-bar flex">
+            <h1>mail filter bar</h1>
         </section>
     )
 }

@@ -1,5 +1,62 @@
 .note-preview{
+position: relative;  
 min-height: 100px;
-background-color: rgb(42, 235, 235);
+background-color: var(--clr-white);
 
+border-radius:var(--border-radius-md);
+border: 1px solid var(--clr-gray-300);
+box-shadow: 0 2px 8px rgba(0,0,0,.15);
+
+padding: 1em;
+
+
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+grid-template-rows: auto;
+grid-template-areas:
+ ". . . . . pin"
+ ". main main main main ."
+ ". . . . . . "
+ ". . . . . delete ";
+ 
+ 
+ 
+}
+.note-preview:hover > button  {
+    /* display: block;         */
+    opacity: 1; 
+    pointer-events: auto; 
+    transition: opacity .5s ease-out, transform .5s ease-out;
+}
+
+
+.note-preview > button {
+    /* display: none; */
+    justify-self: end;
+    align-self: end;
+    width: 30px;
+    height: 30px;
+    
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity .5s ease-out, transform .5s ease-out;
+    
+}
+
+.note-txt, .note-img, .note-todos{
+    grid-area: main;
+}
+
+.pin-note-btn{
+grid-area: pin;
+
+}
+.delete-note-btn{
+    grid-area: delete;
+
+    
+}
+
+.pinned {
+    opacity: 1 !important;
 }

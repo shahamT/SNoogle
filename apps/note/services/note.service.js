@@ -103,8 +103,8 @@ function getEmptyNote(type = 'NoteTxt') {
             default:
             throw new Error(`Unknown note type: ${type}`)
         }
+        return note
 
-    return note
 }
 
 

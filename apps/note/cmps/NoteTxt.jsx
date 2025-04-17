@@ -5,7 +5,7 @@ export function NoteTxt({ note }) {
     const { title, txt } = note.info
 
     return (
-        <article className='note-preview'>
+        <article className='note-txt'>
 
             <h3>{title}</h3>
             <p>{txt && <LongTxt txt={txt} />}</p>

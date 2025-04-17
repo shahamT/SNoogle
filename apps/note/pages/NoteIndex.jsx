@@ -13,8 +13,7 @@ import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
-    const [isAddNote, setIsAddNote] = useState(false)
-    const [noteToEdit, setNoteToEdit] = useState([])
+
 
     useEffect(() => {
         loadNotes()
@@ -34,7 +33,6 @@ export function NoteIndex() {
 
     // functions
     function onRemove(noteId) {
-        console.log(noteId)
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => noteId !== note.id))
@@ -43,11 +41,26 @@ export function NoteIndex() {
             .catch(() => { showErrorMsg('could not remove note') })
     }
 
-    function onToggleForm() {
-        setNoteToEdit(noteService.getEmptyNote('NoteTxt'))
-        setIsAddNote(prevIsAddNot => !prevIsAddNot)
-    }
 
+    function onSetPin(noteId) {
+        noteService.get(noteId)
+            .then(note => {
+                note.isPinned = !note.isPinned
+                return noteService.save(note)
+            })
+            .then(savedNote => {
+                setNotes(prevNotes => {
+                    const newNotes = prevNotes
+                        .map(note =>
+                            note.id === savedNote.id ? { ...savedNote } : note)
+                                .sort((a, b) => (b.isPinned === true) - (a.isPinned === true))
+                                return newNotes
+                            }
+                        )
+                        .catch(err => console.error('Could not toggle pin:', err))
+                    })
+
+    }
 
 
 
@@ -55,11 +68,8 @@ export function NoteIndex() {
     return (
         <div className='note-index grid'>
             <NoteSideNav />
-            <button className="note-add-btn-container" onClick={onToggleForm}>
-                Take a note...
-                {isAddNote && <NoteAdd />}
-            </button>
-            <NoteList notes={notes} onRemove={onRemove} />
+            <NoteAdd />
+            <NoteList notes={notes} onRemove={onRemove} onSetPin={onSetPin} />
 
 
         </div>

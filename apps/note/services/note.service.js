@@ -122,43 +122,157 @@ function _createNotes() {
 }
 
 
+// Generates 10 demo notes (2 long text notes ≥100 words)
 function _createDemoNotes() {
     const now = Date.now()
+  
     return [
-        {
-            id: makeId(4),
-            createdAt: now,
-            type: 'NoteTxt',
-            isPinned: true,
-            style: { backgroundColor: '#00d' },
-            info: { txt: 'Fullstack Me Baby!' }
-        },
-        {
-            id: makeId(4),
-            createdAt: now + 1,
-            type: 'NoteImg',
-            isPinned: false,
-            style: { backgroundColor: '#00d' },
-            info: {
-                url: 'https://source.unsplash.com/random/600x400',
-                title: 'Bobi and Me'
-            }
-        },
-        {
-            id: makeId(4),
-            createdAt: now + 2,
-            type: 'NoteTodos',
-            isPinned: false,
-            info: {
-                title: 'Get my stuff together',
-                todos: [
-                    { txt: 'Driving license', doneAt: null },
-                    { txt: 'Coding power', doneAt: 187111111 }
-                ]
-            }
+      // 1 – long text (~120 words)
+      {
+        id: makeId(4),
+        createdAt: now,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: { backgroundColor: '#ffd58a' },
+        info: {
+          txt: `The morning began with a light jog around the park. The sky was
+          cloud‑dotted, cool enough to feel fresh without a jacket. I passed the
+          lake and heard ducks splashing near the reeds. After the run I stopped
+          at a tiny corner café that’s been open since the nineties, ordered a
+          strong Americano and a cheese toastie, and watched people greet the
+          owner by first name. On my commute I listened to a radio story about a
+          neighbor who grows tomatoes on his rooftop and gives them away on
+          Sundays. It made me think about how small gestures change an entire
+          street’s mood. Work was busy—stand‑ups, stubborn bugs, sprint planning—
+          but a surprise chocolate‑cake birthday at noon melted the stress. I
+          left the office with a pink sunset overhead and a new novel waiting at
+          home.`
         }
+      },
+  
+      // 2 – image note
+      {
+        id: makeId(4),
+        createdAt: now + 1,
+        type: 'NoteImg',
+        isPinned: false,
+        style: { backgroundColor: '#e0f7fa' },
+        info: {
+          url: 'https://source.unsplash.com/random/600x400?nature,water',
+          title: 'Friday stroll by the lake'
+        }
+      },
+  
+      // 3 – todo list
+      {
+        id: makeId(4),
+        createdAt: now + 2,
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+          title: 'Weekend tasks',
+          todos: [
+            { txt: 'Clean wardrobe', doneAt: null },
+            { txt: 'Buy veggies for dinner', doneAt: null },
+            { txt: 'Call Grandma', doneAt: 187111111 }
+          ]
+        }
+      },
+  
+      // 4 – short text
+      {
+        id: makeId(4),
+        createdAt: now + 3,
+        type: 'NoteTxt',
+        isPinned: false,
+        style: { backgroundColor: '#f8bbd0' },
+        info: { txt: 'Pick up the package from the post office before 8 PM' }
+      },
+  
+      // 5 – inspirational image
+      {
+        id: makeId(4),
+        createdAt: now + 4,
+        type: 'NoteImg',
+        isPinned: true,
+        style: { backgroundColor: '#dcedc8' },
+        info: {
+          url: 'https://source.unsplash.com/random/600x400?mountain',
+          title: 'Next hiking spot'
+        }
+      },
+  
+      // 6 – another long text note (~110 words)
+      {
+        id: makeId(4),
+        createdAt: now + 5,
+        type: 'NoteTxt',
+        isPinned: false,
+        style: { backgroundColor: '#d1c4e9' },
+        info: {
+          txt: `Monday morning I swapped my usual drive for a train ride. On the
+          platform I bumped into an old university friend I hadn’t seen in
+          years. We laughed about nights we lived on instant noodles and how now
+          we debate specialty coffee and pension plans. The ride flew by, and he
+          promised to email a hilarious boot‑camp photo from 2010. That random
+          encounter reminded me that people drift out and back into our lives,
+          adding unexpected color like a pop‑up art show on an empty wall.`
+        }
+      },
+  
+      // 7 – grocery list
+      {
+        id: makeId(4),
+        createdAt: now + 6,
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+          title: 'Grocery run',
+          todos: [
+            { txt: 'Almond milk', doneAt: null },
+            { txt: 'Brown rice',  doneAt: null },
+            { txt: 'Ground coffee', doneAt: null }
+          ]
+        }
+      },
+  
+      // 8 – meeting reminder
+      {
+        id: makeId(4),
+        createdAt: now + 7,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: { backgroundColor: '#fff59d' },
+        info: { txt: 'Wednesday 14:30 – mortgage consultant meeting' }
+      },
+  
+      // 9 – dinner photo
+      {
+        id: makeId(4),
+        createdAt: now + 8,
+        type: 'NoteImg',
+        isPinned: false,
+        style: { backgroundColor: '#ffe0b2' },
+        info: {
+          url: 'https://source.unsplash.com/random/600x400?food',
+          title: 'Experimental dinner'
+        }
+      },
+  
+      // 10 – medium text idea
+      {
+        id: makeId(4),
+        createdAt: now + 9,
+        type: 'NoteTxt',
+        isPinned: false,
+        style: { backgroundColor: '#c8e6c9' },
+        info: {
+          txt: 'Blog post idea: balancing full‑time work with evening studies without sacrificing downtime.'
+        }
+      }
     ]
-}
+  }
+  
 
 
 

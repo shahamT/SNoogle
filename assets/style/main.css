@@ -40,7 +40,9 @@
 
 
 /* Notes Cmps */
+@import 'cmps/notes/notes-index.css';
 @import 'cmps/notes/notes-list.css';
+@import 'cmps/notes/notes-preview.css';
 
 
 

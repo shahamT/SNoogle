@@ -20,23 +20,17 @@ export const noteService = {
 // to do
 function query(filterBy = {}) {
     return storageService.query(NOTES_KEY)
-        // .then(() => console.log('query(filterBy) need you to update'))
-    // .then(notes => {
-    //   if (filterBy.search) {
-    //     const regExp = new RegExp(filterBy.search, 'i')
-    //     notes = notes.filter(note =>
-    //       regExp.test(note.title)
-    //       || regExp.test(note.subtitle)
-    //       || regExp.test(note.authors)
-    //       || regExp.test(note.description))
-    //   }
-    //   if (filterBy.category) {
-    //     notes = notes.filter(note => note.categories.includes(filterBy.category))
-    //   }
-    //   return notes
-    // })
-}
-
+    .then(notes => {
+        if (!filterBy.txt) return notes
+        const regExp = new RegExp(filterBy.txt, 'i')
+        return notes.filter(note =>
+          regExp.test(note.type) ||
+          regExp.test(note.info.txt || '') ||
+          regExp.test(note.info.title || '')
+        )
+      })
+    }
+    
 function get(noteId) {
     return storageService.get(NOTES_KEY, noteId)
 }
@@ -86,7 +80,8 @@ function getEmptyNote(type = 'NoteTxt') {
     
     switch (type) {
         case 'NoteTxt':
-            base.info = { txt: '' }
+            base.info = { title:''
+                 ,txt: '' }
             break
 
         case 'NoteImg':
@@ -119,10 +114,11 @@ function getEmptyNote(type = 'NoteTxt') {
 // ~~~~~~~~~~~~~~~~LOCAL FUNCTIONS~~~~~~~~~~~~~~~~~~~
 
 function _createNotes() {
-    if (!loadFromStorage(NOTES_KEY) || loadFromStorage(NOTES_KEY).lentgh === 0) {
-        const notes = _createDemoNotes()
-       saveToStorage(NOTES_KEY, notes)
-    }
+    const notes = loadFromStorage(NOTES_KEY) || []
+    if (notes.length === 0) {
+        saveToStorage(NOTES_KEY, _createDemoNotes())
+      }
+    
 }
 
 

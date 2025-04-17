@@ -1,0 +1,20 @@
+.note-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+.note-list li {
+  background: #f2f2f2;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.note-list-card {
+
+
+}

@@ -1,13 +1,19 @@
+import { NoteImg } from "./NoteImg.jsx"
+import { NoteTodos } from "./NoteTodos.jsx"
+import { NoteTxt } from "./NoteTxt.jsx"
 
 export function NotePreview({ note }) {
-    const { title } = note.info
+    const { type } = note
+    console.log(note)
 
-    return <article className='book-prev'>
-        <h3>{book.title}</h3>
-        <img src={book.thumbnail} alt="" />
-        <p><span className='bold-txt'>Price:</span> {listPrice.amount}</p>
-        <p><span className='bold-txt'>Currency:</span> {listPrice.currencyCode}</p>
-        {listPrice.isOnSale && <img className="on-sale-icon" src="/assets/booksImages/onSale.png.png" alt="" />}
-    </article>
 
+
+    return (
+        <article className='note-preview'>
+            {type === 'NoteTxt' && <NoteTxt note={note} />}
+            {type === 'NoteImg' && <NoteImg note={note} />}
+            {type === 'NoteTodos' && <NoteTodos note={note} />}
+
+        </article>
+    )
 }

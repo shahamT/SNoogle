@@ -1,7 +1,7 @@
 import { NotePreview } from "./NotePreview.jsx"
 
 
-export function NoteList({ notes,onRemove,onSetPin }) {
+export function NoteList({ notes,onRemove,onSetPin,updateTodo }) {
 
 
 
@@ -10,7 +10,7 @@ export function NoteList({ notes,onRemove,onSetPin }) {
     <section className="note-list grid">
       
             {notes.map(note =>
-                    <NotePreview key={note.id} note={note} onSetPin={onSetPin} onRemove={onRemove}/>
+                    <NotePreview key={note.id} note={note} onSetPin={onSetPin} updateTodo={updateTodo} onRemove={onRemove}/>
 
             )}
 

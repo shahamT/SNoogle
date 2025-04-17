@@ -1,0 +1,10 @@
+.note-todo > ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+.crossed {
+    text-decoration: line-through;
+    color: var(--clr-gray-200);
+  }

@@ -41,7 +41,6 @@ export function NoteIndex() {
             .catch(() => { showErrorMsg('could not remove note') })
     }
 
-
     function onSetPin(noteId) {
         noteService.get(noteId)
             .then(note => {
@@ -53,23 +52,35 @@ export function NoteIndex() {
                     const newNotes = prevNotes
                         .map(note =>
                             note.id === savedNote.id ? { ...savedNote } : note)
-                                .sort((a, b) => (b.isPinned === true) - (a.isPinned === true))
-                                return newNotes
-                            }
-                        )
-                        .catch(err => console.error('Could not toggle pin:', err))
-                    })
-
+                        .sort((a, b) => (b.isPinned === true) - (a.isPinned === true))
+                    return newNotes
+                }
+                )
+                    .catch(err => console.error('Could not toggle pin:', err))
+            })
     }
 
+    function updateTodo(updatedTodo, index, noteId) {
+        noteService.get(noteId)
+            .then(note => {
+                const todos = [...note.info.todos]
+                todos[index] = { ...todos[index], ...updatedTodo }
+                note.info.todos = todos
+                return noteService.save(note)
+            })
+            .then(savedNote =>{
+                setNotes(prev => prev.map(note=>note.id === savedNote.id? savedNote:note))
+            })
+            .catch(err => console.error('Could not update todo:', err))
 
+    }
 
 
     return (
         <div className='note-index grid'>
             <NoteSideNav />
             <NoteAdd />
-            <NoteList notes={notes} onRemove={onRemove} onSetPin={onSetPin} />
+            <NoteList notes={notes} onRemove={onRemove} updateTodo={updateTodo} onSetPin={onSetPin} />
 
 
         </div>

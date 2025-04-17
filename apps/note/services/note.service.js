@@ -14,6 +14,7 @@ export const noteService = {
     getEmptyNote,
     getDefaultFilter,
     getFilterFromSearchParams,
+    put,
 }
 
 // ~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~
@@ -31,6 +32,10 @@ function query(filterBy = {}) {
       })
     }
     
+function put(){
+  return storageService.put(NOTES_KEY,noteId)
+}
+
 function get(noteId) {
     return storageService.get(NOTES_KEY, noteId)
 }

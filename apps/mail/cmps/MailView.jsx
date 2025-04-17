@@ -44,22 +44,33 @@ export function MailView() {
         subject,
         sentAt,
         isStarred,
+        to,
     } = mail
     console.log("mail: ", mail)
     return (
-        <section className="mail-view">
-            
-            <div className="mail-action-btns">
+        <section className="mail-view grid">
 
+            <div className="mail-action-btns">
+            <button className="star-btn icon-btn medium star"></button>
+            <button className="star-btn icon-btn medium star"></button>
+            <button className="star-btn icon-btn medium star"></button>
+            <button className="star-btn icon-btn medium star"></button>
+            
             </div>
 
-            <div className="mail-content">
-
+            <div className="mail-content grid">
+                <img src="assets/img/mail/default-user.png" className="sender-img" />
                 <h2 className="mail-subject">{subject}</h2>
-                <p className="mail-from-name">{fromName}</p>
-                <p className="mail-from">{`<${from}>`}</p>
+
+                <div className="details-wraper grid">
+                    <p className="mail-from-name">fromname{fromName}</p>
+                    <p className="mail-from">{`<${from}>`}</p>
+                    <p className="mail-sent-at">{sentAt}</p>
+                    <button className="star-btn icon-btn medium star"></button>
+                </div>
+                <p className="mail-to">to: {to}</p>
+
                 <p className="mail-body">{body}</p>
-                <p className="mail-sent-at">{sentAt}</p>
             </div>
 
         </section>

@@ -86,7 +86,8 @@ function getEmptyNote(type = 'NoteTxt') {
     
     switch (type) {
         case 'NoteTxt':
-            base.info = { txt: '' }
+            base.info = { title:''
+                 ,txt: '' }
             break
 
         case 'NoteImg':

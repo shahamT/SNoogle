@@ -1,3 +1,4 @@
+import { NotePreview } from "./NotePreview";
 
 
 export function NoteList({ notes }) {
@@ -9,7 +10,7 @@ export function NoteList({ notes }) {
         <ul>
             {notes.map(note =>
                 <li key={note.id}>
-                    
+                    <NotePreview note={note}/>
                 </li>
             )}
 

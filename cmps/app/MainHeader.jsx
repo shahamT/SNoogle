@@ -1,3 +1,5 @@
+import { MainLogo } from "../general/MainLogo.jsx"
+
 // react
 const { NavLink } = ReactRouterDOM
 
@@ -6,7 +8,7 @@ export function MainHeader({ onSetPage }) {
     return (
         <header className="main-header grid main-inline-layout ">
             <div className="main-header-content-wraper flex space-between align-center">
-                <img src="img\logo\main-logo.png" alt="" className="main-logo" />
+                <MainLogo/>
                 <nav className="main-nav">
                     <ul className="flex space-between clean-list">
                         <li> <NavLink to="/home">Home</NavLink> </li>

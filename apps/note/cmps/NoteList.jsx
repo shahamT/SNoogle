@@ -1,22 +1,25 @@
-import { NotePreview } from "./NotePreview";
+import { NotePreview } from "./NotePreview.jsx"
 
 
-export function NoteList({ notes }) {
+export function NoteList({ notes,onRemove }) {
 
 
 
 
-    return <section className="notes-list">
-        <ul>
+    return (
+    <section className="note-list ">
+      
             {notes.map(note =>
-                <li key={note.id}>
+                <div key={note.id} className="note-list-card">
                     <NotePreview note={note}/>
-                </li>
+                    <button onClick={()=>onRemove(note.id)}>Delete note</button>
+
+                </div>
             )}
 
-        </ul>
-
-
-
+     
     </section>
+
+
+    )
 }

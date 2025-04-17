@@ -1,0 +1,31 @@
+.main-layout {
+    grid-template-rows: 80px 1fr;
+    row-gap: 24px;
+    min-height: 100vh;
+}
+
+.main-inline-layout{
+    grid-template-columns: minmax(24px, 1fr) minmax(auto, 900px) minmax(16px, 1fr);
+}
+
+.main-inline-padding {
+    padding-inline: 0;
+}
+
+.main-header {
+    grid-row: 1;
+    grid-column: 1/-1;
+
+    >*{
+        grid-column: 2;
+    }
+}
+
+.main-content {
+    grid-row: 2;
+    grid-column: 1/-1;
+
+    >*{
+        grid-column: 2;
+    }
+}

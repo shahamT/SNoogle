@@ -23,7 +23,6 @@ export function NoteIndex() {
         noteService.query(filterBy)
             .then(notes => {
                 setNotes(notes)
-                console.log("variable: ", notes)
             })
 
 

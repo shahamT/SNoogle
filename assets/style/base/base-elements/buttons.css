@@ -108,5 +108,9 @@
     content: "\f08d";
 
 }
+.icon-btn.check::after {
+    content: "\f14a";
+
+}
 
 

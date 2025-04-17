@@ -4,8 +4,6 @@ export function NoteTodos({ note ,updateTodo }) {
     const { title, todos } = note.info
 
     function onToggleDone(updatedTodo,index) {
-        // updateTodo({ ...todo, doneAt })
-        console.log("onToggleDone", updatedTodo,index,note.id)
         updateTodo(updatedTodo,index,note.id)
     }
 
@@ -21,17 +19,11 @@ export function NoteTodos({ note ,updateTodo }) {
                                 onToggleDone({ ...todo, doneAt },index)
                             }} />
                         <label htmlFor={`todo-${index}`}>{todo.txt}</label>     
-                </li>
-
-            )
+                </li> )
 
             )}
             </ul>
-
-
         </article>
-
-
 
     )
 

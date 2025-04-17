@@ -11,6 +11,10 @@ const { useNavigate, useSearchParams } = ReactRouterDOM
 // === Services
 
 // === Child Components
+import { MailSideNav } from "../cmps/MailSideNav.jsx"
+import { MailSortBar } from "../cmps/MailSortBar.jsx"
+import { MailSearchBar } from "../cmps/MailSearchBar.jsx"
+import { MailList } from "../cmps/MailList.jsx"
 
 
 
@@ -43,8 +47,11 @@ export function MailIndex() {
 
     // if (!data) return <div>Loading...</div>
     return (
-        <section className="mail-index">
-            <h1>mail-index</h1>
+        <section className="mail-index grid">
+            <MailSideNav/>
+            <MailSortBar/>
+            <MailSearchBar/>
+            <MailList/>
         </section>
     )
 }

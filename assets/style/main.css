@@ -47,3 +47,6 @@
 /* Mail Cmps */
 @import 'cmps/mail/mail-index.css';
 @import 'cmps/mail/mail-list.css';
+@import 'cmps/mail/mail-search-bar.css';
+@import 'cmps/mail/mail-side-nav.css';
+@import 'cmps/mail/mail-sort-bar.css';

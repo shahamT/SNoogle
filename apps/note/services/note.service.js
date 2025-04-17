@@ -69,7 +69,7 @@ function getDefaultFilter(filterBy = { isPinned: true, info: '', type: null, cre
 
 
 function getEmptyNote(type = 'NoteTxt') {
-    const base = {
+    const note = {
         id: '',
         createdAt: Date.now(),
         type,
@@ -80,19 +80,19 @@ function getEmptyNote(type = 'NoteTxt') {
     
     switch (type) {
         case 'NoteTxt':
-            base.info = { title:''
+          note.info = { title:''
                  ,txt: '' }
             break
 
         case 'NoteImg':
-            base.info = {
+          note.info = {
                 url: '',
                 title: ''
             }
             break
 
         case 'NoteTodos':
-            base.info = {
+          note.info = {
                 title: '',
                 todos: [
                     { txt: '', doneAt: null }
@@ -104,7 +104,7 @@ function getEmptyNote(type = 'NoteTxt') {
             throw new Error(`Unknown note type: ${type}`)
         }
 
-    return base
+    return note
 }
 
 

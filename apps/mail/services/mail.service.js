@@ -34,7 +34,7 @@ export const mailService = {
     get,
     remove,
     save,
-    getEmptymail,
+    getEmptyMail: getEmptyMail,
     getDefaultFilter,
     getDefaultFilter,
     getFilterFromSearchParams,
@@ -76,7 +76,7 @@ function save(mail) {
     }
 }
 
-function getEmptymail() {
+function getEmptyMail() {
     return {
         id: '',
         createdAt: Date.now(),
@@ -86,6 +86,7 @@ function getEmptymail() {
         sentAt: null,
         removedAt: null,
         from: `${loggedinUser.email}`,
+        fromName: `${loggedinUser.fullname}`,
         to: '',
         labels: [],
     }

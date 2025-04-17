@@ -7,7 +7,7 @@
 html {
     font-family: var(--font-primary);
     font-weight: 400;
-    color: rgb(var(--clr-dark-base));
+    color: var(--clr-black);
 
 }
 

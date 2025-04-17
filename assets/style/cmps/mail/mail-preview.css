@@ -22,7 +22,7 @@
 
 /* Main Cmp */
 .mail-preview {
-    border-block-end: 0.7px solid var(--clr-gray-200);
+    border-block-end: 1.5px solid var(--clr-gray-150);
     padding-inline: var(--px-spacing-md);
 
     background-color: var(--clr-white);

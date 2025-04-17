@@ -12,9 +12,9 @@ export function MainHeader({ onSetPage }) {
                 <nav className="main-nav">
                     <ul className="flex space-between clean-list">
                         <li> <NavLink to="/home">Home</NavLink> </li>
+                        <li> <NavLink to="/mail">Mail</NavLink> </li>
+                        <li> <NavLink to="/note">Notes</NavLink> </li>
                         <li> <NavLink to="/about">About</NavLink> </li>
-                        <li> <NavLink to="/note">notes</NavLink> </li>
-                        <li> <NavLink to="/mail">mail</NavLink> </li>
                     </ul>
                 </nav>
             </div>

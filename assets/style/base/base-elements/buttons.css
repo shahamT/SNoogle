@@ -71,7 +71,7 @@
 
 
 /* size */
-.icon-btn.small {
+.icon-btn.big {
     width: 48px;
     width: 48px;
 }
@@ -82,7 +82,7 @@
     font-size: 1em;
 }
 
-.icon-btn.big {
+.icon-btn.small {
     width: 34px;
     width: 34px;
 }

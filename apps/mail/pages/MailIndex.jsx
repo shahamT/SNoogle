@@ -1,20 +1,20 @@
 
 // === React
-// const { useState, useEffect, useRef } = React
-
-import { mailService } from "../services/mail.service.js"
-
 // const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-const { useState, useEffect } = React
-const { useNavigate, useSearchParams } = ReactRouterDOM
+const { useState, useEffect, useRef } = React
+const { useNavigate, useSearchParams, useParams } = ReactRouterDOM
 
 // === Services
+import { mailService } from "../services/mail.service.js"
+import { useToggle } from "../../../custom-hooks/useToggle.js"
 
 // === Child Components
 import { MailSideNav } from "../cmps/MailSideNav.jsx"
 import { MailSearchBar } from "../cmps/MailSearchBar.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailFilterBar } from "../cmps/MailFilterBar.jsx"
+import { MailCompose } from "../cmps/MailCompose.jsx"
+import { MailView } from "../cmps/MailView.jsx"
 
 
 
@@ -26,6 +26,8 @@ export function MailIndex() {
     const [mails, setMails] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
+    const [isComposeOpen, setIsComposeOpen] = useState(false)
+    const { status, mailId } = useParams()
 
     // === Effects
     useEffect(() => {
@@ -44,14 +46,39 @@ export function MailIndex() {
 
 
     // === Functions
+    function onOpenCompose() {
+        setIsComposeOpen(true)
+    }
+    function onCloseCompose() {
+        setIsComposeOpen(false)
+    }
 
-    
+    function onMarkRead(mailToSave) {
+        mailService.save({ ...mailToSave, isRead: true })
+            .then(() => {
+                setMails(prevMails => {
+                    prevMails.find(mail => mail.id === mailToSave.id).isRead = true
+                    return prevMails
+                })
+            })
+            .catch(err => console.log("err: ", err))
+    }
+
     return (
         <section className="mail-index grid">
-            <MailSideNav/>
-            <MailFilterBar/>
-            <MailSearchBar/>
-            <MailList mails={mails}/>
+            <MailSideNav onOpenCompose={onOpenCompose} />
+            <MailSearchBar />
+
+            {!mailId &&
+                <React.Fragment>
+                    <MailList mails={mails} onMarkRead={onMarkRead}/>
+                    <MailFilterBar />
+                </React.Fragment>
+            }
+            {mailId && <MailView />
+            }
+
+            <MailCompose isComposeOpen={isComposeOpen} onCloseCompose={onCloseCompose} />
         </section>
     )
 }

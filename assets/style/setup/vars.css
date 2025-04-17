@@ -42,6 +42,7 @@
   /* === Grayscale === */
   --clr-white: #ffffff;
   --clr-gray-100: #F1F3F4;
+  --clr-gray-150: #E6E9EA;
   --clr-gray-200: #C6CACD;
   --clr-gray-300: #9AA0A6;
   --clr-gray-400: #7C8287;
@@ -121,7 +122,7 @@
   /* ============ SHADOWS ============ */
   --box-shadow-1: inset 1px 0 0 rgb(218,220,224),inset -1px 0 0 rgb(218,220,224),0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15)
   ;
-  --box-shadow-2: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  --box-shadow-2:  rgba(0, 0, 0, 0.35) 0px 5px 15px;
   ;
   --box-shadow-3: ;
   /* ============ Z-INDEX ============ */

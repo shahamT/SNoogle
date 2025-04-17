@@ -1,0 +1,47 @@
+.mail-compose {
+    position: fixed;
+    z-index: var(--z-index-modal);
+    bottom: 0;
+    right: var(--px-spacing-lg);
+
+
+grid-template-rows: auto 1fr;
+
+    width: 550px;
+    height: 550px;
+
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
+    background-color: var(--clr-white);
+    box-shadow: var(--box-shadow-2);
+    overflow: hidden;
+}
+
+.mail-compose .compose-header {
+    padding-inline: var(--px-spacing-md);
+
+    height: 44px;
+    background-color: var(--clr-gray-100);
+
+}
+
+.mail-compose .compose-header .compose-title {
+    font-weight: 500;
+}
+
+.mail-compose .compose-form {
+    grid-template-rows: auto auto 1fr auto;
+    
+    padding-inline: var(--px-spacing-md);
+    padding-block: var(--px-spacing-sm);
+
+}
+
+.mail-compose .compose-form input{
+    padding-block: 12px;
+    border-block-end: 1.5px solid var(--clr-gray-150);
+}
+
+.mail-compose .compose-form textarea {
+    padding-block: 12px;
+}

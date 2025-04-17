@@ -12,7 +12,7 @@
 // ====== Component ======
 // =======================
 
-export function MailSideNav({ /* prop1, prop2 */ }) {
+export function MailSideNav({ onOpenCompose }) {
     // === Hooks
 
     // === Effects
@@ -23,6 +23,7 @@ export function MailSideNav({ /* prop1, prop2 */ }) {
     return (
         <section className="mail-side-nav">
             <h1>sidenav</h1>
+            <button onClick={onOpenCompose} >new email</button>
         </section>
     )
 }

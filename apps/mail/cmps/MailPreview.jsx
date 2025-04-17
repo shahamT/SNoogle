@@ -1,10 +1,13 @@
 // === React
 // const { useState, useEffect, useRef } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
+const {useEffect } = React
+// const { Routes, Route, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
 
 // === Services
 import { elapsedTime } from "../../../services/util.service.js"
+import { mailService } from "../services/mail.service.js"
 
 // === Child Components
 
@@ -14,7 +17,23 @@ import { elapsedTime } from "../../../services/util.service.js"
 // ====== Component ======
 // =======================
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onMarkRead }) {
+    const navigate = useNavigate()
+
+
+    // === Hooks
+
+    // === Effects
+    useEffect(()=>{
+
+    },[mail])
+
+    // === Functions
+    function onOpenMail() {
+        onMarkRead(mail)
+        navigate(`/mail/view/${mail.id}`)
+    }
+
     const {
         from,
         body,
@@ -24,17 +43,11 @@ export function MailPreview({ mail }) {
         isStarred,
     } = mail
 
-    // === Hooks
+    const isReadClass = isRead ? "is-read" : ""
+    const isStarredClass = isStarred ? "is-Starred" : ""
 
-    // === Effects
-
-    // === Functions
-
-
-const isReadClass = isRead ? "is-read" : ""
-const isStarredClass = isStarred ? "is-Starred" : ""
     return (
-        <article className={`mail-preview flex ${isReadClass}`}>
+        <article className={`mail-preview flex ${isReadClass}`} onClick={onOpenMail}>
             <input type="checkbox" name="" id="" />
             <button className={`star-btn icon-btn medium star ${isStarredClass}`}></button>
             <p className="mail-from">{from}</p>

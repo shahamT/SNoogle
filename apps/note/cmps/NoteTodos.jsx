@@ -11,18 +11,18 @@ export function NoteTodos({ note ,updateTodo }) {
         <article className='note-todos'>
 
             <h1>{title}</h1>
-            <ul className="clean-list">{todos.map((todo, index) => (
-                <li key={index} className={(todo.doneAt!==null)?'crossed':''}>
-                        <input type="checkbox" name="doneAt" checked={!!todo.doneAt}
+        {todos.map((todo, index) => (
+                <div className={(todo.doneAt!==null)?'crossed':''}>
+                       <span> <input type="checkbox" name="doneAt" checked={!!todo.doneAt}
                             onChange={change => {
                                 const doneAt = change.target.checked ? Date.now() : null
                                 onToggleDone({ ...todo, doneAt },index)
-                            }} />
-                        <label htmlFor={`todo-${index}`}>{todo.txt}</label>     
-                </li> )
+                            }} />{todo.txt}</span>
+                        {/* <label htmlFor={`todo-${index}`}>{todo.txt}</label>      */}
+                </div> )
+         
 
             )}
-            </ul>
         </article>
 
     )

@@ -1,10 +1,20 @@
-.note-todo > ul{
+.note-todo {
     margin: 0;
     padding: 0;
     list-style: none;
 
+ input, select, textarea {
+    height: auto !important;}
+    /* input[type="checkbox"]{
+    height:auto !important; */
 }
+
+/* } */
 .crossed {
     text-decoration: line-through;
     color: var(--clr-gray-200);
+  }
+ 
+  .note-todo{
+
   }

@@ -17,7 +17,7 @@ grid-template-areas:
  ". . . . . pin"
  ". main main main main ."
  ". . . . . . "
- ". . . . . delete ";
+ "duplicate . . . . delete ";
  
  
  
@@ -59,4 +59,8 @@ grid-area: pin;
 
 .pinned {
     opacity: 1 !important;
+}
+
+.duplicate-note-btn{
+    grid-area:duplicate ;
 }

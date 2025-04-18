@@ -104,12 +104,21 @@
     content: "\f2ed";
 
 }
-.icon-btn.pin::after {
-    content: "\f08d";
+ .icon-btn.pin::after {
+        content: "\f08d";
+    
+    }
+ .icon-btn.un-pin::after {
+        content: "\e68f";
+    
+    }
 
-}
 .icon-btn.check::after {
     content: "\f14a";
+
+}
+.icon-btn.duplicate::after {
+    content: "\f24d";
 
 }
 

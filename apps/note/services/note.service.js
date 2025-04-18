@@ -19,7 +19,7 @@ export const noteService = {
 
 // ~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~
 // to do
-function query(filterBy = {}) {
+function query(filterBy = {txt:''}) {
     return storageService.query(NOTES_KEY)
     .then(notes => {
         if (!filterBy.txt) return notes
@@ -66,10 +66,14 @@ function getFilterFromSearchParams(searchParams) {
 
 
 
-function getDefaultFilter(filterBy = { isPinned: true, info: '', type: null, createdAt: null }) {
+function getDefaultFilter(filterBy = {txt: '' }) {
     return { isPinned: filterBy.isPinned, info: filterBy.info, type: filterBy.type, createdAt: filterBy.createdAt }
     
 }
+// function getDefaultFilter(filterBy = { isPinned: true, info: '', type: null, createdAt: null }) {
+//     return { isPinned: filterBy.isPinned, info: filterBy.info, type: filterBy.type, createdAt: filterBy.createdAt }
+    
+// }
 
 
 
@@ -163,7 +167,7 @@ function _createDemoNotes() {
         isPinned: false,
         style: { backgroundColor: '#e0f7fa' },
         info: {
-          url: 'https://source.unsplash.com/random/600x400?nature,water',
+          url: "./assets/img/note/aps,504x498,medium,transparent-pad,600x600,f8f8f8.jpg",
           title: 'Friday stroll by the lake'
         }
       },

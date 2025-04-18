@@ -2,7 +2,7 @@ import { NoteImg } from "./NoteImg.jsx"
 import { NoteTodos } from "./NoteTodos.jsx"
 import { NoteTxt } from "./NoteTxt.jsx"
 
-export function NotePreview({ note , onRemove, onSetPin, updateTodo}) {
+export function NotePreview({ note , onRemove, onSetPin, updateTodo,onDuplicate}) {
     const { type } = note
 
   
@@ -13,7 +13,8 @@ export function NotePreview({ note , onRemove, onSetPin, updateTodo}) {
             {type === 'NoteImg' && <NoteImg note={note} />}
             {type === 'NoteTodos' && <NoteTodos note={note} updateTodo={updateTodo} />}
             <button className="delete-note-btn icon-btn trash" onClick={()=>onRemove(note.id)}></button>
-            <button className={`pin-note-btn ${note.isPinned ? 'pinned':''}`} onClick={()=>onSetPin(note.id)}>pin</button>
+            <button className={`pin-note-btn  ${note.isPinned ? 'pinned':''}`} onClick={()=>onSetPin(note.id)}>pin</button>
+            <button className={`duplicate-note-btn icon-btn duplicate`} onClick={()=>onDuplicate(note.id)}></button>
         </article>
     )
 }

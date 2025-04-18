@@ -74,14 +74,18 @@ export function NoteIndex() {
 
     }
 
+    function onDuplicate(noteId){
+        console.log("copy",noteId)
+
+    }
 
     return (
         <div className='note-index grid'>
             <NoteSideNav />
             <NoteAdd />
-            <NoteList notes={notes} onRemove={onRemove} updateTodo={updateTodo} onSetPin={onSetPin} />
+            <NoteList notes={notes} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
 
 
         </div>
-    )
+    ) 
 }

@@ -56,7 +56,7 @@ export function NoteAdd() {
                 <div className="note-add-btn-container" onClick={onToggleForm}>
                     Take a note...
                     <div className="note-add-btns">
-                    <button className="note-add-check-btn icon-btn check" onClick={createTodoNote}></button>
+                    <button className="note-add-check-btn icon-btn square-check" onClick={createTodoNote}></button>
                     <button className="note-add-check-btn icon-btn img-uploade" onClick={onUploadImg}></button>
                     </div>
                     {(isUploadImg) && <NoteUploadImg />}
@@ -70,7 +70,7 @@ export function NoteAdd() {
                     <label htmlFor="txt">
                         <textarea
                             onChange={handleChange}
-                            name="postContent"
+                            name="txt"
                             placeholder="Take a note..."
                             rows={4}
                             cols={40} />

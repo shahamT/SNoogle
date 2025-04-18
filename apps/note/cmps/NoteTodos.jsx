@@ -12,12 +12,12 @@ export function NoteTodos({ note ,updateTodo }) {
 
             <h1>{title}</h1>
         {todos.map((todo, index) => (
-                <div className={(todo.doneAt!==null)?'crossed':''}>
-                       <span> <input type="checkbox" name="doneAt" checked={!!todo.doneAt}
+                <div className={`todo-line ${(todo.doneAt!==null)?'--crossed-todo':''} `}>
+                       <input type="checkbox" name="doneAt" checked={!!todo.doneAt}
                             onChange={change => {
                                 const doneAt = change.target.checked ? Date.now() : null
                                 onToggleDone({ ...todo, doneAt },index)
-                            }} />{todo.txt}</span>
+                            }} />{todo.txt}
                         {/* <label htmlFor={`todo-${index}`}>{todo.txt}</label>      */}
                 </div> )
          

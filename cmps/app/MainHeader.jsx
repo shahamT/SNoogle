@@ -1,12 +1,13 @@
+import { HamburgerIcon } from "../general/HamburgerIcon.jsx"
 import { MainLogo } from "../general/MainLogo.jsx"
-import {MainSearchBar } from "./MainSearchBar.jsx"
+import { MainSearchBar } from "./MainSearchBar.jsx"
 
 // react
 const { useState, useEffect } = React
 const { NavLink, useLocation } = ReactRouterDOM
 
 
-export function MainHeader({ onSetPage }) {
+export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
     const { pathname } = useLocation()
     const [isSearchVisible, setIsSearchVisible] = useState(false)
 
@@ -27,6 +28,18 @@ export function MainHeader({ onSetPage }) {
     return (
         <header className="main-header grid main-inline-layout ">
             <div className="main-header-content-wraper flex space-between align-center">
+
+                {isSearchVisible &&
+                    <button className="side-nav-btn icon-btn big">
+                        < HamburgerIcon
+                            isOpen={isSideNavPinned}
+                            onClick={setIsSideNavPinned}
+                            color="var(--clr-accent-base)"
+                            size={0.7}
+                        />
+                    </button>
+                }
+
                 <MainLogo />
 
                 {isSearchVisible && <MainSearchBar />}

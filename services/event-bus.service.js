@@ -55,3 +55,21 @@ export function showDialog({ content, backgroundColor = 'black', onConfirm, onCa
   
   window.showDialog = showDialog
   window.closeDialog = closeDialog
+
+
+////////////////////////////////////////////////////
+
+function toggleSideBar(state) {
+    eventBusService.emit('toggle-side-bar', state)
+}
+
+export function openSideBar() {
+    toggleSideBar(true)
+}
+
+export function closeSideBar() {
+    toggleSideBar(false)
+}
+
+window.openSideBar = openSideBar
+window.closeSideBar = closeSideBar

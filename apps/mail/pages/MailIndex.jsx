@@ -20,13 +20,14 @@ import { MailView } from "../cmps/MailView.jsx"
 // ====== Component ======
 // =======================
 
-export function MailIndex() {
+export function MailIndex(isSideNavPinned) {
     // === Hooks
     const [mails, setMails] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [isComposeOpen, setIsComposeOpen] = useState(false)
     const { status, mailId } = useParams()
+    const { pathname } = useLocation()
 
 
     // === Effects
@@ -34,6 +35,12 @@ export function MailIndex() {
     useEffect(() => {
         setFilterBy(mailService.getFilterFromSearchParams(searchParams))
     }, [searchParams])
+
+    useEffect(() => {
+        if (pathname.startsWith('/mail/inbox')) {
+            setSearchParams({ ...filterBy, status:"inbox"})
+        } 
+    }, [pathname])
 
     useEffect(() => {
         loadMails()
@@ -74,7 +81,7 @@ export function MailIndex() {
 
     return (
         <section className="mail-index grid">
-            <MailSideNav onOpenCompose={onOpenCompose} />
+            <MailSideNav onOpenCompose={onOpenCompose} isSideNavPinned={isSideNavPinned}/>
 
             {!mailId &&
                 <React.Fragment>

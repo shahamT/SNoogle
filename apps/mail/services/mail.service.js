@@ -53,7 +53,7 @@ function query(filterBy = {}) {
                     || regExp.test(mail.fromName)
                 )
             }
-            // if (filterBy.category) {
+            // if (filterBy.status) {
             //     mails = mails.filter(mail => mail.categories.includes(filterBy.category))
             // }
             return mails
@@ -76,6 +76,11 @@ function save(mail) {
         return storageService.post(MAIL_DB_KEY, mail)
     }
 }
+
+function getUnreadByStatus(){
+    
+}
+
 
 function getEmptyMail() {
     return {

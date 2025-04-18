@@ -92,7 +92,6 @@
 .icon-btn::after {
     position: relative;
     z-index: 1;
-
 }
 
 .icon-btn.star::after {
@@ -150,7 +149,7 @@
 }
 
 .icon-btn.file::after {
-    content: "\f0e0";
+    content: "\f15b";
     font-family: fa;
 }
 

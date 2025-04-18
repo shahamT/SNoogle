@@ -1,66 +1,80 @@
-.note-preview{
-position: relative;  
-min-height: 100px;
-background-color: var(--clr-white);
+.note-preview {
+    position: relative;
+    min-height: 100px;
+    background-color: var(--clr-white);
 
-border-radius:var(--border-radius-md);
-border: 0.5px solid var(--clr-gray-300);
-box-shadow: 0 2px 8px rgba(133, 129, 129, 0.15);
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--clr-gray-300);
+    box-shadow: 0 2px 8px rgba(133, 129, 129, 0.15);
 
-padding: 0.5em;
+    padding: 0.5em;
 
 
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-grid-template-rows: auto;
-grid-template-areas:
- ". . . . . pin"
- ". main main main main ."
- ". . . . . . "
- "duplicate . . . . delete ";
- 
- 
- 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        ". . . . . pin"
+        "main main main main main main"
+        ". . . . . . "
+        "duplicate . . . . delete ";
+
+
+
 }
-.note-preview:hover > button  {
+
+.note-preview:hover>button {
     /* display: block;         */
-    opacity: 1; 
-    pointer-events: auto; 
+    opacity: 1;
+    pointer-events: auto;
     transition: opacity .5s ease-out, transform .5s ease-out;
 }
 
 
-.note-preview > button {
+.note-preview>button {
     /* display: none; */
     justify-self: end;
     align-self: end;
     width: 30px;
     height: 30px;
-    
+
     opacity: 0;
-    pointer-events: none; 
+    pointer-events: none;
     transition: opacity .5s ease-out, transform .5s ease-out;
-    
+
 }
 
-.note-txt, .note-img, .note-todos{
+.note-txt,
+.note-img,
+.note-todos {
     grid-area: main;
 }
 
-.pin-note-btn{
-grid-area: pin;
+.pin-note-btn {
+    grid-area: pin;
 
 }
-.delete-note-btn{
+
+.delete-note-btn {
     grid-area: delete;
 
-    
+
 }
+
+
 
 .pinned {
     opacity: 1 !important;
 }
 
-.duplicate-note-btn{
-    grid-area:duplicate ;
+.pinnedpin-note-btn .un-pin {
+    display: none;
+}
+
+.pinnedpin-note-btn:hover .un-pin {
+    display: inline-block;
+}
+
+.duplicate-note-btn {
+    grid-area: duplicate;
 }

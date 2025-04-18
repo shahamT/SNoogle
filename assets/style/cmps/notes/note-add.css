@@ -12,7 +12,7 @@
 
 }
 
-.note-add-btn-container{
+.note-add-container{
     /* border-radius:1px solid var(--border-radius-lg); */
     border-radius:1px solid 1em;
     border: 1px solid var(--clr-gray-300);
@@ -42,3 +42,4 @@
   <textarea name="postContent" placeholder="Take a note…" />
   <button type="submit">Save post</button>
 </form> */
+

@@ -18,9 +18,8 @@
     border: 1px solid var(--clr-gray-300);
     cursor: text;
     display: flex;
-    align-items: center;           /* מיישר אנכית */
+    align-items: center;         /* מיישר אנכית */
     justify-content: space-between;
-    /* align-content: center; */
 
 }
 
@@ -28,3 +27,18 @@
     font-size: 1.5em;
    
 }
+
+.note-add-btns{
+        justify-self: end;
+
+}
+
+/* <form onSubmit={ev => {
+  ev.preventDefault();
+  const form = ev.target;
+  const newText = form.postContent.value;
+  // …save newText manually…
+}}>
+  <textarea name="postContent" placeholder="Take a note…" />
+  <button type="submit">Save post</button>
+</form> */

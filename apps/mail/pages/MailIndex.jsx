@@ -31,11 +31,20 @@ export function MailIndex() {
 
 
     // === Effects
+
+    useEffect(() => {
+        setFilterBy(mailService.getFilterFromSearchParams(searchParams))
+    }, [searchParams])
+
     useEffect(() => {
         loadMails()
     }, [filterBy])
 
+
+    // === Functions
+
     function loadMails() {
+        console.log("filterBy: ", filterBy)
         mailService.query(filterBy)
             .then(mails => {
                 setMails(mails)
@@ -45,11 +54,10 @@ export function MailIndex() {
             .catch(err => console.log("err: ", err))
     }
 
-
-    // === Functions
     function onOpenCompose() {
         setIsComposeOpen(true)
     }
+
     function onCloseCompose() {
         setIsComposeOpen(false)
     }
@@ -72,7 +80,7 @@ export function MailIndex() {
 
             {!mailId &&
                 <React.Fragment>
-                    <MailList mails={mails} onMarkRead={onMarkRead}/>
+                    <MailList mails={mails} onMarkRead={onMarkRead} />
                     <MailFilterBar />
                 </React.Fragment>
             }

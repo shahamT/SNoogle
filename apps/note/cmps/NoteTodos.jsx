@@ -18,7 +18,6 @@ export function NoteTodos({ note ,updateTodo }) {
                                 const doneAt = change.target.checked ? Date.now() : null
                                 onToggleDone({ ...todo, doneAt },index)
                             }} />{todo.txt}
-                        {/* <label htmlFor={`todo-${index}`}>{todo.txt}</label>      */}
                 </div> )
          
 

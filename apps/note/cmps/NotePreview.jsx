@@ -12,8 +12,8 @@ export function NotePreview({ note , onRemove, onSetPin, updateTodo,onDuplicate}
             {type === 'NoteTxt' && <NoteTxt note={note} />}
             {type === 'NoteImg' && <NoteImg note={note} />}
             {type === 'NoteTodos' && <NoteTodos note={note} updateTodo={updateTodo} />}
-            <button className="delete-note-btn icon-btn trash" onClick={()=>onRemove(note.id)}></button>
-            <button className={`pin-note-btn  ${note.isPinned ? 'pinned':''}`} onClick={()=>onSetPin(note.id)}>pin</button>
+            <button className="delete-note-btn icon-btn trash-can" onClick={()=>onRemove(note.id)}></button>
+            <button className={`pin-note-btn icon-btn pin ${note.isPinned ? 'pinned':''}`} onClick={()=>onSetPin(note.id)}></button>
             <button className={`duplicate-note-btn icon-btn duplicate`} onClick={()=>onDuplicate(note.id)}></button>
         </article>
     )

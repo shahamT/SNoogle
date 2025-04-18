@@ -1,49 +1,135 @@
-.note-index{
-    grid-template-columns: 200px 1fr 24px;
-    grid-template-rows: auto auto 1fr; 
-    background-color: var(--clr-white);
-    
-   }
-   
-   .note-index .note-side-nav {
-      grid-column: 1;
-      grid-row: 1/4;
-   }
-   
-   .note-index .note-search-bar {
-      grid-column: 2;
-      grid-row: 1;
- }
- 
- .note-index .note-add {
-    grid-column: 2;
-    grid-row: 2;
-    
-   }
-   
-   .note-index .note-list {
-      grid-column: 2;
-      grid-row: 3;
-   }
-   
-   .note-add-btn-container{
+.note-index {
+   grid-template-columns: 200px 1fr 24px;
+   grid-template-rows: auto auto 1fr;
+   background-color: var(--clr-white);
+
+}
+
+.note-index .note-side-nav {
+   grid-column: 1;
+   grid-row: 1/4;
+}
+
+.note-index .note-search-bar {
+   grid-column: 2;
+   grid-row: 1;
+}
+
+.note-index .note-add {
+   grid-column: 2;
+   grid-row: 2;
+
+}
+
+.note-index .note-list {
+   grid-column: 2;
+   grid-row: 3;
+}
+
+.note-add-container {
    justify-self: center;
-   border-radius:var(--border-radius-md);
+   border-radius: var(--border-radius-md);
    width: 600px;
-   height:40px ;
+   height: 40px;
    /* padding: 10px; */
 
    background: none;
    border: 1px solid var(--clr-gray-300);
    outline: none;
-   appearance: none;          
+   appearance: none;
    -webkit-appearance: none;
    cursor: pointer;
 
- }
- /* .note-add-btn-container:active{
+}
+
+/* .note-add-container:active{
    
  } */
 
 
 
+
+.add-note-create-container {
+   border: 1px solid var(--clr-gray-300);
+   width: 100%;
+
+
+
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: auto;
+   grid-template-areas:
+      "title pin"
+      "txt txt"
+      "submit reset";
+      gap: 1em;
+      padding: 0.5em;
+
+
+   input[type="text"] {
+      all: unset;
+      display: inline-block;
+      box-sizing: border-box;
+      background-color: white;
+      /* -webkit-appearance: none; */
+      /* -moz-appearance: none; */
+      /* appearance: none; */
+
+      font: inherit;
+      /* יורש את הגופן של ההורה */
+      color: inherit;
+      background: transparent;
+   
+   }
+
+   textarea {
+      all: revert;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      max-height: 400px;
+      resize: vertical;
+      overflow-y: auto;
+      overflow-x: hidden;
+      font: inherit;
+      color: inherit;
+      background: transparent;
+      border: none;
+
+      
+ 
+
+      /* border: 1px solid var(--clr-gray-300); */
+   }
+   textarea:focus {
+      outline: none;
+    }
+}
+
+.pin-add-btn {
+   grid-area: pin;
+   /* grid-column: 2/-3; */
+   display: flex;
+   justify-self: end;
+}
+
+.add-title {
+   grid-area: title;
+   /* grid-column: 1/-2; */
+}
+
+.add-txt {
+   grid-area: txt;
+}
+
+.add-reset {
+   grid-area: reset;
+
+
+}
+
+.add-submit {
+   grid-area: submit;
+   display: ;
+
+}

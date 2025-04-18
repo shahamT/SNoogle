@@ -122,4 +122,9 @@
 
 }
 
+.icon-btn.img-uploade::after {
+    content: "\f03e";
+
+}
+
 

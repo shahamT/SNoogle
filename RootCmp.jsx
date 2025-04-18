@@ -52,7 +52,7 @@ export function RootCmp() {
             <section className={`app grid main-layout ${sideNanClass}`}>
                 <MainHeader isSideNavPinned={isSideNavPinned} setIsSideNavPinned={setIsSideNavPinned} />
 
-                <main className="main-content grid main-inline-layout">
+                <main className="main-content main-inline-layout">
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<HomePage />} />

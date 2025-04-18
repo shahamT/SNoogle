@@ -23,8 +23,8 @@
 
 /* =============== Components ================ */
 /* App-Cmps */
-@import 'cmps/app/app.css';
 @import 'cmps/app/root.css';
+@import 'cmps/app/app.css';
 @import 'cmps/app/main-header.css';
 @import 'cmps/app/main-search-bar.css';
 @import 'cmps/app/side-nav.css';

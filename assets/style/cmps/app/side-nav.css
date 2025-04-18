@@ -143,6 +143,14 @@
     content: "\f2ed";
     font-family: fa-regular;
 }
+.side-nav .side-nav-list a.sent-btn::before {
+    content: "\f1d8";
+    font-family: fa-regular;
+}
+.side-nav .side-nav-list a.unread-btn::before {
+    content: "\f0e0";
+    font-family: fa-regular;
+}
 
 
 

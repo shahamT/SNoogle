@@ -60,9 +60,9 @@ button {
 	cursor: pointer;
 }
 
-input:not(input[type="checkbox"]),
+input,
 select,
-textarea {
+textarea{
 	height: 32px;
 	border-radius: 4px;
 	border: none;
@@ -71,6 +71,13 @@ textarea {
 	background-color: rgb(233, 233, 233);
 	transition: background-color 0.2s;
 	font-family: inherit;
+}
+
+input[type="checkbox"] {
+	/* either revert specific properties… */
+	height: auto;
+	background-color: transparent;
+	padding: 0;
 }
 
 input:focus,

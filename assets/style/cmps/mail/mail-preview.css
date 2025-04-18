@@ -40,10 +40,15 @@
 .mail-preview .star-btn {
     opacity: 0.3;
 }
-.mail-preview .star-btn.is-Starred {
-font-family: fa;
-color: var(--clr-yellow-l);
-opacity: 1;
+
+.mail-preview .star-btn.is-starred::after {
+    font-family: fa;
+    color: var(--clr-yellow-l);
+    opacity: 1;
+}
+
+.mail-preview .star-btn.is-starred {
+    opacity: 1;
 }
 
 .mail-preview:hover .star-btn {
@@ -53,15 +58,24 @@ opacity: 1;
 
 .mail-preview .mail-sent-at {
     font-size: 0.8em;
+    padding-inline-start: 48px;
 }
 
-.mail-preview .mail-content-wraper{
-grid-template-columns: auto auto 1fr;
+.mail-preview .mail-content-wraper {
+    grid-template-columns: auto auto 1fr;
     gap: 4px;
 }
 
+.mail-preview .mail-content-wraper .mail-subject,
+.mail-preview .mail-content-wraper .mail-body-snippet {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
 .mail-preview .mail-content-wraper .seperator,
-.mail-preview .mail-content-wraper .mail-body-snippet{
+.mail-preview .mail-content-wraper .mail-body-snippet {
     font-weight: 400;
     color: var(--clr-gray-400);
 }
@@ -81,6 +95,19 @@ grid-template-columns: auto auto 1fr;
 }
 
 .mail-preview.is-read .mail-sent-at {
-    font-weight: 500;
+    font-weight: 400;
     color: var(--clr-gray-400);
+}
+
+/* checkbox */
+.mail-preview input.checkbox {
+    opacity: 0.3;
+}
+
+.mail-preview:hover input.checkbox {
+    opacity: 1;
+}
+
+.mail-preview:hover input.is-checked {
+    opacity: 1;
 }

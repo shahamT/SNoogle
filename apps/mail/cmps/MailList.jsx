@@ -12,7 +12,7 @@ import { MailPreview } from "./MailPreview.jsx";
 // ====== Component ======
 // =======================
 
-export function MailList({ mails , onMarkRead}) {
+export function MailList({ mails, onMarkRead, onToogleStarred, onToogleChecked, checkedMails }) {
     // === Hooks
 
     // === Effects
@@ -31,10 +31,17 @@ export function MailList({ mails , onMarkRead}) {
 
     if (!mails) return <Loader size={3} type="cover" />
     return (
-        <section className="mail-list flex flex-column" >
-            
-            {mails.map(mail=> {
-                return  <MailPreview key={mail.id} mail={mail} onMarkRead={onMarkRead}/>
+        <section className="mail-list scrollable-content flex flex-column" >
+
+            {mails.map(mail => {
+                return <MailPreview
+                    key={mail.id}
+                    mail={mail}
+                    onMarkRead={onMarkRead}
+                    onToogleStarred={onToogleStarred}
+                    onToogleChecked={onToogleChecked}
+                    checkedMails={checkedMails}
+                />
             })}
 
 

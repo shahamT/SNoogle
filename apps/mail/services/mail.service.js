@@ -34,9 +34,10 @@ export const mailService = {
     get,
     remove,
     save,
-    getEmptyMail: getEmptyMail,
+    getEmptyMail,
     getDefaultFilter,
     getFilterFromSearchParams,
+    getUnreadByStatus,
 }
 
 
@@ -53,9 +54,63 @@ function query(filterBy = {}) {
                     || regExp.test(mail.fromName)
                 )
             }
-            // if (filterBy.status) {
-            //     mails = mails.filter(mail => mail.categories.includes(filterBy.category))
-            // }
+            console.log("filterBy: ", filterBy)
+            if (filterBy.status) {
+                switch (filterBy.status) {
+                    case "inbox":
+                        console.log('inbox')
+                        mails = mails.filter(mail =>
+                            mail.to === loggedinUser.email
+                            && mail.removedAt === null
+                            && mail.sentAt
+                        )
+                        break
+                    case "unread":
+                        console.log('unread')
+                        mails = mails.filter(mail =>
+                            mail.to === loggedinUser.email
+                            && !mail.removedAt
+                            && mail.sentAt
+                            && !mail.isRead
+                        )
+                        break
+
+                    case "draft":
+                        console.log('draft')
+                        mails = mails.filter(mail =>
+                            mail.from === loggedinUser.email
+                            && !mail.removedAt
+                            && !mail.sentAt
+                        )
+                        break
+
+                    case "starred":
+                        console.log('starred')
+                        mails = mails.filter(mail =>
+                            mail.isStarred === true
+                            && !mail.removedAt
+                            && mail.sentAt
+                        )
+                        break
+
+                    case "sent":
+                        console.log('sent')
+                        mails = mails.filter(mail =>
+                            mail.from === loggedinUser.email
+                            && !mail.removedAt
+                            && mail.sentAt
+                        )
+                        break
+
+                    case "trash":
+                        console.log('trash')
+                        mails = mails.filter(mail =>
+                            mail.removedAt
+                        )
+                        break
+
+                }
+            }
             return mails
         })
 }
@@ -77,9 +132,24 @@ function save(mail) {
     }
 }
 
-function getUnreadByStatus(){
-    
-}
+function getUnreadByStatus() {
+    const statuses = ['trash', 'sent', 'starred', 'draft', 'unread', 'inbox'];
+  
+    const promises = statuses.map(status =>
+      query({ status })  // or mailService.query if that’s your API
+        .then(mails => mails.filter(m => !m.isRead).length)
+    );
+  
+    return Promise.all(promises)
+      .then(counts =>
+        statuses.reduce((acc, status, i) => {
+          const count = counts[i];
+          // store as string, or empty string if zero:
+          acc[status] = count > 0 ? String(count) : '';
+          return acc;
+        }, {})
+      );
+  }
 
 
 function getEmptyMail() {

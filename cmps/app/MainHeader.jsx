@@ -47,7 +47,7 @@ export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
                 <nav className="main-nav">
                     <ul className="flex space-between clean-list">
                         <li> <NavLink to="/home">Home</NavLink> </li>
-                        <li> <NavLink to="/mail/inbox">Mail</NavLink> </li>
+                        <li> <NavLink to={{ pathname: '/mail/inbox', search: '?status=inbox' }}>Mail</NavLink> </li>
                         <li> <NavLink to="/notes">Notes</NavLink> </li>
                         <li> <NavLink to="/about">About</NavLink> </li>
                     </ul>

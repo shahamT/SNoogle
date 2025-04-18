@@ -46,9 +46,9 @@ export function MailView() {
         isStarred,
         to,
     } = mail
-    console.log("mail: ", mail)
+    
     return (
-        <section className="mail-view grid">
+        <section className="mail-view scrollable-content grid">
 
             <div className="mail-action-btns">
             <button className="star-btn icon-btn medium star"></button>

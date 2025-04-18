@@ -36,27 +36,26 @@ export const mailService = {
     save,
     getEmptyMail: getEmptyMail,
     getDefaultFilter,
-    getDefaultFilter,
     getFilterFromSearchParams,
 }
 
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_DB_KEY)
-        // .then(mails => {
-        //     if (filterBy.search) {
-        //         const regExp = new RegExp(filterBy.search, 'i')
-        //         mails = mails.filter(mail =>
-        //             regExp.test(mail.title)
-        //             || regExp.test(mail.subtitle)
-        //             || regExp.test(mail.authors)
-        //             || regExp.test(mail.description))
-        //     }
-        //     if (filterBy.category) {
-        //         mails = mails.filter(mail => mail.categories.includes(filterBy.category))
-        //     }
-        //     return mails
-        // })
+        .then(mails => {
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.search, 'i')
+                mails = mails.filter(mail =>
+                    regExp.test(mail.subject)
+                    || regExp.test(mail.body)
+                    || regExp.test(mail.from)
+                    || regExp.test(mail.fromName))
+            }
+            // if (filterBy.category) {
+            //     mails = mails.filter(mail => mail.categories.includes(filterBy.category))
+            // }
+            return mails
+        })
 }
 
 function get(mailId) {
@@ -118,7 +117,7 @@ function getFilterFromSearchParams(searchParams) {
 // }
 
 function getDefaultFilter() {
-    return { search: '', category: '' }
+    return { txt: '', category: '' }
 }
 
 function _createmails() {

@@ -2,7 +2,7 @@
 // === React
 // const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { useState, useEffect, useRef } = React
-const { useNavigate, useSearchParams, useParams } = ReactRouterDOM
+const { useNavigate, useSearchParams, useParams, useLocation } = ReactRouterDOM
 
 // === Services
 import { mailService } from "../services/mail.service.js"
@@ -28,6 +28,7 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [isComposeOpen, setIsComposeOpen] = useState(false)
     const { status, mailId } = useParams()
+
 
     // === Effects
     useEffect(() => {

@@ -55,7 +55,6 @@ export function MailCompose({ isComposeOpen, onCloseCompose }) {
                 break
         }
         setMailToEdit(prevMail => ({ ...prevMail, [field]: value }))
-        console.log("mailToEdit: ", mailToEdit)
     }
 
 

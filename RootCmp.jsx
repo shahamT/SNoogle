@@ -13,8 +13,7 @@ import { GlobalDialog } from "./cmps/general/Modal.jsx"
 import { NotFound } from "./cmps/general/NotFound.jsx"
 import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
-import { MailView } from "./apps/mail/cmps/MailView.jsx"
-import { MailList } from "./apps/mail/cmps/MailList.jsx"
+
 
 
 // ====== Component ======
@@ -36,10 +35,14 @@ export function RootCmp() {
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<HomePage />} />
+
+
                         <Route path="/mail" element={<MailIndex />} />
                         <Route path="/mail/:status/" element={<MailIndex />} />
                         <Route path="/mail/view/:mailId" element={<MailIndex />} />
-                        <Route path="/note" element={<NoteIndex />} />
+
+
+                        <Route path="/notes" element={<NoteIndex />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </main>

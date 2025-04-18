@@ -1,27 +1,27 @@
 .main-header{
     padding-inline: var(--px-spacing-lg);
+
 }
 
-.main-header .main-header-content-wraper{
+.main-header-content-wraper{
+    gap: var(--px-spacing-lg);
+}
 
-    .main-nav ul{
-        gap: 24px;
-    }
-    
-    .main-nav ul li a{
-        padding-inline: 16px;
-        padding-block: 8px;
-        
-        border-radius: 8px;
-        color: rgb(0, 0, 0);
-        font-weight: 600;
-    
-        transition: 0.3s;
-    }
-    
-    .main-nav ul li a:hover{
-    background-color: rgba(255, 255, 255,0.2);
-    }
+.main-header-content-wraper .main-nav ul{
+    gap: var(--px-spacing-mdl);
+}
 
+.main-header-content-wraper .main-nav ul li a{
+    padding-inline: 16px;
+    padding-block: 8px;
+    
+    border-radius: 8px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
 
+    transition: 0.3s;
+}
+
+.main-header-content-wraper .main-nav ul li a:hover{
+background-color: rgba(255, 255, 255,0.2);
 }

@@ -27,7 +27,7 @@
     border-radius: var(--border-radius-round);
     border: none;
     background-color: transparent;
-    font-family: fa-regular;
+
     color: var(--clr-gray-500);
 
 }
@@ -42,13 +42,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     display: block;
 
     width: 20%;
     height: 20%;
 
-    
+
     background-color: var(--clr-icn-btn-hover);
     border-radius: var(--border-radius-round);
 
@@ -56,9 +55,9 @@
     transition: var(--transition-ex-fast);
 }
 
-.icon-btn:hover::before{
+.icon-btn:hover::before {
     opacity: 1;
-    
+
     width: 100%;
     height: 100%;
 
@@ -72,18 +71,19 @@
 
 /* size */
 .icon-btn.big {
-    width: 48px;
-    width: 48px;
+    height: 40px;
+    width: 40px;
+    font-size: 1.3rem;
 }
 
 .icon-btn.medium {
-    width: 40px ;
-    width: 40px ;
+    height: 40px;
+    width: 40px;
     font-size: 1em;
 }
 
 .icon-btn.small {
-    width: 34px;
+    height: 34px;
     width: 34px;
 }
 
@@ -97,16 +97,30 @@
 
 .icon-btn.star::after {
     content: "\f005";
+    font-family: fa-regular;
+
+}
+
+.icon-btn.xmark::after {
+    content: "\f00d";
+    font-family: fa;
+
+}
+
+.icon-btn.x::after {
+    content: "\58";
+    font-family: fa;
 
 }
 
 .icon-btn.trash::after {
     content: "\f2ed";
+    font-family: fa;
 
 }
+
 .icon-btn.pin::after {
     content: "\f08d";
+    font-family: fa;
 
 }
-
-

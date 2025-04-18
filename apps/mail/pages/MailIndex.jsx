@@ -10,7 +10,6 @@ import { useToggle } from "../../../custom-hooks/useToggle.js"
 
 // === Child Components
 import { MailSideNav } from "../cmps/MailSideNav.jsx"
-import { MailSearchBar } from "../cmps/MailSearchBar.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailFilterBar } from "../cmps/MailFilterBar.jsx"
 import { MailCompose } from "../cmps/MailCompose.jsx"
@@ -76,7 +75,6 @@ export function MailIndex() {
     return (
         <section className="mail-index grid">
             <MailSideNav onOpenCompose={onOpenCompose} />
-            <MailSearchBar />
 
             {!mailId &&
                 <React.Fragment>

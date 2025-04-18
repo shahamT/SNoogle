@@ -26,7 +26,7 @@ export function MailCompose({ isComposeOpen, onCloseCompose }) {
         if (mailId) {
             mailService.get(mailId)
                 .then(mail => {
-                    setBook(mail)
+                    setMail(mail)
                 })
         }
 

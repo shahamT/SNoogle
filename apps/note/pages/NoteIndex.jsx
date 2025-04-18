@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link } = ReactRouterDOM
+const { Link, useSearchParams } = ReactRouterDOM
 
 
 import { noteService } from '../services/note.service.js'
@@ -8,17 +8,23 @@ import { noteService } from '../services/note.service.js'
 import { NoteAdd } from '../cmps/NoteAdd.jsx'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
+import { makeId } from '../../../services/util.service.js'
 
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
-    const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams))
 
+    useEffect(() => {
+        setFilterBy(noteService.getFilterFromSearchParams(searchParams))
+    }, [searchParams])
 
     useEffect(() => {
         loadNotes()
     }, [filterBy])
 
+    // functions
     function loadNotes() {
         noteService.query(filterBy)
             .then(notes => {
@@ -28,9 +34,6 @@ export function NoteIndex() {
 
     }
 
-
-
-    // functions
     function onRemove(noteId) {
         noteService.remove(noteId)
             .then(() => {
@@ -67,16 +70,24 @@ export function NoteIndex() {
                 note.info.todos = todos
                 return noteService.save(note)
             })
-            .then(savedNote =>{
-                setNotes(prev => prev.map(note=>note.id === savedNote.id? savedNote:note))
+            .then(savedNote => {
+                setNotes(prev => prev.map(note => note.id === savedNote.id ? savedNote : note))
             })
             .catch(err => console.error('Could not update todo:', err))
 
     }
 
-    function onDuplicate(noteId){
-        console.log("copy",noteId)
+    function onDuplicate(noteId) {
+        noteService.get(noteId)
+            .then(note => {
+                const noteDuplicate = { ...note, id: makeId(4) }
+                return noteService.post(noteDuplicate)
 
+            })
+            .then(savedNote => {
+                setNotes(prev => [...prev, savedNote])
+            })
+            .catch(err => console.error('Could not duplicate note:', err))
     }
 
     return (
@@ -87,5 +98,5 @@ export function NoteIndex() {
 
 
         </div>
-    ) 
+    )
 }

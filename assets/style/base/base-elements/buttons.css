@@ -118,6 +118,28 @@
     font-family: fa;
 
 }
+ .icon-btn.pin::after {
+        content: "\f08d";
+    
+    }
+ .icon-btn.un-pin::after {
+        content: "\e68f";
+    
+    }
+
+.icon-btn.check::after {
+    content: "\f14a";
+
+}
+.icon-btn.duplicate::after {
+    content: "\f24d";
+
+}
+
+.icon-btn.img-uploade::after {
+    content: "\f03e";
+
+}
 
 .icon-btn.pin::after {
     content: "\f08d";

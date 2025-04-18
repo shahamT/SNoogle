@@ -4,10 +4,10 @@ min-height: 100px;
 background-color: var(--clr-white);
 
 border-radius:var(--border-radius-md);
-border: 1px solid var(--clr-gray-300);
-box-shadow: 0 2px 8px rgba(0,0,0,.15);
+border: 0.5px solid var(--clr-gray-300);
+box-shadow: 0 2px 8px rgba(133, 129, 129, 0.15);
 
-padding: 1em;
+padding: 0.5em;
 
 
 display: grid;
@@ -17,7 +17,7 @@ grid-template-areas:
  ". . . . . pin"
  ". main main main main ."
  ". . . . . . "
- ". . . . . delete ";
+ "duplicate . . . . delete ";
  
  
  
@@ -59,4 +59,8 @@ grid-area: pin;
 
 .pinned {
     opacity: 1 !important;
+}
+
+.duplicate-note-btn{
+    grid-area:duplicate ;
 }

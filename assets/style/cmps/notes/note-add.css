@@ -1,10 +1,30 @@
 .note-add {
     justify-self: center;
     background-color: var(--clr-white);
-    border-radius:1px solid var(--border-radius-sm);
-    width: 600px;
+    border-radius:1px solid var(--border-radius-lg);
+    border-radius:1px solid 1em;
+
     border: 1px solid var(--clr-gray-300);
+    border:0px;
+    width: 600px;
 
     position: relative;
 
+}
+
+.note-add-btn-container{
+    /* border-radius:1px solid var(--border-radius-lg); */
+    border-radius:1px solid 1em;
+    border: 1px solid var(--clr-gray-300);
+    cursor: text;
+    display: flex;
+    align-items: center;           /* מיישר אנכית */
+    justify-content: space-between;
+    /* align-content: center; */
+
+}
+
+.note-add-check-btn{
+    font-size: 1.5em;
+   
 }

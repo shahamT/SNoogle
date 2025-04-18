@@ -6,7 +6,6 @@ import { noteService } from "../services/note.service.js"
 
 export function NoteAdd() {
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote('NoteTxt'))
-    const [isLoading, setIsLoading] = useState(false)
     const [isAddNote, setAddNote] = useState()
 
 useEffect(()=>{
@@ -39,6 +38,9 @@ useEffect(()=>{
         if (!isAddNote) setNoteToEdit(noteService.getEmptyNote('NoteTxt'))
     }
 
+    function createTodoNote(){
+        console.log('newNote')
+    }
 
 
     const { title, txt } = noteToEdit.info || {}
@@ -46,9 +48,9 @@ useEffect(()=>{
     return (
         <section className="note-add  ">
             {(!isAddNote) &&
-                <button className="note-add-btn-container" onClick={onToggleForm}>
-                    Take a note...
-                </button>
+                <div className="note-add-btn-container" onClick={onToggleForm}>
+                    Take a note... <button className="note-add-check-btn icon-btn check" onClick={createTodoNote}></button>
+                </div>
 
             }
             {isAddNote &&

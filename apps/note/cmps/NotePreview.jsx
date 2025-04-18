@@ -2,18 +2,18 @@ import { NoteImg } from "./NoteImg.jsx"
 import { NoteTodos } from "./NoteTodos.jsx"
 import { NoteTxt } from "./NoteTxt.jsx"
 
-export function NotePreview({ note , onRemove}) {
+export function NotePreview({ note , onRemove, onSetPin}) {
     const { type } = note
-    console.log(note)
 
-
+  
 
     return (
-        <article className='note-preview '>
+        <article className="note-preview" >
             {type === 'NoteTxt' && <NoteTxt note={note} />}
             {type === 'NoteImg' && <NoteImg note={note} />}
             {type === 'NoteTodos' && <NoteTodos note={note} />}
-            <button onClick={()=>onRemove(note.id)}>Delete note</button>
+            <button className="delete-note-btn icon-btn trash" onClick={()=>onRemove(note.id)}></button>
+            <button className={`pin-note-btn ${note.isPinned ? 'pinned':''}`} onClick={()=>onSetPin(note.id)}>pin</button>
         </article>
     )
 }

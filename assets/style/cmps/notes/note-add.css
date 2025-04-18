@@ -1,3 +1,10 @@
-.note-add{
-    background-color: blueviolet;
+.note-add {
+    justify-self: center;
+    background-color: var(--clr-white);
+    border-radius:1px solid var(--border-radius-sm);
+    width: 600px;
+    border: 1px solid var(--clr-gray-300);
+
+    position: relative;
+
 }

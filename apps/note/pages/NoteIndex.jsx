@@ -14,6 +14,7 @@ export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
 
+
     useEffect(() => {
         loadNotes()
     }, [filterBy])
@@ -31,23 +32,44 @@ export function NoteIndex() {
 
 
     // functions
-    function onRemove(noteId){
-        console.log(noteId)
+    function onRemove(noteId) {
         noteService.remove(noteId)
-        .then(()=>{
-            setNotes(prevNotes => prevNotes.filter(note=>noteId !== note.id))
-            showSuccessMsg('Note has been successfully removed!')
-        })
-        .catch(() =>{showErrorMsg('could not remove note') })
+            .then(() => {
+                setNotes(prevNotes => prevNotes.filter(note => noteId !== note.id))
+                showSuccessMsg('Note has been successfully removed!')
+            })
+            .catch(() => { showErrorMsg('could not remove note') })
     }
+
+
+    function onSetPin(noteId) {
+        noteService.get(noteId)
+            .then(note => {
+                note.isPinned = !note.isPinned
+                return noteService.save(note)
+            })
+            .then(savedNote => {
+                setNotes(prevNotes => {
+                    const newNotes = prevNotes
+                        .map(note =>
+                            note.id === savedNote.id ? { ...savedNote } : note)
+                                .sort((a, b) => (b.isPinned === true) - (a.isPinned === true))
+                                return newNotes
+                            }
+                        )
+                        .catch(err => console.error('Could not toggle pin:', err))
+                    })
+
+    }
+
 
 
 
     return (
         <div className='note-index grid'>
-           <NoteSideNav/>
-           <NoteAdd/> 
-            <NoteList notes={notes} onRemove={onRemove} />
+            <NoteSideNav />
+            <NoteAdd />
+            <NoteList notes={notes} onRemove={onRemove} onSetPin={onSetPin} />
 
 
         </div>

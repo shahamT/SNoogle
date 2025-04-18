@@ -99,3 +99,14 @@
     content: "\f005";
 
 }
+
+.icon-btn.trash::after {
+    content: "\f2ed";
+
+}
+.icon-btn.pin::after {
+    content: "\f08d";
+
+}
+
+

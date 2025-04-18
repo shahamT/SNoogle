@@ -44,12 +44,14 @@ function query(filterBy = {}) {
     return storageService.query(MAIL_DB_KEY)
         .then(mails => {
             if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.search, 'i')
+                console.log("filterBy: ", filterBy.txt)
+                const regExp = new RegExp(filterBy.txt, 'i')
                 mails = mails.filter(mail =>
                     regExp.test(mail.subject)
                     || regExp.test(mail.body)
                     || regExp.test(mail.from)
-                    || regExp.test(mail.fromName))
+                    || regExp.test(mail.fromName)
+                )
             }
             // if (filterBy.category) {
             //     mails = mails.filter(mail => mail.categories.includes(filterBy.category))
@@ -94,16 +96,19 @@ function getEmptyMail() {
 
 function getFilterFromSearchParams(searchParams) {
     const txt = searchParams.get('txt') || ''
-    const state = searchParams.get('state') || ''
+    const status = searchParams.get('state') || ''
     const lables = searchParams.get('lables') || ''
-    
+
     return {
         txt,
-        state,
+        status,
         lables
     }
 }
 
+function getDefaultFilter() {
+    return { txt: '', status: '', lables: [] }
+}
 
 // function _setNextPrevmailId(mail) {
 //     return query().then((mails) => {
@@ -116,9 +121,6 @@ function getFilterFromSearchParams(searchParams) {
 //     })
 // }
 
-function getDefaultFilter() {
-    return { txt: '', category: '' }
-}
 
 function _createmails() {
     if (!loadFromStorage(MAIL_DB_KEY) || loadFromStorage(MAIL_DB_KEY).lentgh === 0) {

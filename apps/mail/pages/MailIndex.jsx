@@ -10,7 +10,6 @@ import { useToggle } from "../../../custom-hooks/useToggle.js"
 
 // === Child Components
 import { MailSideNav } from "../cmps/MailSideNav.jsx"
-import { MailSearchBar } from "../cmps/MailSearchBar.jsx"
 import { MailList } from "../cmps/MailList.jsx"
 import { MailFilterBar } from "../cmps/MailFilterBar.jsx"
 import { MailCompose } from "../cmps/MailCompose.jsx"
@@ -31,11 +30,20 @@ export function MailIndex() {
 
 
     // === Effects
+
+    useEffect(() => {
+        setFilterBy(mailService.getFilterFromSearchParams(searchParams))
+    }, [searchParams])
+
     useEffect(() => {
         loadMails()
     }, [filterBy])
 
+
+    // === Functions
+
     function loadMails() {
+        console.log("filterBy: ", filterBy)
         mailService.query(filterBy)
             .then(mails => {
                 setMails(mails)
@@ -45,11 +53,10 @@ export function MailIndex() {
             .catch(err => console.log("err: ", err))
     }
 
-
-    // === Functions
     function onOpenCompose() {
         setIsComposeOpen(true)
     }
+
     function onCloseCompose() {
         setIsComposeOpen(false)
     }
@@ -68,11 +75,10 @@ export function MailIndex() {
     return (
         <section className="mail-index grid">
             <MailSideNav onOpenCompose={onOpenCompose} />
-            <MailSearchBar />
 
             {!mailId &&
                 <React.Fragment>
-                    <MailList mails={mails} onMarkRead={onMarkRead}/>
+                    <MailList mails={mails} onMarkRead={onMarkRead} />
                     <MailFilterBar />
                 </React.Fragment>
             }

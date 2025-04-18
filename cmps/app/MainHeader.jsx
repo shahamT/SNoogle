@@ -1,5 +1,5 @@
 import { MainLogo } from "../general/MainLogo.jsx"
-import { MailSearchBar } from "./SearchBar.jsx"
+import {MainSearchBar } from "./MainSearchBar.jsx"
 
 // react
 const { useState, useEffect } = React
@@ -29,7 +29,7 @@ export function MainHeader({ onSetPage }) {
             <div className="main-header-content-wraper flex space-between align-center">
                 <MainLogo />
 
-                {isSearchVisible && <MailSearchBar />}
+                {isSearchVisible && <MainSearchBar />}
 
                 <nav className="main-nav">
                     <ul className="flex space-between clean-list">

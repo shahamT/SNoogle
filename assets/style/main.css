@@ -26,6 +26,7 @@
 @import 'cmps/app/app.css';
 @import 'cmps/app/root.css';
 @import 'cmps/app/main-header.css';
+@import 'cmps/app/main-search-bar.css';
 
 
 /* General-Cmps */
@@ -52,7 +53,6 @@
 /* Mail Cmps */
 @import 'cmps/mail/mail-index.css';
 @import 'cmps/mail/mail-list.css';
-@import 'cmps/mail/mail-search-bar.css';
 @import 'cmps/mail/mail-side-nav.css';
 @import 'cmps/mail/mail-filter-bar.css';
 @import 'cmps/mail/mail-preview.css';

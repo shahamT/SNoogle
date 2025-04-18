@@ -1,9 +1,16 @@
 /* layout */
 .side-nav {
+    z-index: 5;
     padding-block: var(--px-spacing-sm);
     gap: var(--px-spacing-md);
     background-color: var(--clr-bg-light-base);
     overflow: hidden;
+
+    transition: box-shadow 0.5s;
+}
+
+.side-nav-open .side-nav{
+      box-shadow: 5px 15px 15px rgba(0, 0, 0, 0.35);
 }
 
 .side-nav .side-nav-list ul {

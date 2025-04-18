@@ -1,9 +1,17 @@
 .note-index {
-   grid-template-columns: 200px 1fr 24px;
+   grid-template-columns: 74px 1fr 24px;
    grid-template-rows: auto auto 1fr;
    background-color: var(--clr-white);
+   transition: grid-template-columns 0.5s;
+
 
 }
+
+
+.side-nav-open .note-index{
+   grid-template-columns: 300px 1fr 24px;
+   }
+
 
 .note-index .note-side-nav {
    grid-column: 1;

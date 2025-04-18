@@ -21,14 +21,14 @@ const intervalId = useRef()
 
     // === Functions
     function onOpenSideNav() {
-        if (isSideNavPinned.isSideNavPinned) return
+        if (isSideNavPinned) return
         clearTimeout(intervalId.current)
         intervalId.current = setTimeout(() => {
             openSideBar()
         }, 300);
     }
     function onCloseSideNav() {
-        if (isSideNavPinned.isSideNavPinned) return
+        if (isSideNavPinned) return
         clearTimeout(intervalId.current)
         intervalId.current =setTimeout(() => {
             closeSideBar()

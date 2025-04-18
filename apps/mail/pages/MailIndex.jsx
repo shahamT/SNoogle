@@ -20,7 +20,7 @@ import { MailView } from "../cmps/MailView.jsx"
 // ====== Component ======
 // =======================
 
-export function MailIndex(isSideNavPinned) {
+export function MailIndex({isSideNavPinned}) {
     // === Hooks
     const [mails, setMails] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams()

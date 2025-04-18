@@ -11,7 +11,7 @@ import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 import { makeId } from '../../../services/util.service.js'
 
 
-export function NoteIndex() {
+export function NoteIndex({isSideNavPinned}) {
     const [notes, setNotes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams))
@@ -92,7 +92,7 @@ export function NoteIndex() {
 
     return (
         <div className='note-index grid'>
-            <NoteSideNav />
+            <NoteSideNav isSideNavPinned={isSideNavPinned} />
             <NoteAdd />
             <NoteList notes={notes} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
 

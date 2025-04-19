@@ -1,37 +1,54 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
+const { Link, useSearchParams, useLocation } = ReactRouterDOM
 
 
 import { noteService } from '../services/note.service.js'
-
-
-import { NoteAdd } from '../cmps/NoteAdd.jsx'
-import { NoteList } from '../cmps/NoteList.jsx'
-import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 import { makeId } from '../../../services/util.service.js'
 
 
-export function NoteIndex({isSideNavPinned}) {
+// import { NoteAdd } from '../cmps/NoteAdd.jsx'
+import { NoteList } from '../cmps/NoteList.jsx'
+import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
+import { AddNoteCollapsed } from '../cmps/AddNoteCollapsed.jsx'
+import { NoteTodosCreate } from '../cmps/NoteTodosCreate.jsx'
+
+
+
+export function NoteIndex({ isSideNavPinned }) {
+    const { pathname } = useLocation()
+
     const [notes, setNotes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
-    const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams))
+    const [filterBy, setFilterBy] = useState(null)
+
+    const [addNoteType, setAddNoteType] = useState('collapsed')
+
+    // useEffect(() => {
+    //    addParams([{ addNoteType: addNoteType }])
+    // }, [])
 
     useEffect(() => {
-        setFilterBy(noteService.getFilterFromSearchParams(searchParams))
+        // const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
+        // if (!m) return                 
+        // const newStatus = m[1]    
+
+        const params = addParams([{addNoteType: addNoteType},{status: 'inbox'}])
+        
+    }, [pathname])
+
+    useEffect(() => {
+        const addNoteTypeParam = searchParams.get('addNoteType')
+        setAddNoteType(addNoteTypeParam)
+        loadNotes(noteService.getFilterFromSearchParams(searchParams))
     }, [searchParams])
 
-    useEffect(() => {
-        loadNotes()
-    }, [filterBy])
 
     // functions
-    function loadNotes() {
-        noteService.query(filterBy)
+    function loadNotes(params) {
+        noteService.query(params)
             .then(notes => {
                 setNotes(notes)
             })
-
-
     }
 
     function onRemove(noteId) {
@@ -90,13 +107,62 @@ export function NoteIndex({isSideNavPinned}) {
             .catch(err => console.error('Could not duplicate note:', err))
     }
 
+
+
+    function onSaveNote(ev) {
+        ev.preventDefault()
+        noteService.save(noteToEdit)
+            .then(() => {
+                showSuccessMsg('Note has been successfully add!')
+                setAddTxtNote(false)
+            })
+    }
+
+    function handleChange({ target }) {
+        const { name, value } = target
+        setNoteToEdit(prev => ({
+            ...prev,
+            info: { ...prev.info, [name]: value }
+        }))
+    }
+
+
+    function onAddNoteTypeChange(type) {
+        addParams([{ addNoteType: type }])
+    }
+
+    function addParams(keys) {
+        console.log("keys: ", keys)
+        const params = noteService.getFilterFromSearchParams(searchParams)
+        keys.forEach(key => {
+            const k = Object.keys(key)[0]
+            const v = key[k]
+            params[k] = v
+        })
+        setSearchParams(params)
+        return params
+    }
+
     return (
         <div className='note-index grid'>
             <NoteSideNav isSideNavPinned={isSideNavPinned} />
-            <NoteAdd />
-            <NoteList notes={notes} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
 
+            <section className="note-add  ">
+                <NoteAdd addNoteType={addNoteType} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} handleChange={handleChange} />
+            </section >
+
+            <NoteList notes={notes} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
 
         </div>
     )
+}
+
+
+function NoteAdd({ addNoteType, onAddNoteTypeChange }) {
+    const dynamicCmpMap = {
+        collapsed: <AddNoteCollapsed onAddNoteTypeChange={onAddNoteTypeChange} />,
+        // addText: <NoteTxtCreate setAddTxtNote={setAddTxtNote} onSaveNote={onSaveNote} handleChange={handleChange}/>,
+        addToDo: <NoteTodosCreate onAddNoteTypeChange={onAddNoteTypeChange} />
+    }
+    return dynamicCmpMap[addNoteType]
 }

@@ -34,8 +34,8 @@ function query(filterBy = { txt: '' }) {
       )
     })
 }
-function post(noteId){
- return storageService.post(NOTES_KEY, noteId)
+function post(noteId) {
+  return storageService.post(NOTES_KEY, noteId)
 
 }
 
@@ -64,14 +64,18 @@ function save(note) {
 // לשנות מה שלי יש בדיפולט פילטר
 function getFilterFromSearchParams(searchParams) {
   const txt = searchParams.get('txt') || ''
+  const addNoteType = searchParams.get('addNoteType') || ''
+  const status = searchParams.get('status') || ''
   // const status = searchParams.get('state') || ''
   // const lables = searchParams.get('lables') || ''
 
   return {
-      txt,
-      // status,
-      // lables
-}}
+    txt,
+    addNoteType,
+    status,
+    // lables
+  }
+}
 
 
 function getDefaultFilter(filterBy = { txt: '' }) {

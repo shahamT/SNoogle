@@ -23,7 +23,7 @@ export function MainSearchBar({ /* prop1, prop2 */ }) {
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
-    const [filterByToEdit, setfilterByToEdit] = useState(mailService.getParamsFromSearchParams(searchParams))
+    const [filterByToEdit, setfilterByToEdit] = useState(getParamsFromURL())
     const [clearBtnVisivility, setClearBtnVisivility] = useState(false)
     // const [isTyping, setIsTyping] = useState(false)
 
@@ -44,18 +44,18 @@ export function MainSearchBar({ /* prop1, prop2 */ }) {
 
 
 
-    useEffect(() => {
-        setfilterByToEdit(getDefaultFilterBy())
-        // setIsTyping(false)
-    }, [pathname])
+    // useEffect(() => {
+    //     setfilterByToEdit(getDefaultFilterBy())
+    //     // setIsTyping(false)
+    // }, [pathname])
 
     // === Functions
 
-    function getDefaultFilterBy() {
+    function getParamsFromURL() {
         if (pathname.startsWith('/mail')) {
-            return mailService.getDefaultFilter()
+            return mailService.getParamsFromSearchParams(searchParams)
         } else if (pathname.startsWith('/notes')) {
-            return noteService.getDefaultFilter()
+            return noteService.getFilterFromSearchParams(searchParams)
         }
     }
 

@@ -42,7 +42,7 @@ export function MailIndex({ isSideNavPinned }) {
         if (!m) return                 
         const newStatus = m[1]    
 
-        const params = addParam('status', 'inbox')
+        const params = addParam('status', 'inbox') //TODO fix this
         loadMails(params)
     }, [pathname, searchParams, setSearchParams])
 

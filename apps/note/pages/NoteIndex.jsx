@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams, useLocation } = ReactRouterDOM
+const { Link, useSearchParams, useLocation, useNavigate } = ReactRouterDOM
 
 
 import { noteService } from '../services/note.service.js'
@@ -11,15 +11,20 @@ import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 import { AddNoteCollapsed } from '../cmps/AddNoteCollapsed.jsx'
 import { NoteTodosCreate } from '../cmps/NoteTodosCreate.jsx'
+import { NoteTxtCreate } from '../cmps/NoteTxtCreate.jsx'
 
 
 
 export function NoteIndex({ isSideNavPinned }) {
     const { pathname } = useLocation()
+    const navigate = useNavigate()
+
 
     const [notes, setNotes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(null)
+
+    const [noteToEdit,setNoteToEdit] = useState(noteService.getEmptyNote())
 
     const [addNoteType, setAddNoteType] = useState('collapsed')
 
@@ -28,10 +33,10 @@ export function NoteIndex({ isSideNavPinned }) {
     // }, [])
 
     useEffect(() => {
- 
+
         const m = pathname.match(/^\/notes\/(todos|images|archive|trash|main)/)
-        if (!m) return                 
-        const newStatus = m[1]  
+        if (!m) return
+        const newStatus = m[1]
 
         addParams([{ addNoteType: addNoteType }, { status: newStatus }])
 
@@ -42,6 +47,28 @@ export function NoteIndex({ isSideNavPinned }) {
         setAddNoteType(addNoteTypeParam)
         loadNotes(noteService.getFilterFromSearchParams(searchParams))
     }, [searchParams])
+
+    useEffect(() => {
+        const noteType = searchParams.get('addNoteType')
+        let noteTypeKey
+        switch (noteType) {
+            case 'addText':
+                noteTypeKey = 'NoteTxt'
+                break
+            case 'addToDo':
+                noteTypeKey = 'NoteTodos'
+                break
+            case 'addImg':
+                noteTypeKey = 'NoteImg'
+                break
+            default:
+                noteTypeKey = 'NoteTxt'
+        }
+
+        setNoteToEdit(noteService.getEmptyNote(noteTypeKey))
+    }, [searchParams])
+
+
 
 
     // functions
@@ -102,7 +129,8 @@ export function NoteIndex({ isSideNavPinned }) {
                 return noteService.post(noteDuplicate)
 
             })
-            .then(savedNote => {_
+            .then(savedNote => {
+                _
                 setNotes(prev => [...prev, savedNote])
             })
             .catch(err => console.error('Could not duplicate note:', err))
@@ -110,22 +138,24 @@ export function NoteIndex({ isSideNavPinned }) {
 
 
 
-    function onSaveNote(ev) {
+    function onSaveNote(ev, noteToEdit) {
         ev.preventDefault()
+        console.log("ssssssssssssssss")
         noteService.save(noteToEdit)
             .then(() => {
+                console.log(notes)
                 showSuccessMsg('Note has been successfully add!')
-                setAddTxtNote(false)
             })
+            .finally(onClose)
     }
 
-    function handleChange({ target }) {
-        const { name, value } = target
-        setNoteToEdit(prev => ({
-            ...prev,
-            info: { ...prev.info, [name]: value }
-        }))
-    }
+    // function handleChange({ target }) {
+    //     const { name, value } = target
+    //     setNoteToEdit(prev => ({
+    //         ...prev,
+    //         info: { ...prev.info, [name]: value }
+    //     }))
+    // }
 
 
     function onAddNoteTypeChange(type) {
@@ -144,12 +174,19 @@ export function NoteIndex({ isSideNavPinned }) {
         return params
     }
 
+
+
+
+    function onClose() {
+        navigate('/notes/main')
+    }
+
     return (
         <div className='note-index grid'>
             <NoteSideNav isSideNavPinned={isSideNavPinned} />
 
             <section className="note-add  ">
-                <NoteAdd addNoteType={addNoteType} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} handleChange={handleChange} />
+                <NoteAdd addNoteType={addNoteType} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} onClose={onClose} />
             </section >
 
             <NoteList notes={notes} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
@@ -159,12 +196,22 @@ export function NoteIndex({ isSideNavPinned }) {
 }
 
 
-function NoteAdd({ addNoteType, onAddNoteTypeChange }) {
+function NoteAdd(props) {
+    const { addNoteType } = props
     const dynamicCmpMap = {
-        collapsed: <AddNoteCollapsed onAddNoteTypeChange={onAddNoteTypeChange} />,
-        // addText: <NoteTxtCreate setAddTxtNote={setAddTxtNote} onSaveNote={onSaveNote} handleChange={handleChange}/>,
-        addToDo: <NoteTodosCreate onAddNoteTypeChange={onAddNoteTypeChange} />
+        collapsed: <AddNoteCollapsed {...props} />,
+        addText: <NoteTxtCreate {...props} />,
+        addToDo: <NoteTodosCreate {...props} />
     }
     if (!addNoteType) return dynamicCmpMap.collapsed
     return dynamicCmpMap[addNoteType]
 }
+// function NoteAdd({ addNoteType, onAddNoteTypeChange }) {
+//     const dynamicCmpMap = {
+//         collapsed: <AddNoteCollapsed onAddNoteTypeChange={onAddNoteTypeChange} />,
+//         addText: <NoteTxtCreate onAddNoteTypeChange={onAddNoteTypeChange} />,
+//         addToDo: <NoteTodosCreate onAddNoteTypeChange={onAddNoteTypeChange} />
+//     }
+//     if (!addNoteType) return dynamicCmpMap.collapsed
+//     return dynamicCmpMap[addNoteType]
+// }

@@ -23,6 +23,8 @@ export function NoteIndex({ isSideNavPinned }) {
     const [notes, setNotes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(null)
+    const [openColorNoteId, setOpenColorNoteId] = useState(null)
+
 
     const [noteToEdit,setNoteToEdit] = useState(noteService.getEmptyNote())
 
@@ -67,8 +69,6 @@ export function NoteIndex({ isSideNavPinned }) {
 
         setNoteToEdit(noteService.getEmptyNote(noteTypeKey))
     }, [searchParams])
-
-
 
 
     // functions
@@ -148,13 +148,14 @@ export function NoteIndex({ isSideNavPinned }) {
             .finally(onClose)
     }
 
-    // function handleChange({ target }) {
-    //     const { name, value } = target
-    //     setNoteToEdit(prev => ({
-    //         ...prev,
-    //         info: { ...prev.info, [name]: value }
-    //     }))
-    // }
+    function onStyleSave(noteToUpdate){
+        noteService.save(noteToUpdate)
+            .then(() => {
+                console.log("save note:",notes)
+                showSuccessMsg('Note has been successfully add!')
+            })
+            .finally(onClose)
+    }
 
 
     function onAddNoteTypeChange(type) {
@@ -174,8 +175,6 @@ export function NoteIndex({ isSideNavPinned }) {
     }
 
 
-
-
     function onClose() {
         navigate('/notes/main')
     }
@@ -188,11 +187,12 @@ export function NoteIndex({ isSideNavPinned }) {
                 <NoteAdd addNoteType={addNoteType} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} onClose={onClose} />
             </section >
 
-            <NoteList notes={notes} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
+            <NoteList onStyleSave={onStyleSave} notes={notes}  openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
 
         </div>
     )
 }
+
 
 
 function NoteAdd(props) {
@@ -205,12 +205,3 @@ function NoteAdd(props) {
     if (!addNoteType) return dynamicCmpMap.collapsed
     return dynamicCmpMap[addNoteType]
 }
-// function NoteAdd({ addNoteType, onAddNoteTypeChange }) {
-//     const dynamicCmpMap = {
-//         collapsed: <AddNoteCollapsed onAddNoteTypeChange={onAddNoteTypeChange} />,
-//         addText: <NoteTxtCreate onAddNoteTypeChange={onAddNoteTypeChange} />,
-//         addToDo: <NoteTodosCreate onAddNoteTypeChange={onAddNoteTypeChange} />
-//     }
-//     if (!addNoteType) return dynamicCmpMap.collapsed
-//     return dynamicCmpMap[addNoteType]
-// }

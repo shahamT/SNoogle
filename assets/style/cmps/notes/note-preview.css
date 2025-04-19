@@ -17,7 +17,7 @@
         ". . . . . pin"
         "main main main main main main"
         ". . . . . . "
-        "duplicate . . . . delete ";
+        "pickColor duplicate . . . delete ";
 
 
 
@@ -61,6 +61,9 @@
 
 }
 
+.color-note-btn{
+    grid-area: pickColor;
+}
 
 
 .pinned {

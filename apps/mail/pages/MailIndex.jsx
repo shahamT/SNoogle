@@ -38,20 +38,19 @@ export function MailIndex({ isSideNavPinned }) {
     // === Effects
 
     useEffect(() => {
-        // 1) figure out which “folder” we’re in
         const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
-        if (!m) return                 // not a mail‑folder route
-        const newStatus = m[1]         // "inbox" | "starred" | …
+        if (!m) return                 
+        const newStatus = m[1]    
 
-        // 2) clone the real current params
-        const filterBy = mailService.getFilterFromSearchParams(searchParams)
-
-        // 4) merge in the new one and write
-        filterBy.status = newStatus
-        setSearchParams(filterBy)
-        loadMails(filterBy)
+        const params = addParam('status', 'inbox')
+        loadMails(params)
     }, [pathname, searchParams, setSearchParams])
 
+    //opens the compose based on url
+    useEffect(() => {
+        const composeParam = searchParams.get('compose')
+        setIsComposeOpen(composeParam === 'new')
+    }, [searchParams])
 
     useEffect(() => {
         loadUnreadByStatus()
@@ -72,17 +71,38 @@ export function MailIndex({ isSideNavPinned }) {
         mailService.getUnreadByStatus()
             .then(res => {
                 setUnreadByStatus(res)
-                console.log("res: ", res)
             })
 
     }
 
+    // function addParam(key, value) {
+    //     const params = new URLSearchParams(searchParams)
+    //     params.set(key, value)
+    //     setSearchParams(params)
+    // }
+
+    function addParam(key, value) {
+        const params = mailService.getParamsFromSearchParams(searchParams)
+        params[key] = value
+        setSearchParams(params)
+        return params
+    }
+
+
+
+    function toggleComposeState() {
+        const params = mailService.getParamsFromSearchParams(searchParams)
+        if (params.compose === 'new') {
+            setIsComposeOpen(true)
+        } else setIsComposeOpen(false)
+    }
+
     function onOpenCompose() {
-        setIsComposeOpen(true)
+        addParam('compose', 'new')
     }
 
     function onCloseCompose() {
-        setIsComposeOpen(false)
+        addParam('compose', '')
     }
 
     function onMarkRead(mailToSave) {
@@ -120,15 +140,13 @@ export function MailIndex({ isSideNavPinned }) {
     }
 
     function onToogleChecked(mailToCheck) {
-        console.log("checkedMails: ", checkedMails)
-        if (!checkedMails.includes(mailToCheck.id)){
-            setCheckedMails(prevChecked => prevChecked.push(mailToCheck.id))
-        }else {
-            const idIdx = checkedMails.current.findIndex(id=> id === mailToCheck.id)
-            setCheckedMails(prevChecked => prevChecked.splice(mailToCheck.id,1))
-        }
- 
-
+        // console.log("checkedMails: ", checkedMails)
+        // if (!checkedMails.includes(mailToCheck.id)){
+        //     setCheckedMails(prevChecked => prevChecked.push(mailToCheck.id))
+        // }else {
+        //     const idIdx = checkedMails.current.findIndex(id=> id === mailToCheck.id)
+        //     setCheckedMails(prevChecked => prevChecked.splice(mailToCheck.id,1))
+        // }
     }
 
 

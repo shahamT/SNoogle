@@ -2,7 +2,7 @@
 // const { useState, useEffect, useRef } = React
 const { useEffect, useState } = React
 // const { Routes, Route, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useLocation } = ReactRouterDOM
 
 
 import { useEffectUpdate } from "../../../custom-hooks/useEffectUpdate.js"
@@ -36,7 +36,7 @@ export function MailPreview({ mail, onMarkRead, onToogleStarred, onToogleChecked
     // === Functions
     function onOpenMail() {
         onMarkRead(mail)
-        navigate(`/mail/view/${mail.id}`)
+        navigate({ pathname: `/mail/view/${mail.id}`, search: location.search })
     }
 
     function onStarClick(ev) {

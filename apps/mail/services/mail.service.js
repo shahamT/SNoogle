@@ -36,7 +36,7 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
-    getFilterFromSearchParams,
+    getParamsFromSearchParams,
     getUnreadByStatus,
 }
 
@@ -54,11 +54,9 @@ function query(filterBy = {}) {
                     || regExp.test(mail.fromName)
                 )
             }
-            console.log("filterBy: ", filterBy)
             if (filterBy.status) {
                 switch (filterBy.status) {
                     case "inbox":
-                        console.log('inbox')
                         mails = mails.filter(mail =>
                             mail.to === loggedinUser.email
                             && mail.removedAt === null
@@ -66,7 +64,6 @@ function query(filterBy = {}) {
                         )
                         break
                     case "unread":
-                        console.log('unread')
                         mails = mails.filter(mail =>
                             mail.to === loggedinUser.email
                             && !mail.removedAt
@@ -76,7 +73,6 @@ function query(filterBy = {}) {
                         break
 
                     case "draft":
-                        console.log('draft')
                         mails = mails.filter(mail =>
                             mail.from === loggedinUser.email
                             && !mail.removedAt
@@ -85,7 +81,6 @@ function query(filterBy = {}) {
                         break
 
                     case "starred":
-                        console.log('starred')
                         mails = mails.filter(mail =>
                             mail.isStarred === true
                             && !mail.removedAt
@@ -94,7 +89,6 @@ function query(filterBy = {}) {
                         break
 
                     case "sent":
-                        console.log('sent')
                         mails = mails.filter(mail =>
                             mail.from === loggedinUser.email
                             && !mail.removedAt
@@ -103,7 +97,6 @@ function query(filterBy = {}) {
                         break
 
                     case "trash":
-                        console.log('trash')
                         mails = mails.filter(mail =>
                             mail.removedAt
                         )
@@ -134,22 +127,22 @@ function save(mail) {
 
 function getUnreadByStatus() {
     const statuses = ['trash', 'sent', 'starred', 'draft', 'unread', 'inbox'];
-  
+
     const promises = statuses.map(status =>
-      query({ status })  // or mailService.query if that’s your API
-        .then(mails => mails.filter(m => !m.isRead).length)
+        query({ status })  // or mailService.query if that’s your API
+            .then(mails => mails.filter(m => !m.isRead).length)
     );
-  
+
     return Promise.all(promises)
-      .then(counts =>
-        statuses.reduce((acc, status, i) => {
-          const count = counts[i];
-          // store as string, or empty string if zero:
-          acc[status] = count > 0 ? String(count) : '';
-          return acc;
-        }, {})
-      );
-  }
+        .then(counts =>
+            statuses.reduce((acc, status, i) => {
+                const count = counts[i];
+                // store as string, or empty string if zero:
+                acc[status] = count > 0 ? String(count) : '';
+                return acc;
+            }, {})
+        );
+}
 
 
 function getEmptyMail() {
@@ -169,15 +162,17 @@ function getEmptyMail() {
 }
 
 
-function getFilterFromSearchParams(searchParams) {
+function getParamsFromSearchParams(searchParams) {
+    const compose = searchParams.get('compose') || ''
     const txt = searchParams.get('txt') || ''
     const status = searchParams.get('state') || ''
     const lables = searchParams.get('lables') || ''
 
     return {
+        compose,
         txt,
         status,
-        lables
+        lables,
     }
 }
 

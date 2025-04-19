@@ -23,7 +23,7 @@ export function MainSearchBar({ /* prop1, prop2 */ }) {
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
-    const [filterByToEdit, setfilterByToEdit] = useState(getTruthyValues(getDefaultFilterBy()))
+    const [filterByToEdit, setfilterByToEdit] = useState(mailService.getParamsFromSearchParams(searchParams))
     const [clearBtnVisivility, setClearBtnVisivility] = useState(false)
     // const [isTyping, setIsTyping] = useState(false)
 

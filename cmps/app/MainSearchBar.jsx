@@ -29,7 +29,7 @@ export function MainSearchBar({ /* prop1, prop2 */ }) {
 
     // === Effects
     useEffect(() => {
-        setSearchParams({ ...filterByToEdit, ...searchParams })
+        setSearchParams({ ...searchParams, ...filterByToEdit  })
         if(filterByToEdit.txt !== ""){
             setClearBtnVisivility(true)
         } else setClearBtnVisivility(false)

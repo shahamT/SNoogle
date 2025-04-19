@@ -28,12 +28,15 @@ export function NoteIndex({ isSideNavPinned }) {
     // }, [])
 
     useEffect(() => {
-        // const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
-        // if (!m) return                 
-        // const newStatus = m[1]    
+ 
+        const m = pathname.match(/^\/notes\/(todos|images|archive|trash|main)/)
+        if (!m) return                 
+        const newStatus = m[1]  
 
-        const params = addParams([{addNoteType: addNoteType},{status: 'inbox'}])
-        
+        console.log('got here');
+
+        addParams([{ addNoteType: addNoteType }, { status: newStatus }])
+
     }, [pathname])
 
     useEffect(() => {
@@ -164,5 +167,6 @@ function NoteAdd({ addNoteType, onAddNoteTypeChange }) {
         // addText: <NoteTxtCreate setAddTxtNote={setAddTxtNote} onSaveNote={onSaveNote} handleChange={handleChange}/>,
         addToDo: <NoteTodosCreate onAddNoteTypeChange={onAddNoteTypeChange} />
     }
+    if (!addNoteType) return dynamicCmpMap.collapsed
     return dynamicCmpMap[addNoteType]
 }

@@ -39,10 +39,11 @@ export function MailIndex({ isSideNavPinned }) {
 
     useEffect(() => {
         const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
+        console.log("m: ", m)
         if (!m) return                 
         const newStatus = m[1]    
 
-        const params = addParam('status', 'inbox') //TODO fix this
+        const params = addParam('status', newStatus) //TODO fix this
         loadMails(params)
     }, [pathname, searchParams, setSearchParams])
 

@@ -64,7 +64,7 @@ function save(note) {
 // לשנות מה שלי יש בדיפולט פילטר
 function getFilterFromSearchParams(searchParams) {
   const txt = searchParams.get('txt') || ''
-  const addNoteType = searchParams.get('addNoteType') || ''
+  const addNoteType = searchParams.get('addNoteType') || 'collapsed'
   const status = searchParams.get('status') || ''
   // const status = searchParams.get('state') || ''
   // const lables = searchParams.get('lables') || ''

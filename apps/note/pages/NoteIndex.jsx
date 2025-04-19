@@ -33,8 +33,6 @@ export function NoteIndex({ isSideNavPinned }) {
         if (!m) return                 
         const newStatus = m[1]  
 
-        console.log('got here');
-
         addParams([{ addNoteType: addNoteType }, { status: newStatus }])
 
     }, [pathname])
@@ -104,7 +102,7 @@ export function NoteIndex({ isSideNavPinned }) {
                 return noteService.post(noteDuplicate)
 
             })
-            .then(savedNote => {
+            .then(savedNote => {_
                 setNotes(prev => [...prev, savedNote])
             })
             .catch(err => console.error('Could not duplicate note:', err))

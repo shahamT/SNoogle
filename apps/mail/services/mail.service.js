@@ -1,7 +1,7 @@
 // mail service
 
 import { storageService } from "../../../services/async-storage.service.js"
-import { loadFromStorage, saveToStorage } from "../../../services/util.service.js"
+import { getTruthyValues, loadFromStorage, saveToStorage } from "../../../services/util.service.js"
 
 
 
@@ -165,15 +165,17 @@ function getEmptyMail() {
 function getParamsFromSearchParams(searchParams) {
     const compose = searchParams.get('compose') || ''
     const txt = searchParams.get('txt') || ''
-    const status = searchParams.get('state') || ''
+    const status = searchParams.get('status') || ''
     const lables = searchParams.get('lables') || ''
 
-    return {
+    const cleanParams = getTruthyValues({
         compose,
         txt,
         status,
         lables,
-    }
+    })
+
+    return cleanParams
 }
 
 function getDefaultFilter() {

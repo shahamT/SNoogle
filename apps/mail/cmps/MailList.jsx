@@ -12,7 +12,16 @@ import { MailPreview } from "./MailPreview.jsx";
 // ====== Component ======
 // =======================
 
-export function MailList({ mails, onMarkRead, onToogleStarred, onToogleChecked, checkedMails }) {
+export function MailList({
+    mails,
+    onMarkRead,
+    onToogleStarred,
+    onToogleChecked,
+    checkedMails,
+    onRemoveMail,
+    onMarkUnRead,
+    addParam }) {
+
     // === Hooks
 
     // === Effects
@@ -41,6 +50,9 @@ export function MailList({ mails, onMarkRead, onToogleStarred, onToogleChecked, 
                     onToogleStarred={onToogleStarred}
                     onToogleChecked={onToogleChecked}
                     checkedMails={checkedMails}
+                    onRemoveMail={onRemoveMail}
+                    onMarkUnRead={onMarkUnRead}
+                    addParam={addParam}
                 />
             })}
 

@@ -56,10 +56,9 @@
 
 }
 
-.mail-preview .mail-sent-at {
-    font-size: 0.8em;
-    padding-inline-start: 48px;
-}
+
+
+/* mail content */
 
 .mail-preview .mail-content-wraper {
     grid-template-columns: auto auto 1fr;
@@ -81,6 +80,27 @@
 }
 
 
+/* sent date */
+
+.mail-preview .mail-sent-at {
+    font-size: 0.8em;
+    padding-inline-start: 48px;
+}
+
+.mail-preview:hover .mail-sent-at{
+    display: none;
+}
+
+/* action btns */
+
+.mail-preview .mail-action-btns{
+    display: none;
+    
+}
+
+.mail-preview:hover .mail-action-btns{
+    display: flex;
+}
 
 
 /* isRead */

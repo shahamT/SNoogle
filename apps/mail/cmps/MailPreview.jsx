@@ -18,7 +18,16 @@ import { mailService } from "../services/mail.service.js"
 // ====== Component ======
 // =======================
 
-export function MailPreview({ mail, onMarkRead, onToogleStarred, onToogleChecked, checkedMails }) {
+export function MailPreview({
+    mail,
+    onMarkRead,
+    onToogleStarred,
+    onToogleChecked,
+    checkedMails,
+    onRemoveMail,
+    onMarkUnRead,
+    addParam }) {
+
     const navigate = useNavigate()
     const [isChecked, setIsChecked] = useState(getCheckedState())
     // === Hooks
@@ -35,18 +44,38 @@ export function MailPreview({ mail, onMarkRead, onToogleStarred, onToogleChecked
 
     // === Functions
     function onOpenMail() {
+        if (!mail.sentAt) {
+            addParam('compose', mail.id)
+            return
+        }
+
         onMarkRead(mail)
         navigate({ pathname: `/mail/view/${mail.id}`, search: location.search })
     }
 
-    function onStarClick(ev) {
+    function handleToogleStarred(ev) {
         ev.stopPropagation()
         onToogleStarred(mail)
     }
 
-    function onCheckboxClick(ev) {
+    function handleToogleChecked(ev) {
         ev.stopPropagation()
         onToogleChecked(mail)
+    }
+
+    function handleRemoveMail(ev) {
+        ev.stopPropagation()
+        onRemoveMail(mail)
+    }
+
+    function handleMarkUnRead(ev) {
+        ev.stopPropagation()
+        onMarkUnRead(mail)
+    }
+
+    function handleMarkRead(ev) {
+        ev.stopPropagation()
+        onMarkRead(mail)
     }
 
     function getCheckedState() {
@@ -69,8 +98,8 @@ export function MailPreview({ mail, onMarkRead, onToogleStarred, onToogleChecked
 
     return (
         <article className={`mail-preview flex ${isReadClass}`} onClick={onOpenMail}>
-            <input className={`checkbox mail-checkbox ${isCheckedClass}`} type="checkbox" onClick={onCheckboxClick} />
-            <button className={`star-btn icon-btn medium star ${isStarredClass}`} onClick={onStarClick}></button>
+            <input className={`checkbox mail-checkbox ${isCheckedClass}`} type="checkbox" onClick={handleToogleChecked} />
+            <button className={`star-btn icon-btn medium star ${isStarredClass}`} onClick={handleToogleStarred}></button>
             <p className="mail-from">{from}</p>
             <div className="mail-content-wraper grid">
                 <p className="mail-subject">{subject}</p>
@@ -78,7 +107,13 @@ export function MailPreview({ mail, onMarkRead, onToogleStarred, onToogleChecked
                 <p className="mail-body-snippet">{body}</p>
             </div>
             <p className="mail-sent-at">{elapsedTime(sentAt)}</p>
+            <div className="mail-action-btns">
+                <button className="delete-btn icon-btn medium trash-can-regular" onClick={handleRemoveMail}></button>
+                {isRead && <button className="mark-unread-btn icon-btn medium envelope" onClick={handleMarkUnRead}></button>}
+                {!isRead && <button className="mark-read-btn icon-btn medium envelope-open" onClick={handleMarkRead}></button>}
+            </div>
 
         </article>
     )
 }
+

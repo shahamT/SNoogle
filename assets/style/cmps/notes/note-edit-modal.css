@@ -1,0 +1,73 @@
+/* רקע כהה מאחורי המודאל */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  height: 80vh;
+  background-color: rgba(60, 64, 67, 0.4); /* שקיפות */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* חלון העריכה עצמו */
+.modal-window {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px 20px;
+  width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.note-edit-modal{
+  background-color: aqua;
+  
+}
+
+/* שדה כותרת */
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+/* שדה הטקסט */
+.modal-text {
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  flex-grow: 1;
+  min-height: 100px;
+  margin-bottom: 12px;
+}
+
+/* כפתורים בתחתית המודאל */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* כל הכפתורים במודאל */
+.modal-actions .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-actions .icon-btn:hover {
+  background-color: #f1f3f4;
+}

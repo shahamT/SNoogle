@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams, useLocation, useNavigate } = ReactRouterDOM
+const {  useSearchParams, useLocation, useNavigate } = ReactRouterDOM
 
 
 import { noteService } from '../services/note.service.js'
@@ -19,13 +19,13 @@ export function NoteIndex({ isSideNavPinned }) {
     const { pathname } = useLocation()
     const navigate = useNavigate()
 
+    const [searchParams, setSearchParams] = useSearchParams()
+    const editNoteId = searchParams.get('edit')
 
     const [notes, setNotes] = useState([])
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [filterBy, setFilterBy] = useState(null)
     const [openColorNoteId, setOpenColorNoteId] = useState(null)
 
-
+    const [noteToEditId, setNoteToEditId] = useState(null)
     const [noteToEdit,setNoteToEdit] = useState(noteService.getEmptyNote())
 
     const [addNoteType, setAddNoteType] = useState('collapsed')
@@ -69,6 +69,14 @@ export function NoteIndex({ isSideNavPinned }) {
 
         setNoteToEdit(noteService.getEmptyNote(noteTypeKey))
     }, [searchParams])
+
+    useEffect(() => {
+        if (noteToEditId) {
+          noteService.get(noteToEditId).then(setNoteToEdit)
+        }
+      }, [noteToEditId])
+
+
 
 
     // functions
@@ -152,7 +160,7 @@ export function NoteIndex({ isSideNavPinned }) {
         noteService.save(noteToUpdate)
             .then(() => {
                 console.log("save note:",notes)
-                showSuccessMsg('Note has been successfully add!')
+                showSuccessMsg('Note has been successfully saved!')
             })
             .finally(onClose)
     }
@@ -174,10 +182,19 @@ export function NoteIndex({ isSideNavPinned }) {
         return params
     }
 
+// function onCloseModal(){
+//     setNoteToEdit(null)
+//     setNoteToEditId(null)
+//     searchParams.delete('edit')
+//     setSearchParams(searchParams)
+
+// }
 
     function onClose() {
         navigate('/notes/main')
     }
+
+    
 
     return (
         <div className='note-index grid'>
@@ -186,10 +203,11 @@ export function NoteIndex({ isSideNavPinned }) {
             <section className="note-add  ">
                 <NoteAdd addNoteType={addNoteType} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} onClose={onClose} />
             </section >
-
             <NoteList onStyleSave={onStyleSave} notes={notes}  openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
-
+           
         </div>
+
+
     )
 }
 

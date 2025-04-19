@@ -64,6 +64,7 @@ export function RootCmp() {
 
 
                         <Route path="/notes" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />
+
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </main>

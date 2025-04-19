@@ -3,7 +3,7 @@ const { useNavigate, useParams, Link } = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 import { NoteTodosCreate } from "./NoteTodosCreate.jsx"
-import { NoteTxtCreate } from "./NoteTxtCreate.jsx"
+// import { NoteTxtCreate } from "./NoteTxtCreate.jsx"
 import { NoteUploadImg } from "./NoteUploadImg.jsx"
 
 
@@ -72,11 +72,11 @@ function onClose(){
               
                 </div>
             }
-            {isAddTxtNote && <NoteTxtCreate onClose={onClose} onSaveNote={onSaveNote} handleChange={handleChange} />}
+            {/* {isAddTxtNote && <NoteTxtCreate setAddTxtNote={setAddTxtNote} onSaveNote={onSaveNote} handleChange={handleChange} />} */}
 
-            {isAddTodosNote && <NoteTodosCreate onClose={onClose} onSaveNote={onSaveNote} handleChange={handleChange} />}
+            {isAddTodosNote && <NoteTodosCreate setAddTodosNote={setAddTodosNote} onSaveNote={onSaveNote} handleChange={handleChange} />}
 
-            {isUploadImg && <NoteUploadImg onClose={onClose} onSaveNote={onSaveNote} handleChange={handleChange} />}
+            {isUploadImg && <NoteUploadImg setUploadImg={setUploadImg} onSaveNote={onSaveNote} handleChange={handleChange} />}
 
 
         </section >

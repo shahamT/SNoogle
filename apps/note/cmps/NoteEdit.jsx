@@ -1,6 +1,6 @@
-const { useParams, useNavigate } = ReactRouterDOM
 
-export function NoteTodosCreate({txt,title,onSaveNote,onClose, handleChange}) {
+
+export function NoteEdit({txt,title,onSaveNote,onClose, handleChange}) {
     // === Hooks
 
     // === Effects

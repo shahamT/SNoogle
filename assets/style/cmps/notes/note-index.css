@@ -64,12 +64,12 @@
 
 
    display: grid;
-   grid-template-columns: 1fr 1fr;
-   grid-template-rows: auto;
+   grid-template-columns: 1fr 1fr 1fr;
+   /* grid-template-rows: auto; */
    grid-template-areas:
-      "title pin"
-      "txt txt"
-      "submit reset";
+      "title title pin"
+      "txt txt txt"
+      "submit reset close";
       gap: 1em;
       padding: 0.5em;
 
@@ -123,21 +123,30 @@
 
 .add-title {
    grid-area: title;
+   /* grid-column: 1/3; */
    /* grid-column: 1/-2; */
 }
 
-.add-txt {
+.add-txt, .todo-list  {
    grid-area: txt;
+   display: flex;
+   flex-direction: column;
 }
 
 .add-reset {
    grid-area: reset;
 
-
 }
 
 .add-submit {
    grid-area: submit;
-   display: ;
 
 }
+.create-close-btn{
+   grid-area: close;
+}
+
+
+/* .todo-create-txt{
+   grid-area: txt;
+} */

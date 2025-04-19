@@ -13,10 +13,6 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
         setNoteTxtEdit(noteToEdit)
     }, [noteToEdit])
 
-    // useEffect(()=>{
-    //     setNoteToEdit(noteService.getEmptyNote('NoteTxt'))
-    // },[])
-
     function handleChange({ target }) {
         const { name, value } = target
         setNoteTxtEdit(prev => ({
@@ -26,16 +22,11 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
     }
 
 
-    // === Effects
 
-    // === Functions
-    // function onClose(){
-    //     navigate('/notes/main')
-    // }
 
     const { title, txt } = noteTxtEdit.info
     console.log(noteTxtEdit.info)
-    if (!noteTxtEdit.info) return <div>Loading...</div>
+    // if (!noteTxtEdit.info) return <div>Loading...</div>
     return (
 
         <form onSubmit={(ev) => {onSaveNote(ev, noteTxtEdit)}}
@@ -59,7 +50,7 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
             <button className="add-reset icon-btn " type="reset">Reset edits</button>
             <button className="add-submit icon-btn bookmark" type="submit">Save post</button>
 
-            <button type="button" onClick={onClose}>Close</button>
+            <button className="create-close-btn icon-btn" type="button" onClick={onClose}>Close</button>
         </form>
     )
 }

@@ -140,10 +140,9 @@ export function NoteIndex({ isSideNavPinned }) {
 
     function onSaveNote(ev, noteToEdit) {
         ev.preventDefault()
-        console.log("ssssssssssssssss")
         noteService.save(noteToEdit)
             .then(() => {
-                console.log(notes)
+                console.log("save note:",notes)
                 showSuccessMsg('Note has been successfully add!')
             })
             .finally(onClose)

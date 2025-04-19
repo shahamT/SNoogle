@@ -18,7 +18,7 @@
     border: 1px solid var(--clr-gray-300);
     cursor: text;
     display: flex;
-    align-items: center;         /* מיישר אנכית */
+    align-items: center;      
     justify-content: space-between;
 
 }

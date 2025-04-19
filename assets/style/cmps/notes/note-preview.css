@@ -2,11 +2,11 @@
     position: relative;
     min-height: 100px;
     background-color: var(--clr-white);
-
+    cursor: pointer;
     border-radius: var(--border-radius-md);
     border: 0.5px solid var(--clr-gray-300);
     box-shadow: 0 2px 8px rgba(133, 129, 129, 0.15);
-
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
     padding: 0.5em;
 
 
@@ -17,11 +17,17 @@
         ". . . . . pin"
         "main main main main main main"
         ". . . . . . "
-        "duplicate . . . . delete ";
+        "pickColor duplicate . . . delete ";
 
 
 
 }
+
+.note-preview:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* 👈 צל חזק יותר */
+    transform: translateY(-1px);              /* 👈 קופץ קצת למעלה */
+  }
+
 
 .note-preview:hover>button {
     /* display: block;         */
@@ -61,6 +67,9 @@
 
 }
 
+.color-note-btn{
+    grid-area: pickColor;
+}
 
 
 .pinned {

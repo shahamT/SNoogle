@@ -16,6 +16,7 @@ import { GlobalDialog } from "./cmps/general/Modal.jsx"
 import { NotFound } from "./cmps/general/NotFound.jsx"
 import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
+import { NoteEditModal } from "./apps/note/cmps/NoteEditModal.jsx"
 
 
 
@@ -64,6 +65,7 @@ export function RootCmp() {
 
 
                         <Route path="/notes" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />
+                        <Route path="/notes/edit/:noteId" element={<NoteEditModal isSideNavPinned={isSideNavPinned}/>} />
                         <Route path="/notes/:status/" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />
 
                         <Route path="*" element={<NotFound />} />

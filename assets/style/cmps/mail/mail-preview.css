@@ -1,7 +1,7 @@
 /* ======= Layout =======*/
 .mail-preview {
     display: grid;
-    grid-template-columns: auto auto 200px minmax(100px, 1fr) auto;
+    grid-template-columns: auto auto 300px minmax(100px, 1fr) auto;
     grid-template-rows: 44px;
     column-gap: 8px;
 }
@@ -23,7 +23,8 @@
 /* Main Cmp */
 .mail-preview {
     border-block-end: 1.5px solid var(--clr-gray-150);
-    padding-inline: var(--px-spacing-md);
+    padding-inline-end: var(--px-spacing-md);
+    padding-inline-start: var(--px-spacing-sm);
 
     background-color: var(--clr-white);
     color: var(--clr-black);
@@ -100,6 +101,7 @@
 
 .mail-preview:hover .mail-action-btns{
     display: flex;
+    gap: 4px;
 }
 
 
@@ -113,6 +115,11 @@
 .mail-preview.is-read .mail-from {
     font-weight: 400;
 }
+
+.mail-preview.draft .mail-from {
+color: var(--clr-red-base);
+}
+
 
 .mail-preview.is-read .mail-sent-at {
     font-weight: 400;

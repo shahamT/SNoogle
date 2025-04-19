@@ -183,7 +183,7 @@
 }
 .icon-btn.arrow-left::after {
     content: "\f060";
-    font-family: fa-regular;
+    font-family: fa;
 }
 
 .icon-btn.share-from-square::after {

@@ -29,6 +29,7 @@ export function MailPreview({
     addParam }) {
 
     const navigate = useNavigate()
+    const { pathname } = useLocation()
     const [isChecked, setIsChecked] = useState(getCheckedState())
     // === Hooks
 
@@ -49,8 +50,9 @@ export function MailPreview({
             return
         }
 
-        onMarkRead(mail)
-        navigate({ pathname: `/mail/view/${mail.id}`, search: location.search })
+        const match = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
+        const status = match ? match[1] : 'inbox'
+        navigate({ pathname: `/mail/${status}/view/${mail.id}`, search: location.search })
     }
 
     function handleToogleStarred(ev) {
@@ -89,24 +91,31 @@ export function MailPreview({
         sentAt,
         isRead,
         isStarred,
+        createdAt,
     } = mail
 
 
     const isReadClass = isRead ? "is-read" : ""
     const isStarredClass = isStarred ? "is-starred" : ""
     const isCheckedClass = isChecked ? "is-checked" : ""
+    const fromToShow = sentAt ? from : 'Draft'
+    const isDraftClass = sentAt ? '' : 'draft'
+    const timeStampToShow = sentAt ? sentAt : createdAt
 
     return (
-        <article className={`mail-preview flex ${isReadClass}`} onClick={onOpenMail}>
-            <input className={`checkbox mail-checkbox ${isCheckedClass}`} type="checkbox" onClick={handleToogleChecked} />
+        <article className={`mail-preview flex ${isReadClass} ${isDraftClass}`} onClick={onOpenMail}>
+            <label className="checkbox-wrapper" onClick={e => e.stopPropagation()}>
+                <input type="checkbox" className={`checkbox mail-checkbox ${isCheckedClass}`} onClick={handleToogleChecked} />
+            </label>
+            {/* <input className={`checkbox mail-checkbox ${isCheckedClass}`} type="checkbox" onClick={handleToogleChecked} /> */}
             <button className={`star-btn icon-btn medium star ${isStarredClass}`} onClick={handleToogleStarred}></button>
-            <p className="mail-from">{from}</p>
+            <p className="mail-from">{fromToShow}</p>
             <div className="mail-content-wraper grid">
                 <p className="mail-subject">{subject}</p>
                 <p className="seperator">-</p>
                 <p className="mail-body-snippet">{body}</p>
             </div>
-            <p className="mail-sent-at">{elapsedTime(sentAt)}</p>
+            <p className="mail-sent-at">{elapsedTime(timeStampToShow)}</p>
             <div className="mail-action-btns">
                 <button className="delete-btn icon-btn medium trash-can-regular" onClick={handleRemoveMail}></button>
                 {isRead && <button className="mark-unread-btn icon-btn medium envelope" onClick={handleMarkUnRead}></button>}

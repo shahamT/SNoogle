@@ -40,7 +40,6 @@ export function MailIndex({ isSideNavPinned }) {
 
     useEffect(() => {
         const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
-        console.log("m: ", m)
         if (!m) return
         const newStatus = m[1]
 
@@ -173,8 +172,6 @@ export function MailIndex({ isSideNavPinned }) {
             return [...prevMails]
         })
 
-
-
         mailService.save({ ...mailToStar, isStarred: !boolean })
             .then(() => {
                 loadUnreadByStatus()
@@ -194,7 +191,7 @@ export function MailIndex({ isSideNavPinned }) {
     function onRemoveMail(mailToRemove) {
         const timeStamp = Date.now()
         setMails(prevMails => prevMails.filter(mail => mail.id !== mailToRemove.id))
-        if (!mailToRemove.removedAt) {
+        if (!mailToRemove.removedAt && mailToRemove.sentAt) {
             mailService.save({ ...mailToRemove, removedAt: timeStamp })
                 .then(() => {
                     loadUnreadByStatus()
@@ -258,7 +255,11 @@ export function MailIndex({ isSideNavPinned }) {
                     <MailFilterBar />
                 </React.Fragment>
             }
-            {mailId && <MailView />
+            {mailId && <MailView
+                onToogleStarred={onToogleStarred}
+                onRemoveMail={onRemoveMail}
+                onMarkUnRead={onMarkUnRead}
+            />
             }
 
             <MailCompose

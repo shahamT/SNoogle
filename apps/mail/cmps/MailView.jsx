@@ -1,11 +1,12 @@
 // === React
 // const { useState, useEffect, useRef } = React
 
+import { elapsedTime } from "../../../services/util.service.js"
 import { mailService } from "../services/mail.service.js"
 
 // const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { useState, useEffect } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useParams, useNavigate, Link, useLocation } = ReactRouterDOM
 
 // === Services
 
@@ -17,11 +18,19 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 // ====== Component ======
 // =======================
 
-export function MailView() {
+export function MailView({
+    onToogleStarred,
+    onRemoveMail,
+    onMarkUnRead,
+}) {
+
     // === Hooks
+    const { pathname } = useLocation()
+    const navigate = useNavigate()
+
     const [mail, setMail] = useState(null)
     const { mailId } = useParams()
-    const navigate = useNavigate()
+
     // === Effects
     useEffect(() => {
         LoadMail()
@@ -35,6 +44,38 @@ export function MailView() {
             .catch(err => console.log("err: ", err))
     }
 
+
+    function handleToogleStarred() {
+        setMail(prevMail => {
+            const updatedMail = { ...prevMail, isStarred: !prevMail.isStarred }
+            onToogleStarred(updatedMail)
+            return updatedMail
+        })
+        onToogleStarred(mail)
+    }
+
+
+    function handleRemoveMail() {
+        onRemoveMail(mail)
+        navigateBack()
+    }
+
+    function handleMarkUnRead() {
+        onMarkUnRead(mail)
+        navigateBack()
+    }
+
+    function handleBack() {
+        navigateBack()
+    }
+
+    function navigateBack() {
+        const match = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
+        const status = match ? match[1] : 'inbox'
+        navigate({ pathname: `/mail/${status}`, search: location.search })
+    }
+
+
     if (!mail) return <div>Loading...</div>
 
     const {
@@ -46,16 +87,17 @@ export function MailView() {
         isStarred,
         to,
     } = mail
-    
+    const isStarredClass = isStarred ? "is-starred" : ""
+    console.log("isStarredClass: ", isStarredClass)
     return (
         <section className="mail-view scrollable-content grid">
 
-            <div className="mail-action-btns">
-            <button className="star-btn icon-btn medium star"></button>
-            <button className="star-btn icon-btn medium star"></button>
-            <button className="star-btn icon-btn medium star"></button>
-            <button className="star-btn icon-btn medium star"></button>
-            
+            <div className="mail-action-btns flex">
+                <button className="back-btn icon-btn big arrow-left" onClick={handleBack}></button>
+                <button className="make-note-btn icon-btn big note-sticky"></button>
+                <button className="mark-unread-btn icon-btn big envelope" onClick={handleMarkUnRead}></button>
+                <button className="delete-btn icon-btn big trash-can-regular" onClick={handleRemoveMail}></button>
+
             </div>
 
             <div className="mail-content grid">
@@ -65,8 +107,8 @@ export function MailView() {
                 <div className="details-wraper grid">
                     <p className="mail-from-name">fromname{fromName}</p>
                     <p className="mail-from">{`<${from}>`}</p>
-                    <p className="mail-sent-at">{sentAt}</p>
-                    <button className="star-btn icon-btn medium star"></button>
+                    <p className="mail-sent-at">{elapsedTime(sentAt)}</p>
+                    <button className={`star-btn icon-btn medium star ${isStarredClass}`} onClick={handleToogleStarred}></button>
                 </div>
                 <p className="mail-to">to: {to}</p>
 

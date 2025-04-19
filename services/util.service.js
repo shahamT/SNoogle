@@ -163,7 +163,7 @@ export function elapsedTime(pastMs) {
 
     // same calendar day
     if (now.toDateString() === past.toDateString()) {
-        return `${padNum(past.getHours())}:${padNum(past.getMinutes())}`;
+        return `${padNum(past.getHours())}:${padNum(past.getMinutes())} (today)`;
     }
 
     // same month of the same year

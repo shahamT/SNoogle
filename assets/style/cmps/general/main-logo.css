@@ -1,5 +1,6 @@
 .main-logo-wraper{
-justify-self: start;
+min-width: fit-content;
+    justify-self: start;
 cursor: pointer;
 }
 

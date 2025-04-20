@@ -1,53 +1,30 @@
 // === React
+const { useState, useEffect } = React
+const { useSearchParams, useLocation, useNavigate } = ReactRouterDOM
 
+// === Services
 import { mailService } from "../../apps/mail/services/mail.service.js"
 import { noteService } from "../../apps/note/services/note.service.js"
 import { useEffectUpdate } from "../../custom-hooks/useEffectUpdate.js"
 import { getTruthyValues } from "../../services/util.service.js"
+import { debounce } from "../../../services/util.service.js"
 
-// const { useState, useEffect, useRef } = React
-const { useState, useEffect } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-const { useSearchParams, useLocation, useNavigate } = ReactRouterDOM
-
-// === Services
-
-// === Child Components
 
 
 // ====== Component ======
 // =======================
 
-export function MainSearchBar({ /* prop1, prop2 */ }) {
+export function MainSearchBar() {
     // === Hooks
     const navigate = useNavigate()
     const { pathname } = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterByToEdit, setfilterByToEdit] = useState(getParamsFromURL())
-    const [clearBtnVisivility, setClearBtnVisivility] = useState(false)
-    // const [isTyping, setIsTyping] = useState(false)
 
     // === Effects
     useEffect(() => {
         setSearchParams({ ...searchParams, ...filterByToEdit  })
-        if(filterByToEdit.txt !== ""){
-            setClearBtnVisivility(true)
-        } else setClearBtnVisivility(false)
     }, [filterByToEdit])
-
-
-    // useEffectUpdate(() => {
-    //     if (pathname.startsWith('/mail/view')) {
-    //         navigate(`/mail?txt=${filterByToEdit.txt}`)
-    //     }
-    // }, [isTyping])
-
-
-
-    // useEffect(() => {
-    //     setfilterByToEdit(getDefaultFilterBy())
-    //     // setIsTyping(false)
-    // }, [pathname])
 
     // === Functions
 
@@ -60,11 +37,8 @@ export function MainSearchBar({ /* prop1, prop2 */ }) {
     }
 
     function onSearchChange(target) {
-        // setIsTyping(true)
         handleChange(target)
     }
-
-
 
     function handleChange({ target }) {
         const field = target.name
@@ -96,11 +70,9 @@ export function MainSearchBar({ /* prop1, prop2 */ }) {
     }
 
 
-
-    // if (!data) return <div>Loading...</div>
     const searchInput = filterByToEdit.txt ? filterByToEdit.txt : ""
+    const clearBtnClass = filterByToEdit.txt ? "" : "hidden";
 
-    const clearBtnClass = clearBtnVisivility ? "" : "hidden"
     return (
         <div className="main-search-bar">
             <input

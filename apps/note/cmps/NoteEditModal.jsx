@@ -38,7 +38,7 @@ export function NoteEditModal({onCloseModal,onStyleSave,note}){
                 console.log("save note EDIT:",note)
                 showSuccessMsg('Note has been successfully save!')
             })
-            .finally(onClose)
+            .finally(onCloseModal)
     }
 
     function handleReset(ev) {

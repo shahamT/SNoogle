@@ -32,53 +32,55 @@ export function NoteImagModal({ note, onSaveNoteEdit, onCloseModal }) {
 
   return (
     <dialog open className="note-dialog">
-      <form
-        className="modal-window"
-        onSubmit={(ev) =>
-          onSaveNoteEdit(ev, {
-            ...note,
-            info: {
-              ...note.info,
-              title,
-              url: imgUrl,
-            },
-          })
-        }
-      >
-        <input
-          className="modal-title"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
+  <div className="modal-backdrop">
+    <form
+      className="modal-window"
+      onSubmit={(ev) =>
+        onSaveNoteEdit(ev, {
+          ...note,
+          info: {
+            ...note.info,
+            title,
+            url: imgUrl,
+          },
+        })
+      }
+    >
+      <input
+        className="modal-title"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileUpload}
+      />
+
+      {imgUrl && (
+        <img
+          src={imgUrl}
+          alt="Uploaded preview"
+          style={{ maxWidth: '100%', marginTop: '1em' }}
         />
+      )}
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-        />
-
-        {imgUrl && (
-          <img
-            src={imgUrl}
-            alt="Uploaded preview"
-            style={{ maxWidth: '100%', marginTop: '1em' }}
-          />
-        )}
-
-        <div className="modal-actions">
-          <button className="icon-btn" type="reset" onClick={handleReset}>
-            Reset
-          </button>
-          <button className="icon-btn" type="submit">
-            Save
-          </button>
-          <button className="icon-btn" type="button" onClick={onCloseModal}>
-            Close
-          </button>
-        </div>
-      </form>
-    </dialog>
+      <div className="modal-actions">
+        <button className="icon-btn" type="reset" onClick={handleReset}>
+          Reset
+        </button>
+        <button className="icon-btn" type="submit">
+          Save
+        </button>
+        <button className="icon-btn" type="button" onClick={onCloseModal}>
+          Close
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
   )
 }

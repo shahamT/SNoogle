@@ -1,4 +1,3 @@
-/* רקע כהה מאחורי המודאל */
 .modal-backdrop {
   position: fixed;
   top: 50%;
@@ -18,8 +17,6 @@
     all: revert;
     width: 1.2em;
     height: 1.2em;
-    accent-color: var(--clr-primary);
-    /* צבע מותאם, אם יש לך משתנה */
     cursor: pointer;
     font: inherit;
     color: inherit;
@@ -37,7 +34,6 @@
 
 }
 
-/* חלון העריכה עצמו */
 .modal-window {
   background-color: white;
   border-radius: 8px;
@@ -52,7 +48,6 @@
 }
 
 
-/* שדה כותרת */
 .modal-title {
   font-size: 1.25rem;
   font-weight: 500;
@@ -61,7 +56,6 @@
   margin-bottom: 12px;
 }
 
-/* שדה הטקסט */
 .modal-text {
   resize: none;
   border: none;
@@ -75,7 +69,6 @@
  font-size: 1.5em;
 }
 
-/* כפתורים בתחתית המודאל */
 .modal-actions {
   display: flex;
   justify-content: space-between;
@@ -83,7 +76,6 @@
   margin-top: 10px;
 }
 
-/* כל הכפתורים במודאל */
 .modal-actions .icon-btn {
   background: none;
   border: none;
@@ -95,4 +87,14 @@
 
 .modal-actions .icon-btn:hover {
   background-color: #f1f3f4;
+}
+.note-dialog {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }

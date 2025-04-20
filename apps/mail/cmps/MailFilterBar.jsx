@@ -1,17 +1,9 @@
 // === React
-
-import { mailService } from "../services/mail.service.js"
-
-// const { useState, useEffect, useRef } = React
 const { useState, useEffect, useRef } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { useSearchParams } = ReactRouterDOM
 
 // === Services
-
-// === Child Components
-
-
+import { mailService } from "../services/mail.service.js"
 
 
 // ====== Component ======
@@ -116,7 +108,6 @@ export function MailFilterBar({
                 {/* <button className="make-note-btn icon-btn big note-sticky"></button> */}
                 {/* <button className="mark-unread-btn icon-btn big envelope" ></button> */}
                 {/* <button className="delete-btn icon-btn big trash-can-regular" ></button> */}
-
             </div>
 
 

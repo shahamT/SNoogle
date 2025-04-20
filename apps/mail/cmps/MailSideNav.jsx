@@ -1,16 +1,6 @@
 // === React
-
-
-// const { useState, useEffect, useRef } = React
 const { useRef } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-const { NavLink, useLocation  } = ReactRouterDOM
-
-// === Services
-
-// === Child Components
-
-
+const { NavLink } = ReactRouterDOM
 
 
 // ====== Component ======
@@ -37,14 +27,6 @@ export function MailSideNav({ onOpenCompose, isSideNavPinned, unreadByStatus }) 
         }, 300);
     }
 
-
-    // const inboxCount = unreadByStatus && unreadByStatus.inbox > 0 ? unreadByStatus.inbox : ""
-    // const trashCount = unreadByStatus && unreadByStatus.inbox > 0 ? unreadByStatus.inbox : ""
-    // const unreadCount = unreadByStatus && unreadByStatus.inbox > 0 ? unreadByStatus.inbox : ""
-    // const starredCount = unreadByStatus && unreadByStatus.starred > 0 ? unreadByStatus.starred : ""
-    // const sentCount = unreadByStatus && unreadByStatus.sent > 0 ? unreadByStatus.sent : ""
-    // const draftCount = unreadByStatus && unreadByStatus.draft > 0 ? unreadByStatus.draft : ""
-
     // if (!data) return <div>Loading...</div>
     return (
         <section className="mail-side-nav side-nav flex flex-column">
@@ -57,7 +39,6 @@ export function MailSideNav({ onOpenCompose, isSideNavPinned, unreadByStatus }) 
             <nav className="side-nav-list">
                 <ul className="clean-list flex flex-column">
                     <li>
-                        {/* <NavLink to={{pathname: '/mail/inbox', search: location.search,}} */}
                         <NavLink to={{ pathname: '/mail/inbox', search: location.search }}
                             className="inbox-btn flex"
                             onMouseOver={onOpenSideNav}

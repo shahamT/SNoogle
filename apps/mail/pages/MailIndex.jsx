@@ -1,12 +1,10 @@
 
 // === React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-const { useState, useEffect, useRef } = React
-const { useNavigate, useSearchParams, useParams, useLocation } = ReactRouterDOM
+const { useState, useEffect } = React
+const { useSearchParams, useParams, useLocation } = ReactRouterDOM
 
 // === Services
 import { mailService } from "../services/mail.service.js"
-import { useToggle } from "../../../custom-hooks/useToggle.js"
 import { useEffectUpdate } from "../../../custom-hooks/useEffectUpdate.js"
 
 // === Child Components
@@ -33,6 +31,7 @@ export function MailIndex({ isSideNavPinned }) {
 
     const [isComposeOpen, setIsComposeOpen] = useState(false)
     const [checkedMails, setCheckedMails] = useState([])
+    const [isLoading, setIsLoading] =useState(false)
 
     const [updateList, setUpdateList] = useState(null)
 
@@ -42,6 +41,8 @@ export function MailIndex({ isSideNavPinned }) {
         const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
         if (!m) return
         const newStatus = m[1]
+
+        setIsLoading(true)
 
         const params = addParam('status', newStatus) //TODO fix this
         loadMails(params)
@@ -58,6 +59,7 @@ export function MailIndex({ isSideNavPinned }) {
     }, [])
 
     useEffectUpdate(() => {
+        setIsLoading(true)
         loadMails(mailService.getParamsFromSearchParams(searchParams))
     }, [updateList])
 
@@ -67,6 +69,7 @@ export function MailIndex({ isSideNavPinned }) {
         mailService.query(filterBy)
             .then(mails => {
                 setMails(mails)
+                setIsLoading(false)
                 console.log("mails: ", mails)
             })
             .catch(err => console.log("err: ", err))
@@ -251,6 +254,7 @@ export function MailIndex({ isSideNavPinned }) {
                         onRemoveMail={onRemoveMail}
                         onMarkUnRead={onMarkUnRead}
                         addParam={addParam}
+                        isLoading={isLoading}
                     />
                     <MailFilterBar />
                 </React.Fragment>

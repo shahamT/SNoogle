@@ -37,6 +37,7 @@
 @import 'cmps/general/flash-msg.css';
 @import 'cmps/general/hamburger-icon.css';
 @import 'cmps/general/modal.css';
+@import 'cmps/general/loader.css';
 
 /* Pages */
 @import 'pages/home.css';

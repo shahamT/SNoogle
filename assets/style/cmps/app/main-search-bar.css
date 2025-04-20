@@ -1,6 +1,7 @@
 .main-search-bar {
+    justify-self: start;
     position: relative;
-    width: 100%;
+    width: 600px;
     height: 48px;
 
 

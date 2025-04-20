@@ -1,4 +1,15 @@
-.main-logo{
-    width: 150px;
-    height: auto;
+.main-logo-wraper{
+justify-self: start;
+cursor: pointer;
 }
+
+.main-logo{
+    height: 50px;
+    object-fit: contain;
+ 
+}
+/* .main-logo.app{
+    width: 300px;
+    object-fit: contain;
+ 
+} */

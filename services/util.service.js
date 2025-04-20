@@ -86,14 +86,21 @@ export function makeLorem(size = 100) {
 
 export function animateCSS(el, animation = 'bounce', options = {}) {
     const prefix = 'animate__'
-    const { isRemoveAnimation = true } = options
+    const { isRemoveAnimation = true, delay = 0 } = options
+
     return new Promise((resolve, reject) => {
         const animationName = `${prefix}${animation}`
+
+        el.style.setProperty('animationDelay', `${delay}s`)
+        el.classList.remove('hidden-before-anim') // ⬅️ Reveal the element just before animating
         el.classList.add(`${prefix}animated`, animationName)
 
         function handleAnimationEnd(event) {
             event.stopPropagation()
-            if (isRemoveAnimation) el.classList.remove(`${prefix}animated`, animationName)
+            if (isRemoveAnimation) {
+                el.classList.remove(`${prefix}animated`, animationName)
+                el.style.removeProperty('animationDelay')
+            }
             resolve('Animation ended')
         }
 

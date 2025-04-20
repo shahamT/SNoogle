@@ -3,8 +3,9 @@ const {useState,useEffect,useRef} = React
 const {useParams,useNavigate} = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
-import { NoteTodosModal } from "./NoteTodosModal.jsx"
 
+import { NoteImagModal } from "./NoteImgModal.jsx"
+import { NoteTodosModal } from "./NoteTodosModal.jsx"
 import { NoteTxtModal } from "./NoteTxtModal.jsx"
 
 export function NoteEditModal(){
@@ -64,8 +65,8 @@ function NoteType(props) {
     const type = note.type
     const dynamicCmpMap = {
         NoteTxt: <NoteTxtModal {...props} />,
-        NoteTodos: <NoteTodosModal {...props} />
-        // NoteImg: <NoteImg {...props} />,
+        NoteTodos: <NoteTodosModal {...props} />,
+        NoteImg: <NoteImagModal {...props} />,
     }
     return dynamicCmpMap[type] || null
 }

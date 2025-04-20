@@ -5,7 +5,7 @@
     right: var(--px-spacing-lg);
 
 
-grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr;
 
     width: 550px;
     height: 550px;
@@ -27,21 +27,58 @@ grid-template-rows: auto 1fr;
 
 .mail-compose .compose-header .compose-title {
     font-weight: 500;
+    width: 450px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
 }
 
 .mail-compose .compose-form {
     grid-template-rows: auto auto 1fr auto;
-    
+
     padding-inline: var(--px-spacing-md);
-    padding-block: var(--px-spacing-sm);
+    padding-block-start: var(--px-spacing-sm);
 
 }
 
-.mail-compose .compose-form input{
+.mail-compose .compose-form input,
+.mail-compose .compose-form textarea {
     padding-block: 12px;
     border-block-end: 1.5px solid var(--clr-gray-150);
 }
 
-.mail-compose .compose-form textarea {
+
+
+
+
+/* action-btns */
+
+.mail-compose .action-btns {
+    justify-content: end;
+    gap: 12px;
+
     padding-block: 12px;
+}
+
+
+.mail-compose .action-btns .send-btn {
+    padding-inline: var(--px-spacing-lg);
+
+    height: 40px;
+    border: none;
+    outline: none;
+
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: var(--border-radius-round);
+    background-color: var(--clr-blue-d);
+    color: var(--clr-white);
+    transition: 0.1s;
+}
+
+.mail-compose .action-btns .send-btn:hover {
+    background-color: var(--clr-blue-base);
+    box-shadow: rgba(25, 103, 210, 0.54) 0px 4px 4px;
 }

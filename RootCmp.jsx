@@ -61,8 +61,7 @@ export function RootCmp() {
 
                         <Route path="/mail" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
                         <Route path="/mail/:status/" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
-                        <Route path="/mail/view/:mailId" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
-                        
+                        <Route path="/mail/:status/view/:mailId" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
 
 
                         <Route path="/notes" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />

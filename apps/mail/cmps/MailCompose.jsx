@@ -1,11 +1,13 @@
 // === React
 const { useState, useEffect, useRef } = React
 // const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-const { useParams } = ReactRouterDOM
+const { useSearchParams, useParams, useLocation } = ReactRouterDOM
 
 
 // === Services
 import { mailService } from "../services/mail.service.js"
+import { debounce } from "../../../services/util.service.js"
+import { useEffectUpdate } from "../../../custom-hooks/useEffectUpdate.js"
 
 // === Child Components
 
@@ -15,29 +17,49 @@ import { mailService } from "../services/mail.service.js"
 // ====== Component ======
 // =======================
 
-export function MailCompose({ isComposeOpen, onCloseCompose }) {
+export function MailCompose({ isComposeOpen, onCloseCompose, saveDraft }) {
     // === Hooks
+    const [searchParams, setSearchParams] = useSearchParams()
+    // const { mailId, NoteAppMail } = useParams()
+
     const [mail, setMail] = useState(mailService.getEmptyMail())
     const [mailToEdit, setMailToEdit] = useState({ ...mail })
-    const { mailId, NoteAppMail } = useParams()
+
+    const debouncedSaveDraft = useRef(debounce(draft => {
+        onSaveDraft(draft)
+        setMailTitle('Saved as draft')
+        setTimeout(() => {
+            setMailTitle(draft.subject)
+        }, 1500);
+    }, 1500)).current
+
+    const [mailTitle, setMailTitle] = useState('')
 
     // === Effects
     useEffect(() => {
-        if (mailId) {
-            mailService.get(mailId)
-                .then(mail => {
-                    setMail(mail)
-                })
+        setMailToEdit({ ...mail })
+    }, [])
+
+
+    // useEffectUpdate(() => {
+    //     debouncedSaveDraft(mailToEdit)
+    // }, [setMailToEdit])
+
+    useEffect(() => {
+        const composeParam = searchParams.get('compose')
+        if (!composeParam || composeParam === 'new') {
+            setMailToEdit(mailService.getEmptyMail())
+            setMailTitle('New Message')
+            return
         }
 
-        // else if (NoteAppMail) {
-        //     mailService.get(mailId)
-        //         .then(mailContent => {
-        //             setMailToEdit({ ...mailContent })
-        //         })
-        // }
+        mailService.get(composeParam)
+            .then(mail => {
+                setMailToEdit(prevMail => ({ ...prevMail, ...mail }))
+                setMailTitle(mail.subject)
+            })
+    }, [searchParams])
 
-    }, [])
 
     // === Functions
 
@@ -54,15 +76,23 @@ export function MailCompose({ isComposeOpen, onCloseCompose }) {
                 value = target.checked
                 break
         }
-        setMailToEdit(prevMail => ({ ...prevMail, [field]: value }))
+
+        const newMail = { ...mailToEdit, [field]: value }
+        setMailToEdit(newMail)
+        debouncedSaveDraft(newMail)
+
     }
 
+    function onSaveDraft(draft) {
+        saveDraft(draft)
 
+    }
 
     function onSend(ev) {
         ev.preventDefault()
 
         mailToEdit.sentAt = Date.now()
+        mailToEdit.isRead = false
 
         SaveMail(mailToEdit)
             .then(mail => {
@@ -88,20 +118,23 @@ export function MailCompose({ isComposeOpen, onCloseCompose }) {
 
     } = mailToEdit
 
+    const subjectToShow = subject === '(no subject)' ? '' : subject
+    const titleToShow = mailTitle === '(no subject)' || mailTitle === '' ? 'New Mail' : mailTitle
+
     return (
         <div className="mail-compose grid">
             <div className="compose-header flex space-between align-center">
-                <p className="compose-title">New Message</p>
-                <button className="close-btn" onClick={onCloseCompose}>close</button>
+                <p className="compose-title">{titleToShow}</p>
+                <button className="close-btn icon-btn small xmark" onClick={onCloseCompose}></button>
 
             </div>
             <form className="compose-form grid" onSubmit={onSend}>
                 <input className="to-input clean-input" type="text" name="to" value={to} onChange={handleChange} placeholder="To" />
-                <input className="subject-input clean-input" type="text" name="subject" value={subject} onChange={handleChange} placeholder="Subject" />
+                <input className="subject-input clean-input" type="text" name="subject" value={subjectToShow} onChange={handleChange} placeholder="Subject" />
                 <textarea className="body-input clean-input" type="text" name="body" value={body} onChange={handleChange} placeholder=""></textarea>
                 <div className="action-btns flex">
+                    <button type="button" className="discard-btn icon-btn medium trash-can"></button>
                     <button className="send-btn">Send</button>
-                    <button type="button" className="discard-btn">delete</button>
                 </div>
             </form>
         </div>

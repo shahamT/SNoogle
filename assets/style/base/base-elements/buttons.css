@@ -106,76 +106,80 @@
 
 .icon-btn.x::after {
     content: "\58";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.trash-can::after {
     content: "\f2ed";
-    font-family: fa;
+    font-family: fa-regular;
+}
+.icon-btn.trash-can-regular::after {
+    content: "\f2ed";
+    font-family: fa-regular;
 }
 
 .icon-btn.duplicate::after {
     content: "\f24d";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.img-uploade::after {
     content: "\f03e";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.pin::after {
     content: "\f08d";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.un-pin::after {
        content: "\e68f";
-       font-family: fa;
+       font-family: fa-regular;
    }
 
 .icon-btn.envelope::after {
     content: "\f0e0";
-    font-family: fa;
+    font-family: fa-regular;
 }
 .icon-btn.envelope-open::after {
     content: "\f2b6";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.pencil::after {
     content: "\f0e0";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.file::after {
     content: "\f15b";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.chevron-left::after {
     content: "\f053";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.chevron-right::after {
     content: "\f054";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.palette::after {
     content: "\f53f";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.image::after {
     content: "\f03e";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.inbox::after {
     content: "\f01c";
-    font-family: fa;
+    font-family: fa-regular;
 }
 .icon-btn.arrow-left::after {
     content: "\f060";
@@ -184,25 +188,25 @@
 
 .icon-btn.share-from-square::after {
     content: "\f14d";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.square-check::after {
     content: "\f14a";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.note-sticky::after {
     content: "\f249";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.box-archive::after {
     content: "\f187";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn .bookmark{
     content: "\f02e";
-    font-family: fa;
+    font-family: fa-regular;
 }

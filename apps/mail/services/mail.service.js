@@ -1,7 +1,7 @@
 // mail service
 
 import { storageService } from "../../../services/async-storage.service.js"
-import { loadFromStorage, saveToStorage } from "../../../services/util.service.js"
+import { getTruthyValues, loadFromStorage, saveToStorage } from "../../../services/util.service.js"
 
 
 
@@ -45,7 +45,6 @@ function query(filterBy = {}) {
     return storageService.query(MAIL_DB_KEY)
         .then(mails => {
             if (filterBy.txt) {
-                console.log("filterBy: ", filterBy.txt)
                 const regExp = new RegExp(filterBy.txt, 'i')
                 mails = mails.filter(mail =>
                     regExp.test(mail.subject)
@@ -104,6 +103,19 @@ function query(filterBy = {}) {
 
                 }
             }
+
+            if (filterBy.filterfrom && filterBy.filterfrom !== 'null') {
+                const from = new Date(filterBy.filterfrom).getTime()
+                console.log("from: ", from)
+                mails = mails.filter(mail => mail.sentAt > from)
+            }
+            if (filterBy.filterto && filterBy.filterto !== 'null') {
+                const to = new Date(filterBy.filterto).getTime()
+                console.log("to: ", to)
+                mails = mails.filter(mail => mail.sentAt < to)
+            }
+
+            mails = mails.sort((a, b) => b.sentAt - a.sentAt)
             return mails
         })
 }
@@ -165,15 +177,21 @@ function getEmptyMail() {
 function getParamsFromSearchParams(searchParams) {
     const compose = searchParams.get('compose') || ''
     const txt = searchParams.get('txt') || ''
-    const status = searchParams.get('state') || ''
+    const status = searchParams.get('status') || ''
     const lables = searchParams.get('lables') || ''
+    const filterfrom = searchParams.get('filterfrom') || ''
+    const filterto = searchParams.get('filterto') || ''
 
-    return {
+    const cleanParams = getTruthyValues({
         compose,
         txt,
         status,
         lables,
-    }
+        filterfrom,
+        filterto,
+    })
+
+    return cleanParams
 }
 
 function getDefaultFilter() {

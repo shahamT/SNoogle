@@ -24,24 +24,24 @@ import { MailView } from "../cmps/MailView.jsx"
 export function MailIndex({ isSideNavPinned }) {
     // === Hooks
     const { pathname } = useLocation()
+    const [searchParams, setSearchParams] = useSearchParams()
+    const { status, mailId } = useParams()
+
 
     const [mails, setMails] = useState(null)
     const [unreadByStatus, setUnreadByStatus] = useState(null)
-    const { status, mailId } = useParams()
-
-    const [searchParams, setSearchParams] = useSearchParams()
 
     const [isComposeOpen, setIsComposeOpen] = useState(false)
-
     const [checkedMails, setCheckedMails] = useState([])
+
+    const [updateList, setUpdateList] = useState(null)
 
     // === Effects
 
     useEffect(() => {
         const m = pathname.match(/^\/mail\/(inbox|starred|draft|trash|unread|sent)/)
-        console.log("m: ", m)
-        if (!m) return                 
-        const newStatus = m[1]    
+        if (!m) return
+        const newStatus = m[1]
 
         const params = addParam('status', newStatus) //TODO fix this
         loadMails(params)
@@ -50,12 +50,16 @@ export function MailIndex({ isSideNavPinned }) {
     //opens the compose based on url
     useEffect(() => {
         const composeParam = searchParams.get('compose')
-        setIsComposeOpen(composeParam === 'new')
+        setIsComposeOpen(composeParam)
     }, [searchParams])
 
     useEffect(() => {
         loadUnreadByStatus()
     }, [])
+
+    useEffectUpdate(() => {
+        loadMails(mailService.getParamsFromSearchParams(searchParams))
+    }, [updateList])
 
     // === Functions
 
@@ -76,20 +80,12 @@ export function MailIndex({ isSideNavPinned }) {
 
     }
 
-    // function addParam(key, value) {
-    //     const params = new URLSearchParams(searchParams)
-    //     params.set(key, value)
-    //     setSearchParams(params)
-    // }
-
     function addParam(key, value) {
         const params = mailService.getParamsFromSearchParams(searchParams)
         params[key] = value
         setSearchParams(params)
         return params
     }
-
-
 
     function toggleComposeState() {
         const params = mailService.getParamsFromSearchParams(searchParams)
@@ -106,18 +102,67 @@ export function MailIndex({ isSideNavPinned }) {
         addParam('compose', '')
     }
 
-    function onMarkRead(mailToSave) {
-        mailService.save({ ...mailToSave, isRead: true })
+    function saveDraft(draft) {
+        if (!draft.subject) draft.subject = '(no subject)'
+        draft.isRead = true
+        mailService.save(draft)
+            .then(mail => {
+                console.log("mail: ", mail)
+                addParam('compose', mail.id)
+            })
+    }
+
+    // ==== mail action ====
+
+    function onMarkRead(mailToMark) {
+        setMails(prevMails => {
+            prevMails.find(mail => mail.id === mailToMark.id).isRead = true
+            return [...prevMails]
+        })
+
+        mailService.save({ ...mailToMark, isRead: true })
             .then(() => {
                 setMails(prevMails => {
-                    prevMails.find(mail => mail.id === mailToSave.id).isRead = true
+                    prevMails.find(mail => mail.id === mailToMark.id).isRead = true
                     return prevMails
                 })
                 loadUnreadByStatus()
+                showSuccessMsg(`Marked as 'Read'`)
+
             })
-            .catch(err => console.log("err: ", err))
+            .catch(err => {
+                console.log("err: ", err)
+                setMails(prevMails => {
+                    prevMails.find(mail => mail.id === mailToMark.id).isRead = false
+                    return [...prevMails]
+                })
+            })
     }
 
+    function onMarkUnRead(mailToMark) {
+        setMails(prevMails => {
+            prevMails.find(mail => mail.id === mailToMark.id).isRead = false
+            return [...prevMails]
+        })
+
+        mailService.save({ ...mailToMark, isRead: false })
+            .then(() => {
+                setMails(prevMails => {
+                    prevMails.find(mail => mail.id === mailToMark.id).isRead = false
+                    return prevMails
+                })
+                loadUnreadByStatus()
+                showSuccessMsg(`Marked as 'Unread'`)
+
+            })
+            .catch(err => {
+                console.log("err: ", err)
+                setMails(prevMails => {
+                    prevMails.find(mail => mail.id === mailToMark.id).isRead = true
+                    return [...prevMails]
+                })
+            })
+    }
 
     function onToogleStarred(mailToStar) {
         const boolean = mailToStar.isStarred
@@ -130,6 +175,9 @@ export function MailIndex({ isSideNavPinned }) {
         mailService.save({ ...mailToStar, isStarred: !boolean })
             .then(() => {
                 loadUnreadByStatus()
+                if (pathname.startsWith('/mail/starred')) {
+                    setUpdateList(Date.now())
+                }
             })
             .catch(err => {
                 console.log("err: ", err)
@@ -138,6 +186,39 @@ export function MailIndex({ isSideNavPinned }) {
                     return [...prevMails]
                 })
             })
+    }
+
+    function onRemoveMail(mailToRemove) {
+        const timeStamp = Date.now()
+        setMails(prevMails => prevMails.filter(mail => mail.id !== mailToRemove.id))
+        if (!mailToRemove.removedAt && mailToRemove.sentAt) {
+            mailService.save({ ...mailToRemove, removedAt: timeStamp })
+                .then(() => {
+                    loadUnreadByStatus()
+                    showSuccessMsg('Mail was moved to trash folder')
+                })
+                .catch(err => {
+                    console.log("err: ", err)
+                    setMails(prevMails => {
+                        prevMails.push(mailToRemove)
+                        showErrorMsg('Somthing went wrong! mail could not be removed')
+                    })
+                })
+        } else {
+            mailService.remove(mailToRemove.id)
+                .then(() => {
+                    loadUnreadByStatus()
+                    showSuccessMsg('Mail was deleted')
+                })
+                .catch(err => {
+                    console.log("err: ", err)
+                    setMails(prevMails => {
+                        prevMails.push(mailToRemove)
+                        showErrorMsg('Somthing went wrong! mail could not be deleted')
+                    })
+                })
+        }
+
     }
 
     function onToogleChecked(mailToCheck) {
@@ -167,16 +248,24 @@ export function MailIndex({ isSideNavPinned }) {
                         onToogleStarred={onToogleStarred}
                         onToogleChecked={onToogleChecked}
                         checkedMails={checkedMails}
+                        onRemoveMail={onRemoveMail}
+                        onMarkUnRead={onMarkUnRead}
+                        addParam={addParam}
                     />
                     <MailFilterBar />
                 </React.Fragment>
             }
-            {mailId && <MailView />
+            {mailId && <MailView
+                onToogleStarred={onToogleStarred}
+                onRemoveMail={onRemoveMail}
+                onMarkUnRead={onMarkUnRead}
+            />
             }
 
             <MailCompose
                 isComposeOpen={isComposeOpen}
                 onCloseCompose={onCloseCompose}
+                saveDraft={saveDraft}
             />
         </section>
     )

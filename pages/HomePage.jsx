@@ -5,7 +5,7 @@ const { useEffect, useRef } = React
 const { useNavigate } = ReactRouterDOM
 
 // === Services
-import { animateCSS } from "../services/util.service.JS"
+import { animateCSS } from "../services/util.service.js"
 
 // === Child Components
 
@@ -44,7 +44,7 @@ export function HomePage() {
             <p ref={elDescription} className="description hidden-before-anim" >SNoogle brings your mail and notes together under one beautifully familiar interface. Designed for simplicity and clarity, SNoogle makes communication and capture seamless, intuitive—and yes, a little playful too.
                 <br /> No switching tabs. No losing focus. Just you, your thoughts, and the people you care about.</p>
 
-            <div ref={elAppsWraper} className="apps-wraper flex hidden-before-anim">
+            <div ref={elAppsWraper} className="apps-wraper grid hidden-before-anim">
 
                 <div className="app-container snail flex flex-column align-center" onClick={() => navigate({ pathname: `/mail/` })}>
                     <div className="title-container flex align-center">

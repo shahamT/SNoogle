@@ -17,6 +17,7 @@ import { NotFound } from "./cmps/general/NotFound.jsx"
 import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
 import { NoteEditModal } from "./apps/note/cmps/NoteEditModal.jsx"
+import { AboutPage } from "./pages/AboutPage.jsx"
 
 
 
@@ -57,9 +58,10 @@ export function RootCmp() {
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<HomePage />} />
+                        <Route path="/about" element={<AboutPage />} />
 
 
-                        <Route path="/mail" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
+                        <Route path="/mail" element={<Navigate to="/mail/inbox" replace />} />
                         <Route path="/mail/:status/" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
                         <Route path="/mail/:status/view/:mailId" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
 

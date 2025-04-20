@@ -6,7 +6,7 @@
     background-color: var(--clr-bg-light-base);
     overflow: hidden;
 
-    transition: box-shadow 0.5s;
+    transition: box-shadow 0.2s;
 }
 
 .side-nav-open .side-nav{
@@ -42,7 +42,7 @@
 .side-nav .side-nav-list a .title,
 .side-nav .side-nav-list a .attribute {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out 0.0s;
+    transition: opacity 0.2s ease-in-out 0.0s;
     ;
 
 
@@ -51,7 +51,7 @@
 .side-nav-open .side-nav .side-nav-list a .title,
 .side-nav-open .side-nav .side-nav-list a .attribute {
     opacity: 1;
-    transition: opacity 0.3s ease-in-out 0.2s;
+    transition: opacity 0.2s ease-in-out 0.2s;
     ;
 
 }
@@ -71,7 +71,7 @@
 
 .side-nav .side-nav-list a.active {
     background-color: rgba(211, 227, 253, 0);
-    transition: background-color 0.5s;
+    transition: background-color 0.3s;
     opacity: 1;
     font-weight: 700;
 }
@@ -171,8 +171,8 @@
     background-color: #c2e7ff;
 
     transition: 
-    width      0.3s ease,
-    box-shadow 0.3s ease;
+    width      0.2s ease,
+    box-shadow 0.2s ease;
 
 }
 

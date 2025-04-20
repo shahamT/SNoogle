@@ -28,8 +28,12 @@
    
 }
 
-.note-add-btns{
-        justify-self: end;
+.add-text-note-btn{
+  padding-left: 0.5em;
+  max-width: 80%;
+  width:80%;
+  font: inherit;
+  color: var(--clr-gray-300);
 
 }
 

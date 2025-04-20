@@ -38,11 +38,11 @@
 @import 'cmps/general/modal.css';
 
 /* Pages */
+@import 'cmps/notes/note-index.css';
 
 
 
 /* Notes Cmps */
-@import 'cmps/notes/note-index.css';
 @import 'cmps/notes/note-list.css';
 @import 'cmps/notes/note-preview.css';
 @import 'cmps/notes/note-side-nav.css';

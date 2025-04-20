@@ -98,7 +98,7 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
                 onChange={handleTitleChange}
                 type="text"
                 name="title"
-                placeholder="Title"
+                placeholder="Title:"
             />
 
             <ul className="todo-list clean-list">

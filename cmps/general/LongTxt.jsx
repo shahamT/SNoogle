@@ -14,10 +14,10 @@ export function LongTxt({ txt, length = 100 }) {
         <span className="long-txt">
                 <span className="txt">{textToShow}</span>
                 {isLongText &&
-                    <span>
-                        <button className="show-txt-btn" onClick={onToggleIsShowFullTxt}>
+                    <span> <em><br />...open to read more</em>
+                        {/* <button className="show-txt-btn" onClick={onToggleIsShowFullTxt}>
                             {isShowFullTxt ? 'Show Less' : 'Read More'}
-                        </button>
+                        </button> */}
                     </span>
                 }
         </span>

@@ -37,12 +37,12 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
 
 
     return (
-        <article className="note-preview" style={noteStyle} onClick={() => onOpenNote(note.id)} >
+        <article className="note-preview" style={noteStyle} onClick={() => {onOpenNote(note.id)}} >
             <NoteType note={note} updateTodo={updateTodo} />
 
-            <button className="delete-note-btn icon-btn trash-can" onClick={() => {e.stopPropagation()
+            <button className="delete-note-btn icon-btn trash-can" onClick={(e) => {e.stopPropagation()
                 onRemove(note.id)}}></button>
-            <button className={`pin-note-btn icon-btn pin ${note.isPinned ? 'pinned' : ''}`} onClick={() => {e.stopPropagation()
+            <button className={`pin-note-btn icon-btn pin ${note.isPinned ? 'pinned' : ''}`} onClick={(e) => {e.stopPropagation()
                  onSetPin(note.id)}}></button>
             <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
                 e.stopPropagation()
@@ -51,7 +51,7 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
 
             <button
                 className="color-note-btn icon-btn palette"
-                onClick={() => {{e.stopPropagation()
+                onClick={(e) => {{e.stopPropagation()
                     setOpenColorNoteId(isColorPalleteOpen ? null : note.id)
                 }}}
             ></button>

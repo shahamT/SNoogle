@@ -8,9 +8,9 @@
 }
 
 
-.side-nav-open .note-index{
+.side-nav-open .note-index {
    grid-template-columns: 300px 1fr 24px;
-   }
+}
 
 
 .note-index .note-side-nav {
@@ -65,13 +65,14 @@
 
    display: grid;
    grid-template-columns: 1fr 1fr 1fr;
-   /* grid-template-rows: auto; */
+   grid-template-rows: auto;
    grid-template-areas:
       "title title pin"
       "txt txt txt"
+      ". img ."
       "submit reset close";
-      gap: 1em;
-      padding: 0.5em;
+   gap: 1em;
+   padding: 0.5em;
 
 
    input[type="text"] {
@@ -87,7 +88,7 @@
       /* יורש את הגופן של ההורה */
       color: inherit;
       background: transparent;
-   
+
    }
 
    textarea {
@@ -104,14 +105,15 @@
       background: transparent;
       border: none;
 
-      
- 
+
+
 
       /* border: 1px solid var(--clr-gray-300); */
    }
+
    textarea:focus {
       outline: none;
-    }
+   }
 }
 
 .pin-add-btn {
@@ -127,7 +129,12 @@
    /* grid-column: 1/-2; */
 }
 
-.add-txt, .todo-list  {
+/* .add-img {
+   grid-area: img;
+} */
+
+.add-txt,
+.todo-list {
    grid-area: txt;
    display: flex;
    flex-direction: column;
@@ -142,10 +149,28 @@
    grid-area: submit;
 
 }
-.create-close-btn{
+
+.create-close-btn {
    grid-area: close;
 }
 
+
+.img-upload-btn {
+   grid-area: img;
+   display: flex;
+   font-size: inherit;
+   justify-content: space-around;
+   align-items: center;
+
+}
+
+.img-upload-btn:hover {
+   cursor: pointer;
+
+   /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
+
+
+}
 
 /* .todo-create-txt{
    grid-area: txt;

@@ -12,6 +12,7 @@ import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 import { AddNoteCollapsed } from '../cmps/AddNoteCollapsed.jsx'
 import { NoteTodosCreate } from '../cmps/NoteTodosCreate.jsx'
 import { NoteTxtCreate } from '../cmps/NoteTxtCreate.jsx'
+import { NoteImgCreate } from '../cmps/NoteImgCreate.jsx'
 
 
 
@@ -135,13 +136,19 @@ export function NoteIndex({ isSideNavPinned }) {
             .then(note => {
                 const noteDuplicate = { ...note, id: makeId(4) }
                 return noteService.post(noteDuplicate)
-
+                .then(savedNote => ( { savedNote, originalNoteId: noteId }) )
             })
-            .then(savedNote => {
-                _
-                setNotes(prev => [...prev, savedNote])
-            })
+            .then(({ savedNote, originalNoteId }) => {
+                setNotes(prev => {
+                  const idx = prev.findIndex(note => note.id === originalNoteId)
+                  if (idx === -1) return [...prev, savedNote]
+                  const newNotes = [...prev]
+                  newNotes.splice(idx + 1, 0, savedNote)
+                  return newNotes
+                })})
+    
             .catch(err => console.error('Could not duplicate note:', err))
+            .finally(showSuccessMsg('Note has been successfully duplicate!'))
     }
 
 
@@ -218,7 +225,8 @@ function NoteAdd(props) {
     const dynamicCmpMap = {
         collapsed: <AddNoteCollapsed {...props} />,
         addText: <NoteTxtCreate {...props} />,
-        addToDo: <NoteTodosCreate {...props} />
+        addToDo: <NoteTodosCreate {...props} />,
+        addImg: <NoteImgCreate {...props} />
     }
     if (!addNoteType) return dynamicCmpMap.collapsed
     return dynamicCmpMap[addNoteType]

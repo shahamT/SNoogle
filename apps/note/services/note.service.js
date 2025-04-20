@@ -204,7 +204,7 @@ function _createDemoNotes() {
       style: { backgroundColor: '#e0f7fa' },
       info: {
         url: "./assets/img/note/aps,504x498,medium,transparent-pad,600x600,f8f8f8.jpg",
-        title: 'Friday stroll by the lake'
+        title: 'logo to Aqua-Web'
       }
     },
 
@@ -242,7 +242,7 @@ function _createDemoNotes() {
       isPinned: true,
       style: { backgroundColor: '#dcedc8' },
       info: {
-        url: 'https://source.unsplash.com/random/600x400?mountain',
+        url: 'https://domf5oio6qrcr.cloudfront.net/medialibrary/15676/p3-hiking-hl1024-gi1680305131.jpg',
         title: 'Next hiking spot'
       }
     },
@@ -299,7 +299,7 @@ function _createDemoNotes() {
       isPinned: false,
       style: { backgroundColor: '#ffe0b2' },
       info: {
-        url: 'https://source.unsplash.com/random/600x400?food',
+        url: 'https://myplate-prod.azureedge.us/sites/default/files/styles/recipe_525_x_350_/public/2020-11/SkilletPastaDinner_527x323.jpg?itok=Yb4EDdkm',
         title: 'Experimental dinner'
       }
     },

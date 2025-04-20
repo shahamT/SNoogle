@@ -6,7 +6,6 @@ import { noteService } from '../services/note.service.js'
 import { makeId } from '../../../services/util.service.js'
 
 
-// import { NoteAdd } from '../cmps/NoteAdd.jsx'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteSideNav } from '../cmps/NoteSideNav.jsx'
 import { AddNoteCollapsed } from '../cmps/AddNoteCollapsed.jsx'
@@ -27,14 +26,11 @@ export function NoteIndex({ isSideNavPinned }) {
     const [notes, setNotes] = useState([])
     const [openColorNoteId, setOpenColorNoteId] = useState(null)
 
-    // const [noteToEditId, setNoteToEditId] = useState(null)
     const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
 
     const [addNoteType, setAddNoteType] = useState('collapsed')
 
-    // useEffect(() => {
-    //    addParams([{ addNoteType: addNoteType }])
-    // }, [])
+   
 
     useEffect(() => {
 

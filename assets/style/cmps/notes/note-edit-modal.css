@@ -1,4 +1,3 @@
-/* רקע כהה מאחורי המודאל */
 .modal-backdrop {
   position: fixed;
   top: 50%;
@@ -13,13 +12,18 @@
   align-items: center;
   z-index: 1000;
 
+input[type="text"]{
+  font-size: 1.5em;
+  margin-bottom: 1em;
+
+}
+
+
 
   input[type="checkbox"] {
     all: revert;
     width: 1.2em;
     height: 1.2em;
-    accent-color: var(--clr-primary);
-    /* צבע מותאם, אם יש לך משתנה */
     cursor: pointer;
     font: inherit;
     color: inherit;
@@ -35,9 +39,12 @@
     background-color: transparent;
   }
 
+  textarea{
+    height: 100%;
+  }
+
 }
 
-/* חלון העריכה עצמו */
 .modal-window {
   background-color: white;
   border-radius: 8px;
@@ -52,7 +59,6 @@
 }
 
 
-/* שדה כותרת */
 .modal-title {
   font-size: 1.25rem;
   font-weight: 500;
@@ -61,7 +67,6 @@
   margin-bottom: 12px;
 }
 
-/* שדה הטקסט */
 .modal-text {
   resize: none;
   border: none;
@@ -71,19 +76,16 @@
   min-height: 100px;
   margin-bottom: 12px;
 }
-.add-title {
- font-size: 1.5em;
-}
 
-/* כפתורים בתחתית המודאל */
 .modal-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-self: end;
   margin-top: 10px;
+  margin-top: auto;
 }
 
-/* כל הכפתורים במודאל */
 .modal-actions .icon-btn {
   background: none;
   border: none;
@@ -95,4 +97,27 @@
 
 .modal-actions .icon-btn:hover {
   background-color: #f1f3f4;
+}
+.note-dialog {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.modal-notes-upload{
+  grid-area: img;
+  display: flex;
+  font-size: inherit;
+  justify-content: space-around;
+  align-items: center;
+
+  input[type="file"] {
+    display: none;
+  }
+
 }

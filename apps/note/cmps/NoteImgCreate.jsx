@@ -59,7 +59,6 @@ export function NoteImgCreate({ onSaveNote, onClose }) {
 
 
 
-  // if (!data) return <div>Loading...</div>
   return (
     <form className="add-note-create-container" onSubmit={handleSubmit}>
       <button type="button" className="pin-add-btn icon-btn pin" onClick={() => setIsPinned(prev => !prev)}></button>

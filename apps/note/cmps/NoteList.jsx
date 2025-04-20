@@ -11,7 +11,7 @@ export function NoteList({ onStyleSave, openColorNoteId, setOpenColorNoteId, not
                 <section className="note-list grid">
 
                         {notes.map(note =>
-                                <NotePreview key={note.id} onStyleSave={onStyleSave} openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} note={note} onDuplicate={onDuplicate} onSetPin={onSetPin} updateTodo={updateTodo} onRemove={onRemove} />
+                                <NotePreview key={note.id}  onStyleSave={onStyleSave} openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} note={note} onDuplicate={onDuplicate} onSetPin={onSetPin} updateTodo={updateTodo} onRemove={onRemove} />
                         )}
                        
                      

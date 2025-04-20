@@ -96,7 +96,7 @@
 
 .icon-btn.star::after {
     content: "\f005";
-    font-family: fa-regular;
+    font-family: fa;
 }
 
 .icon-btn.xmark::after {

@@ -1,10 +1,12 @@
 
 const { useState, useEffect } = React
-
-export function NoteTxtModal({ note }) {
+const {useNavigate} = ReactRouterDOM
+export function NoteTxtModal({ note,onSaveNoteEdit }) {
 
     const [title, setTitle] = useState('')
     const [txt, setTxt] = useState('')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (note) {
@@ -17,13 +19,25 @@ export function NoteTxtModal({ note }) {
     console.log(note)
 
 
+    function handleReset(ev) {
+        ev.preventDefault()
+        setTitle('')
+        // setIsPinned(false)
+        setTxt('')
+      }
 
 
     // const {title, txt} = note
     if (!note) return <div>Loading...</div>
     return (
 <div className="modal-backdrop">
-  <form className="modal-window">
+  <form className="modal-window"  onSubmit={(ev) => onSaveNoteEdit(ev, {
+    ...note,
+    info: {
+        ...note.info,
+        title,
+        txt
+}})}>
     <input
       className="modal-title"
       type="text"
@@ -41,24 +55,12 @@ export function NoteTxtModal({ note }) {
     />
 
     <div className="modal-actions">
-      <button className="icon-btn" type="reset">Reset</button>
+      <button className="icon-btn" type="reset" onClick={handleReset}>Reset</button>
       <button className="icon-btn" type="submit">Save</button>
-      <button className="icon-btn" type="button" onClick={() => window.history.back()}>Close</button>
+      <button className="icon-btn" type="button" onClick={() => navigate('/notes')}>Close</button>
     </div>
   </form>
 </div>
-
-
-        // <form className="add-note-create-container">
-        //     {/* <button className="pin-add-btn icon-btn pin" name="isPinned" onClick={handleChange}></button> */}
-        //     {/* <input className="add-txt" value={false} onChange={handleChange} type="checkbox" name="checkbox" id="checkbox" /> */}
-        //     {/* <input className="add-txt" value={txt} onChange={handleChange} type="txt" name="txt" id="txt" placeholder="List item" /> */}
-
-        //     <button className="add-reset icon-btn " type="reset">Reset edits</button>
-        //     <button className="add-submit icon-btn bookmark" type="submit">Save post</button>
-        //     <button type="button" >Close</button>
-
-        // </form>
 
 
     )

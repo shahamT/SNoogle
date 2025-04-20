@@ -1,12 +1,14 @@
 
 const {useState,useEffect,useRef} = React
-const {useParams} = ReactRouterDOM
+const {useParams,useNavigate} = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
+import { NoteTodosModal } from "./NoteTodosModal.jsx"
 
 import { NoteTxtModal } from "./NoteTxtModal.jsx"
 
 export function NoteEditModal(){
+    const navigate = useNavigate()
     
     const dialogRef = useRef()
     const {noteId} = useParams()
@@ -25,11 +27,34 @@ export function NoteEditModal(){
         .then(note=>setNote(note))
         .catch(err => console.log('err:', err))
     }
+
+    function onSaveNoteEdit(ev, note) {
+        ev.preventDefault()
+        noteService.save(note)
+            .then(() => {
+                console.log("save note EDIT:",note)
+                showSuccessMsg('Note has been successfully save!')
+            })
+            .finally(onClose)
+    }
+
+    function handleReset(ev) {
+        ev.preventDefault()
+        setCurrTitle('')
+        setIsPinned(false)
+        setTodos([{ txt: '', doneAt: null }])
+      }
+
+    
+    function onClose() {
+        navigate(-1)
+    }
+
     
     if (!note) return <div>Loading...</div>
     return (
         <dialog ref={dialogRef} className="note-dialog">
-        <NoteType note={note} />
+        <NoteType note={note} onSaveNoteEdit={onSaveNoteEdit} onClose={onClose} />
       </dialog>
     )
 }
@@ -39,8 +64,8 @@ function NoteType(props) {
     const type = note.type
     const dynamicCmpMap = {
         NoteTxt: <NoteTxtModal {...props} />,
+        NoteTodos: <NoteTodosModal {...props} />
         // NoteImg: <NoteImg {...props} />,
-        // NoteTodos: <NoteTodos {...props} />
     }
     return dynamicCmpMap[type] || null
 }

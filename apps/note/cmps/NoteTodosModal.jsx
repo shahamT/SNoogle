@@ -85,6 +85,7 @@ export function NoteTodosModal({ note, onSaveNoteEdit }) {
   if (!note) return <div>Loading...</div>
 
   return (
+    <dialog open className="note-dialog">
     <div className="modal-backdrop">
       <form onSubmit={handleSubmit} className="modal-window">
         <input
@@ -123,5 +124,6 @@ export function NoteTodosModal({ note, onSaveNoteEdit }) {
         </div>
       </form>
     </div>
+    </dialog>
   )
 }

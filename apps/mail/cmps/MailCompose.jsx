@@ -36,7 +36,19 @@ export function MailCompose({ isComposeOpen, onCloseCompose, saveDraft }) {
     useEffect(() => {
         const composeParam = searchParams.get('compose')
         if (!composeParam || composeParam === 'new') {
-            setMailToEdit(mailService.getEmptyMail())
+            console.log("composeParam: ", composeParam)
+            const newMail = mailService.getEmptyMail()
+
+            const subjectParam = searchParams.get('newsubject')
+            console.log("subjectParam: ", subjectParam)
+            if (subjectParam) newMail.subject = subjectParam
+
+            const bodyParam = searchParams.get('newbody')
+            console.log("bodyParam: ", bodyParam)
+
+            if (bodyParam) newMail.body = bodyParam
+
+            setMailToEdit(newMail)
             setMailTitle('New Message')
             return
         }

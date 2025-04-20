@@ -74,6 +74,11 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
 
         onSaveNote(ev, note)
     }
+    function handlePinToggle(ev) {
+        ev.preventDefault()
+        setIsPinned(prev => !prev)
+      }
+    
 
     function handleReset(ev) {
         ev.preventDefault()
@@ -87,7 +92,7 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
 
             <div className="header flex">
                 <input className="add-title clean-input" value={title} onChange={handleTitleChange} type="text" name="title" id="title" placeholder="Title" />
-                <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+                <button className={`pin-note-btn icon-btn medium ${isPinned ? 'un-pin' : 'pin'}`} name="isPinned" onClick={handlePinToggle}></button>
             </div>
 
             <ul className="todo-list clean-list">

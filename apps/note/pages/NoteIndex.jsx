@@ -190,17 +190,12 @@ export function NoteIndex({ isSideNavPinned }) {
         return params
     }
 
-    // function onCloseModal(){
-    //     setNoteToEdit(null)
-    //     setNoteToEditId(null)
-    //     searchParams.delete('edit')
-    //     setSearchParams(searchParams)
-
-    // }
 
     function onClose() {
         navigate('/notes/main')
     }
+
+
 
     function onCloseModal() {
         setNoteToEdit(null)

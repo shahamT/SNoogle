@@ -17,7 +17,6 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
     const isColorPalleteOpen = openColorNoteId === note.id
 
     function onSetColorStyle(newStyle) {
-        // setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }))
         const updatedNote = {
             ...note,
             style: {
@@ -46,7 +45,7 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
             }}></button>
 
             <div className="note-content-wraper">
-                <NoteType note={note} updateTodo={updateTodo} />
+                <NoteType note={note} updateTodo={updateTodo}  />
             </div>
 
             <div className="action-btns flex">

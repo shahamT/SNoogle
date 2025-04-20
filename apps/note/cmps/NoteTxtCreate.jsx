@@ -3,7 +3,7 @@ import { noteService } from "../services/note.service.js"
 const { useState, useEffect } = React
 const { Routes, Route, useNavigate } = ReactRouterDOM
 
-export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit }) {
+export function NoteTxtCreate({ onSaveNote, handleChange, onClose,noteToEdit }) {
     // === Hooks
     const navigate = useNavigate()
     const [noteTxtEdit, setNoteTxtEdit] = useState(noteToEdit)
@@ -21,17 +21,30 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
         }))
     }
 
+    function hendlePinChange(ev) {
+        ev.preventDefault()
+        setNoteTxtEdit(prev => {
+            const update ={
+                ...prev,
+                isPinned: !prev.isPinned
+            }
+            return update
+        })
+    
+    }
+
+
     function handleReset(ev) {
         ev.preventDefault()
-        setNoteTxtEdit(prev =>({
+        setNoteTxtEdit(prev => ({
             ...prev,
-            info:{ title: '', txt: '' }
+            info: { title: '', txt: '' }
         }))
     }
 
 
     const { title, txt } = noteTxtEdit.info
-    console.log(noteTxtEdit.info)
+    const { isPinned } = noteTxtEdit
     // if (!noteTxtEdit.info) return <div>Loading...</div>
     return (
 
@@ -40,7 +53,7 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
 
             <div className="header flex">
                 <input className="add-title clean-input" value={title} onChange={handleChange} type="text" name="title" id="title" placeholder="Title" />
-                <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+                <button className={`pin-note-btn icon-btn medium ${isPinned ? 'un-pin' : 'pin'}`} name="isPinned" onClick={hendlePinChange}></button>
             </div>
 
             <textarea

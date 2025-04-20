@@ -1,12 +1,5 @@
-// === React
 const { useState } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 
-// === Services
-
-// === Child Components
-// ====== Component ======
-// =======================
 
 export function NoteImgCreate({ onSaveNote, onClose }) {
   // === Hooks
@@ -16,7 +9,6 @@ export function NoteImgCreate({ onSaveNote, onClose }) {
 
 
 
-  // === Effects
 
   // === Functions
   function handleFileUpload(ev) {
@@ -57,14 +49,17 @@ export function NoteImgCreate({ onSaveNote, onClose }) {
     setIsPinned(false)
   }
 
-
+  function handlePinToggle(ev) {
+    ev.preventDefault()
+    setIsPinned(prev => !prev)
+  }
 
   return (
     <form className="add-note-create-container" onSubmit={handleSubmit}>
 
       <div className="header flex">
         <input className="add-title clean-input" value={title} onChange={handleTitleChange} type="text" name="title" id="title" placeholder="Title" />
-        <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+        <button className={`pin-note-btn icon-btn medium ${isPinned ? 'un-pin' : 'pin'}`} name="isPinned" onClick={handlePinToggle}></button>
       </div>
 
 

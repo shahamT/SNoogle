@@ -1,15 +1,40 @@
 /* רקע כהה מאחורי המודאל */
 .modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   width: 80vw;
   height: 80vh;
-  background-color: rgba(60, 64, 67, 0.4); /* שקיפות */
+  /* background-color: rgba(60, 64, 67, 0.144);  */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+
+  input[type="checkbox"] {
+    all: revert;
+    width: 1.2em;
+    height: 1.2em;
+    accent-color: var(--clr-primary);
+    /* צבע מותאם, אם יש לך משתנה */
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  input,
+  textarea {
+    all: unset;
+    box-sizing: border-box;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
 }
 
 /* חלון העריכה עצמו */
@@ -17,18 +42,15 @@
   background-color: white;
   border-radius: 8px;
   padding: 16px 20px;
+  height: 900px;
   width: 600px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.819);
   overflow-y: auto;
 }
 
-.note-edit-modal{
-  background-color: aqua;
-  
-}
 
 /* שדה כותרת */
 .modal-title {
@@ -48,6 +70,9 @@
   flex-grow: 1;
   min-height: 100px;
   margin-bottom: 12px;
+}
+.add-title {
+ font-size: 1.5em;
 }
 
 /* כפתורים בתחתית המודאל */

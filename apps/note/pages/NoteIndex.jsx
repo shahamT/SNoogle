@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const {  useSearchParams, useLocation, useNavigate } = ReactRouterDOM
+const { useSearchParams, useLocation, useNavigate } = ReactRouterDOM
 
 
 import { noteService } from '../services/note.service.js'
@@ -13,21 +13,22 @@ import { AddNoteCollapsed } from '../cmps/AddNoteCollapsed.jsx'
 import { NoteTodosCreate } from '../cmps/NoteTodosCreate.jsx'
 import { NoteTxtCreate } from '../cmps/NoteTxtCreate.jsx'
 import { NoteImgCreate } from '../cmps/NoteImgCreate.jsx'
+import { NoteEditModal } from '../cmps/NoteEditModal.jsx'
 
 
 
 export function NoteIndex({ isSideNavPinned }) {
     const { pathname } = useLocation()
     const navigate = useNavigate()
-
     const [searchParams, setSearchParams] = useSearchParams()
     const editNoteId = searchParams.get('edit')
+
 
     const [notes, setNotes] = useState([])
     const [openColorNoteId, setOpenColorNoteId] = useState(null)
 
-    const [noteToEditId, setNoteToEditId] = useState(null)
-    const [noteToEdit,setNoteToEdit] = useState(noteService.getEmptyNote())
+    // const [noteToEditId, setNoteToEditId] = useState(null)
+    const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
 
     const [addNoteType, setAddNoteType] = useState('collapsed')
 
@@ -46,10 +47,18 @@ export function NoteIndex({ isSideNavPinned }) {
     }, [pathname])
 
     useEffect(() => {
+        if (!editNoteId) return
+        if (noteToEdit.id === editNoteId) return
+        noteService.get(editNoteId).then(setNoteToEdit)
+      }, [editNoteId])
+    
+   
+      useEffect(() => {
         const addNoteTypeParam = searchParams.get('addNoteType')
         setAddNoteType(addNoteTypeParam)
-        loadNotes(noteService.getFilterFromSearchParams(searchParams))
-    }, [searchParams])
+        const filter = noteService.getFilterFromSearchParams(searchParams)
+        loadNotes(filter)
+      }, [searchParams])
 
     useEffect(() => {
         const noteType = searchParams.get('addNoteType')
@@ -67,15 +76,10 @@ export function NoteIndex({ isSideNavPinned }) {
             default:
                 noteTypeKey = 'NoteTxt'
         }
-
+        if (editNoteId) return
         setNoteToEdit(noteService.getEmptyNote(noteTypeKey))
-    }, [searchParams])
+    }, [searchParams, editNoteId])
 
-    useEffect(() => {
-        if (noteToEditId) {
-          noteService.get(noteToEditId).then(setNoteToEdit)
-        }
-      }, [noteToEditId])
 
 
 
@@ -136,17 +140,18 @@ export function NoteIndex({ isSideNavPinned }) {
             .then(note => {
                 const noteDuplicate = { ...note, id: makeId(4) }
                 return noteService.post(noteDuplicate)
-                .then(savedNote => ( { savedNote, originalNoteId: noteId }) )
+                    .then(savedNote => ({ savedNote, originalNoteId: noteId }))
             })
             .then(({ savedNote, originalNoteId }) => {
                 setNotes(prev => {
-                  const idx = prev.findIndex(note => note.id === originalNoteId)
-                  if (idx === -1) return [...prev, savedNote]
-                  const newNotes = [...prev]
-                  newNotes.splice(idx + 1, 0, savedNote)
-                  return newNotes
-                })})
-    
+                    const idx = prev.findIndex(note => note.id === originalNoteId)
+                    if (idx === -1) return [...prev, savedNote]
+                    const newNotes = [...prev]
+                    newNotes.splice(idx + 1, 0, savedNote)
+                    return newNotes
+                })
+            })
+
             .catch(err => console.error('Could not duplicate note:', err))
             .finally(showSuccessMsg('Note has been successfully duplicate!'))
     }
@@ -163,10 +168,10 @@ export function NoteIndex({ isSideNavPinned }) {
             .finally(onClose)
     }
 
-    function onStyleSave(noteToUpdate){
+    function onStyleSave(noteToUpdate) {
         noteService.save(noteToUpdate)
             .then(() => {
-                console.log("save note:",notes)
+                console.log("save note:", notes)
                 showSuccessMsg('Note has been successfully saved!')
             })
             .finally(onClose)
@@ -189,19 +194,25 @@ export function NoteIndex({ isSideNavPinned }) {
         return params
     }
 
-// function onCloseModal(){
-//     setNoteToEdit(null)
-//     setNoteToEditId(null)
-//     searchParams.delete('edit')
-//     setSearchParams(searchParams)
+    // function onCloseModal(){
+    //     setNoteToEdit(null)
+    //     setNoteToEditId(null)
+    //     searchParams.delete('edit')
+    //     setSearchParams(searchParams)
 
-// }
+    // }
 
     function onClose() {
         navigate('/notes/main')
     }
 
-    
+    function onCloseModal() {
+        setNoteToEdit(null)
+        const params = noteService.getFilterFromSearchParams(searchParams)
+        delete params.edit
+        setSearchParams(params)
+      }
+
 
     return (
         <div className='note-index grid'>
@@ -210,8 +221,14 @@ export function NoteIndex({ isSideNavPinned }) {
             <section className="note-add  ">
                 <NoteAdd addNoteType={addNoteType} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} onClose={onClose} />
             </section >
-            <NoteList onStyleSave={onStyleSave} notes={notes}  openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
-           
+            <NoteList onStyleSave={onStyleSave} notes={notes} openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
+            {editNoteId && noteToEdit && (
+                <NoteEditModal
+                    note={noteToEdit}
+                    onStyleSave={onStyleSave}
+                    onCloseModal={onCloseModal}
+                />
+            )}
         </div>
 
 

@@ -8,26 +8,28 @@ import { NoteImagModal } from "./NoteImgModal.jsx"
 import { NoteTodosModal } from "./NoteTodosModal.jsx"
 import { NoteTxtModal } from "./NoteTxtModal.jsx"
 
-export function NoteEditModal(){
+export function NoteEditModal({onCloseModal,onStyleSave,note}){
     const navigate = useNavigate()
     
     const dialogRef = useRef()
-    const {noteId} = useParams()
-    const[note,setNote] = useState(null)
+    // const {noteId} = useParams()
+    // const[note,setNote] = useState(null)
     
-    useEffect(()=>{
-        loadNote()
-    },[noteId])
+    // useEffect(()=>{
+    //     loadNote()
+    // },[noteId])
 
-    useEffect(()=>{
-        if(note) dialogRef.current.showModal()
-    },[note])
 
-    function loadNote(){
-        noteService.get(noteId)
-        .then(note=>setNote(note))
-        .catch(err => console.log('err:', err))
-    }
+
+    useEffect(() => {
+        if (note && dialogRef.current) dialogRef.current.showModal()
+      }, [note])
+
+    // function loadNote(){
+    //     noteService.get(noteId)
+    //     .then(note=>setNote(note))
+    //     .catch(err => console.log('err:', err))
+    // }
 
     function onSaveNoteEdit(ev, note) {
         ev.preventDefault()
@@ -47,22 +49,21 @@ export function NoteEditModal(){
       }
 
     
-    function onClose() {
-        navigate(-1)
-    }
+   
 
     
     if (!note) return <div>Loading...</div>
     return (
         <dialog ref={dialogRef} className="note-dialog">
-        <NoteType note={note} onSaveNoteEdit={onSaveNoteEdit} onClose={onClose} />
+            {note && <NoteType note={note} onSaveNoteEdit={onSaveNoteEdit} onCloseModal={onCloseModal} />}
+        
       </dialog>
     )
 }
-
 function NoteType(props) {
     const { note } = props
     const type = note.type
+
     const dynamicCmpMap = {
         NoteTxt: <NoteTxtModal {...props} />,
         NoteTodos: <NoteTodosModal {...props} />,

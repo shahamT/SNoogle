@@ -32,7 +32,9 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
 
 
     function onOpenNote(noteId) {
-        navigate(`/notes/edit/${noteId}`)
+        // navigate(`/notes/edit/${noteId}`)
+        navigate(`/notes/main?edit=${noteId}`)
+
     }
 
 

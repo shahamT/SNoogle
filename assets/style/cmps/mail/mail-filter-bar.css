@@ -1,9 +1,12 @@
 .mail-filter-bar {
+
+    gap: 24px;
+    
     padding-inline-start: var(--px-spacing-sm);
     padding-inline-end: var(--px-spacing-md);
+    padding-block-end: var(--px-spacing-sm);
 
     align-items: center;
-
 
     background-color: var(--clr-white);
     border-top-right-radius: var(--border-radius-lg);
@@ -35,13 +38,15 @@
 .mail-filter-bar .date-range-picker .input-wraper {
     position: relative;
 }
+
 .mail-filter-bar .date-range-picker .input-wraper .clear-btn {
     position: absolute;
-    left: 0px;
+    left: 1px;
+    top: 1px;
 }
 
 .mail-filter-bar .date-range-picker input {
-    height: 40px;
+    height: 36px;
     width: 200px;
     padding-inline-start: 40px;
     background-color: transparent;

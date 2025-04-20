@@ -20,7 +20,6 @@ const { useSearchParams } = ReactRouterDOM
 export function MailFilterBar({
     initialStart = '',
     initialEnd = '',
-    onRangeChange
 }) {
     // === Hooks
     const [searchParams, setSearchParams] = useSearchParams()
@@ -109,7 +108,7 @@ export function MailFilterBar({
 
     // if (!data) return <div>Loading...</div>
     return (
-        <section className="mail-filter-bar flex space-between">
+        <section className="mail-filter-bar flex">
             <div className="action-btns flex">
                 <label className="checkbox-wrapper">
                     <input type="checkbox" className="mail-checkbox" />
@@ -127,7 +126,7 @@ export function MailFilterBar({
 
                 <label>From</label>
                 <div className="input-wraper">
-                    {startDate && <button className="clear-btn icon-btn medium xmark" onClick={onClearStartDate}></button>}
+                    {startDate && <button className="clear-btn icon-btn small xmark" onClick={onClearStartDate}></button>}
                     <NativeDateInput
                         type="date"
                         value={startDate}
@@ -138,7 +137,7 @@ export function MailFilterBar({
 
                 <label>To </label>
                 <div className="input-wraper">
-                    {endDate && <button className="clear-btn icon-btn medium xmark" onClick={onClearEndDate}></button>}
+                    {endDate && <button className="clear-btn icon-btn small xmark" onClick={onClearEndDate}></button>}
                     <NativeDateInput
                         type="date"
                         value={startDate}

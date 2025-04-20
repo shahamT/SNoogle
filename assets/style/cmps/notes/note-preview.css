@@ -1,5 +1,4 @@
 .note-preview {
-    position: relative;
     min-height: 100px;
     background-color: var(--clr-white);
     cursor: pointer;
@@ -24,8 +23,7 @@
 }
 
 .note-preview:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* 👈 צל חזק יותר */
-    transform: translateY(-1px);              /* 👈 קופץ קצת למעלה */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
 

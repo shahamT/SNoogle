@@ -48,7 +48,7 @@ export function NoteImgCreate({ onSaveNote, onClose }) {
 
   function handleTitleChange(ev) {
     setTitle(ev.target.value)
-}
+  }
 
   function handleReset(ev) {
     ev.preventDefault()
@@ -61,27 +61,24 @@ export function NoteImgCreate({ onSaveNote, onClose }) {
 
   return (
     <form className="add-note-create-container" onSubmit={handleSubmit}>
-      <button type="button" className="pin-add-btn icon-btn pin" onClick={() => setIsPinned(prev => !prev)}></button>
-      <input
-        className="add-title"
-        value={title}
-        onChange={handleTitleChange}
-        type="text"
-        name="title"
-        placeholder="Title:"
-      />
 
-<label className="img-upload-btn icon-btn">
-  Upload Image
-  <input type="file" accept="image/*" onChange={handleFileUpload} hidden />
-</label>
-      {imgUrl && <img src={imgUrl} alt="Uploaded preview" style={{ maxWidth: '100%' }} />}
+      <div className="header flex">
+        <input className="add-title clean-input" value={title} onChange={handleTitleChange} type="text" name="title" id="title" placeholder="Title" />
+        <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+      </div>
 
 
-      <button className="add-reset icon-btn" type="reset" onClick={handleReset}>Reset</button>
-      <button className="add-submit icon-btn bookmark" type="submit">Save</button>
-      <button className="create-close-btn icon-btn" type="button" onClick={onClose}>Close</button>
+      {imgUrl && <img className="img-Preview" src={imgUrl} alt="Uploaded preview" style={{ maxWidth: '100%' }} />}
+      <label className="img-upload-btn">
+        Upload Image
+        <input type="file" accept="image/*" onChange={handleFileUpload} hidden />
+      </label>
 
+      <div className="action-btns flex">
+        <button className="add-reset text-btn" type="reset" onClick={handleReset}>Reset</button>
+        <button className="add-submit text-btn" type="submit">Save</button>
+        <button className="create-close-btn text-btn" type="button" onClick={onClose}>Close</button>
+      </div>
 
     </form>
   )

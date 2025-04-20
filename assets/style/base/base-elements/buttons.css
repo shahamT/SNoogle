@@ -125,7 +125,7 @@
 
 .icon-btn.img-uploade::after {
     content: "\f03e";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.pin::after {
@@ -174,7 +174,7 @@
 
 .icon-btn.image::after {
     content: "\f03e";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.inbox::after {
@@ -193,7 +193,7 @@
 
 .icon-btn.square-check::after {
     content: "\f14a";
-    font-family: fa;
+    font-family: fa-regular;
 }
 
 .icon-btn.note-sticky::after {

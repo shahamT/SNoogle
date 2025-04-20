@@ -214,7 +214,7 @@ export function NoteIndex({ isSideNavPinned }) {
         <div className='note-index grid'>
             <NoteSideNav isSideNavPinned={isSideNavPinned} />
 
-            <section className="note-add  ">
+            <section className="note-add-container">
                 <NoteAdd addNoteType={addNoteType} noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} onAddNoteTypeChange={onAddNoteTypeChange} onSaveNote={onSaveNote} onClose={onClose} />
             </section >
             <NoteList onStyleSave={onStyleSave} notes={notes} openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />

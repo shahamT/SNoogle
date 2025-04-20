@@ -29,28 +29,29 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
     // if (!noteTxtEdit.info) return <div>Loading...</div>
     return (
 
-        <form onSubmit={(ev) => {onSaveNote(ev, noteTxtEdit)}}
-         className="add-note-create-container">
-            <button className="pin-add-btn icon-btn pin" name="isPinned" onClick={handleChange}></button>
+        <form onSubmit={(ev) => { onSaveNote(ev, noteTxtEdit) }}
+            className="add-note-create-container">
 
-            <label htmlFor="title">
-                <input className="add-title" value={title} onChange={handleChange} type="text" name="title" id="title" placeholder="Title:" />
-            </label>
+            <div className="header flex">
+                <input className="add-title clean-input" value={title} onChange={handleChange} type="text" name="title" id="title" placeholder="Title" />
+                <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+            </div>
 
-            <label className="add-txt" htmlFor="txt">
-                <textarea
-                    value={txt}
-                    onChange={handleChange}
-                    name="txt"
-                    placeholder="Take a note..."
-                    rows={4}
-                    cols={40} />
-            </label>
+            <textarea
+                className="note-txt-input clean-input"
+                value={txt}
+                onChange={handleChange}
+                name="txt"
+                placeholder="Take a note..."
+                rows={4}
+                cols={40}
+            />
 
-            <button className="add-reset icon-btn " type="reset">Reset edits</button>
-            <button className="add-submit icon-btn bookmark" type="submit">Save post</button>
-
-            <button className="create-close-btn icon-btn" type="button" onClick={onClose}>Close</button>
+            <div className="action-btns flex">
+                <button className="add-reset text-btn" type="reset">Reset</button>
+                <button className="add-submit text-btn" type="submit">Save</button>
+                <button className="create-close-btn text-btn" type="button" onClick={onClose}>Close</button>
+            </div>
         </form>
     )
 }

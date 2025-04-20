@@ -3,17 +3,7 @@
 .note-list{
   grid-auto-flow: dense;
 
-  padding-top: 2em;
-  align-self: start;
   grid-template-columns: repeat(auto-fit, 200px);
-  gap: 0.4em;
+  gap: 16px;
   justify-content: center;
 }
-
-.note-list li {
-  background: #f2f2f2;
-  border-radius:var(--border-radius-md);
-  border: 1px solid var(--clr-gray-300);
-  padding: 1rem;
-}
-

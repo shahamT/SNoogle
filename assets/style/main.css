@@ -49,7 +49,9 @@
 @import 'cmps/notes/note-list.css';
 @import 'cmps/notes/note-preview.css';
 @import 'cmps/notes/note-side-nav.css';
-@import 'cmps/notes/note-add.css';
+@import 'cmps/notes/note-add-container.css';
+@import 'cmps/notes/note-add-collapssed.css';
+@import 'cmps/notes/note-create-components.css';
 @import 'cmps/notes/note-todo.css';
 @import 'cmps/notes/color-input.css';
 @import 'cmps/notes/note-edit-modal.css';

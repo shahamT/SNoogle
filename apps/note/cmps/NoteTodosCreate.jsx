@@ -1,4 +1,4 @@
-const { useState, useRef,useEffect } = React
+const { useState, useRef, useEffect } = React
 
 export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
     const { title = '', todos: initialTodos = [] } = noteToEdit.info || {}
@@ -13,10 +13,10 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
 
     useEffect(() => {
         if (pendingFocusIndex !== null) {
-          inputRefs.current[pendingFocusIndex].focus()
-          setPendingFocusIndex(null)
+            inputRefs.current[pendingFocusIndex].focus()
+            setPendingFocusIndex(null)
         }
-      }, [todos])
+    }, [todos])
 
 
 
@@ -48,7 +48,7 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
             ev.preventDefault()
             const currentTxt = todos[idx].txt.trim()
             if (!currentTxt) return
-            
+
             const newTodo = { txt: '', doneAt: null }
             setTodos(prev => {
                 const copy = [...prev]
@@ -80,26 +80,15 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
         setCurrTitle('')
         setIsPinned(false)
         setTodos([{ txt: '', doneAt: null }])
-      }
+    }
 
     return (
         <form onSubmit={handleSubmit} className="add-note-create-container">
-            <button
-                type="button"
-                className="pin-add-btn icon-btn pin"
-                onClick={() => setIsPinned(prev => !prev)}
-            >
 
-            </button>
-
-            <input
-                className="add-title"
-                value={currTitle}
-                onChange={handleTitleChange}
-                type="text"
-                name="title"
-                placeholder="Title:"
-            />
+            <div className="header flex">
+                <input className="add-title clean-input" value={title} onChange={handleTitleChange} type="text" name="title" id="title" placeholder="Title" />
+                <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+            </div>
 
             <ul className="todo-list clean-list">
                 {todos.map((todo, idx) => (
@@ -116,14 +105,16 @@ export function NoteTodosCreate({ onSaveNote, onClose, noteToEdit }) {
                             onChange={(ev) => handleTextChange(ev, idx)}
                             onKeyDown={(ev) => handleEnter(ev, idx)}
                             placeholder="List item"
+                            className="clean-input"
                         />
                     </li>
                 ))}
             </ul>
-
-            <button className="add-reset icon-btn" type="reset" onClick={handleReset}>Reset</button>
-            <button className="add-submit icon-btn bookmark" type="submit">Save</button>
-            <button className="create-close-btn icon-btn" type="button" onClick={onClose}>Close</button>
+            <div className="action-btns flex">
+                <button className="add-reset text-btn" type="reset" onClick={handleReset}>Reset</button>
+                <button className="add-submit text-btn bookmark" type="submit">Save</button>
+                <button className="create-close-btn text-btn" type="button" onClick={onClose}>Close</button>
+            </div>
         </form>
     )
 }

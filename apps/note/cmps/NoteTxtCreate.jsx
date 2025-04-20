@@ -21,7 +21,13 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
         }))
     }
 
-
+    function handleReset(ev) {
+        ev.preventDefault()
+        setNoteTxtEdit(prev =>({
+            ...prev,
+            info:{ title: '', txt: '' }
+        }))
+    }
 
 
     const { title, txt } = noteTxtEdit.info
@@ -48,7 +54,7 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
             />
 
             <div className="action-btns flex">
-                <button className="add-reset text-btn" type="reset">Reset</button>
+                <button className="add-reset text-btn" type="reset" onClick={handleReset}>Reset</button>
                 <button className="add-submit text-btn" type="submit">Save</button>
                 <button className="create-close-btn text-btn" type="button" onClick={onClose}>Close</button>
             </div>

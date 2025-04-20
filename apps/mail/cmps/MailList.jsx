@@ -1,9 +1,3 @@
-// === React
-// const { useState, useEffect, useRef } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
-
-// === Services
-
 // === Child Components
 import { Loader } from "../../../cmps/general/Loader.jsx";
 import { MailPreview } from "./MailPreview.jsx";
@@ -20,42 +14,54 @@ export function MailList({
     checkedMails,
     onRemoveMail,
     onMarkUnRead,
-    addParam }) {
+    addParam,
+    isLoading }) {
 
-    // === Hooks
+    if (!mails) return (
+        <section className="mail-list loader-wraper flex" >
+            <Loader
+                size={6}
+                width={8}
+                color="#EA4335"
+                speed="2"
+                textSize={1.2}
+            />
 
-    // === Effects
+        </section>
+    )
 
-    // === Functions
 
-    // size = 1,
-    // width = 3,
-    // speed = 0.8,
-    // color = '#fff',
-    // type = 'inline',
-    // text = '',
-    // textSize = 1,
-    // textPad = 1,
-    // textPos = 'bottom'
-
-    if (!mails) return <Loader size={3} type="cover" />
     return (
         <section className="mail-list scrollable-content flex flex-column" >
 
-            {mails.map(mail => {
-                return <MailPreview
-                    key={mail.id}
-                    mail={mail}
-                    onMarkRead={onMarkRead}
-                    onToogleStarred={onToogleStarred}
-                    onToogleChecked={onToogleChecked}
-                    checkedMails={checkedMails}
-                    onRemoveMail={onRemoveMail}
-                    onMarkUnRead={onMarkUnRead}
-                    addParam={addParam}
-                />
-            })}
-
+            {isLoading &&
+                <div className="loader-wraper flex" >
+                    <Loader
+                        size={6}
+                        width={8}
+                        color="#EA4335"
+                        speed="2"
+                        textSize={1.2}
+                    />
+                </div>}
+            {!isLoading &&
+                <React.Fragment>
+                    {mails.length === 0 && <img className="emails-empty-state" src="assets\img\empty-state\mail-empty-state.png" alt="" />}
+                    {mails.map(mail => {
+                        return <MailPreview
+                            key={mail.id}
+                            mail={mail}
+                            onMarkRead={onMarkRead}
+                            onToogleStarred={onToogleStarred}
+                            onToogleChecked={onToogleChecked}
+                            checkedMails={checkedMails}
+                            onRemoveMail={onRemoveMail}
+                            onMarkUnRead={onMarkUnRead}
+                            addParam={addParam}
+                        />
+                    })}
+                </React.Fragment>
+            }
 
         </section>
     )

@@ -1,18 +1,9 @@
 // === React
-// const { useState, useEffect, useRef } = React
 const { useEffect, useState } = React
-// const { Routes, Route, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { useNavigate, useLocation } = ReactRouterDOM
 
-
-import { useEffectUpdate } from "../../../custom-hooks/useEffectUpdate.js"
 // === Services
 import { elapsedTime } from "../../../services/util.service.js"
-import { mailService } from "../services/mail.service.js"
-
-// === Child Components
-
-
 
 
 // ====== Component ======
@@ -102,6 +93,7 @@ export function MailPreview({
     const isDraftClass = sentAt ? '' : 'draft'
     const timeStampToShow = sentAt ? sentAt : createdAt
 
+    
     return (
         <article className={`mail-preview flex ${isReadClass} ${isDraftClass}`} onClick={onOpenMail}>
             <label className="checkbox-wrapper" onClick={e => e.stopPropagation()}>

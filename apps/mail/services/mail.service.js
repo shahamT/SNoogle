@@ -167,6 +167,8 @@ function getParamsFromSearchParams(searchParams) {
     const lables = searchParams.get('lables') || ''
     const filterfrom = searchParams.get('filterfrom') || ''
     const filterto = searchParams.get('filterto') || ''
+    const newsubject = searchParams.get('newsubject') || ''
+    const newbody = searchParams.get('newbody') || ''
 
     const cleanParams = getTruthyValues({
         compose,
@@ -175,6 +177,8 @@ function getParamsFromSearchParams(searchParams) {
         lables,
         filterfrom,
         filterto,
+        newsubject,
+        newbody,
     })
 
     return cleanParams

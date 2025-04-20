@@ -104,4 +104,5 @@
 .mail-view .mail-body {
     grid-column: 2/4;
     grid-row: 4;
+    white-space: pre-wrap;
 }

@@ -45,16 +45,10 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
             }}></button>
 
             <div className="note-content-wraper">
-                <NoteType note={note} updateTodo={updateTodo}  />
+                <NoteType note={note} updateTodo={updateTodo} />
             </div>
 
             <div className="action-btns flex">
-
-                <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
-                    e.stopPropagation()
-                    onDuplicate(note.id)
-                }}></button>
-
                 <button
                     className="color-note-btn icon-btn palette"
                     onClick={(e) => {
@@ -64,6 +58,10 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
                         }
                     }}
                 ></button>
+                <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
+                    e.stopPropagation()
+                    onDuplicate(note.id)
+                }}></button>
 
                 <button className="delete-note-btn icon-btn trash-can" onClick={(e) => {
                     e.stopPropagation()

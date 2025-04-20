@@ -1,7 +1,7 @@
 import { noteService } from "../services/note.service.js"
 
 const { useState, useEffect } = React
-const { Routes, Route, useNavigate } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
 export function NoteTxtCreate({ onSaveNote, handleChange, onClose,noteToEdit }) {
     // === Hooks
@@ -45,7 +45,7 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose,noteToEdit }) 
 
     const { title, txt } = noteTxtEdit.info
     const { isPinned } = noteTxtEdit
-    // if (!noteTxtEdit.info) return <div>Loading...</div>
+    if (!noteTxtEdit) return <div>Loading...</div>
     return (
 
         <form onSubmit={(ev) => { onSaveNote(ev, noteTxtEdit) }}

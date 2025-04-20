@@ -3,6 +3,9 @@ import { NotePreview } from "./NotePreview.jsx"
 
 
 export function NoteList({ onStyleSave, openColorNoteId, setOpenColorNoteId, notes, onRemove, onSetPin, updateTodo, onDuplicate }) {
+       
+
+
         return (
                 <section className="note-list">
                         {notes.map(note =>

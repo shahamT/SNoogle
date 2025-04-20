@@ -4,10 +4,9 @@ export function NoteImg({ note }) {
 
     return <article className='note-img'>
         
-        <img src={url} alt="" /> 
-        <h1>{title}</h1>
+        <h3 className='title'>{title}</h3>
+        <img className='img' src={url} alt="" /> 
         
-       
     </article>
 
 }

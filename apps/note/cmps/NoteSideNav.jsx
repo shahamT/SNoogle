@@ -52,8 +52,17 @@ const intervalId = useRef()
                         </NavLink>
                     </li>
                     <li>
+                    <NavLink to={{ pathname: '/notes/texts', search: location.search }}
+                            className="txt-btn flex"
+                            onMouseOver={onOpenSideNav}
+                            onMouseOut={onCloseSideNav} >
+                                <p className="title">Texts</p>
+                                <p className="attribute"></p>
+                        </NavLink>
+                    </li>
+                    <li>
                     <NavLink to={{ pathname: '/notes/todos', search: location.search }}
-                            className="starred-btn flex"
+                            className="todos-btn flex"
                             onMouseOver={onOpenSideNav}
                             onMouseOut={onCloseSideNav} >
                                 <p className="title">To-dos</p>
@@ -66,24 +75,6 @@ const intervalId = useRef()
                             onMouseOver={onOpenSideNav}
                             onMouseOut={onCloseSideNav} >
                                 <p className="title">Images</p>
-                                <p className="attribute"></p>
-                        </NavLink>
-                    </li>
-                    <li>
-                    <NavLink to={{ pathname: '/notes/archive', search: location.search }}
-                            className="trash-btn flex"
-                            onMouseOver={onOpenSideNav}
-                            onMouseOut={onCloseSideNav} >
-                                <p className="title">Archive</p>
-                                <p className="attribute"></p>
-                        </NavLink>
-                    </li>
-                    <li>
-                    <NavLink to={{ pathname: '/notes/trash', search: location.search }}
-                            className="trash-btn flex"
-                            onMouseOver={onOpenSideNav}
-                            onMouseOut={onCloseSideNav} >
-                                <p className="title">Trash</p>
                                 <p className="attribute"></p>
                         </NavLink>
                     </li>

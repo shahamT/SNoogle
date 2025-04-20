@@ -1,50 +1,40 @@
 .note-preview {
+    position: relative;
+    break-inside: avoid; 
+    
+    display: flex;
+    flex-direction: column;
+
+    border: 0.5px solid var(--clr-gray-150);
+    padding-inline:8px;
+    padding-block-end:4px;
+    padding-block-start:8px;
     min-height: 100px;
+    margin-block-end: 16px;
+
     background-color: var(--clr-white);
     cursor: pointer;
     border-radius: var(--border-radius-md);
-    border: 0.5px solid var(--clr-gray-300);
-    box-shadow: 0 2px 8px rgba(133, 129, 129, 0.15);
     transition: box-shadow 0.2s ease, transform 0.2s ease;
-    padding: 0.5em;
-
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-        ". . . . . pin"
-        "main main main main main main"
-        ". . . . . . "
-        "pickColor duplicate . . . delete ";
-
-
-
 }
 
 .note-preview:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-
-
-.note-preview:hover>button {
-    /* display: block;         */
-    opacity: 1;
-    pointer-events: auto;
-    transition: opacity .5s ease-out, transform .5s ease-out;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.25);
 }
 
 
-.note-preview>button {
-    /* display: none; */
-    justify-self: end;
-    align-self: end;
-    width: 30px;
-    height: 30px;
+.note-preview .pin-note-btn {
+    position: absolute;
+    right: 4px;
+    top: 4px;
 
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .5s ease-out, transform .5s ease-out;
+    height: 32px !important;
+    width: 32px !important;
+}
+
+.note-preview .pin-note-btn.pinned {
+    opacity: 1 !important;
+    color: var(--clr-gray-700);
 
 }
 
@@ -54,34 +44,32 @@
     grid-area: main;
 }
 
-.pin-note-btn {
-    grid-area: pin;
 
+.note-preview .action-btns {
+    margin-block-start: auto;
 }
+.note-preview .action-btns button{
+    margin-block-start: auto;
+
+    width: 30px;
+    height: 30px;
+}
+
+
+.note-preview .action-btns,
+.note-preview .pin-note-btn {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .5s ease-out, transform .5s ease-out;
+}
+.note-preview:hover .action-btns,
+.note-preview:hover .pin-note-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 .delete-note-btn {
-    grid-area: delete;
+    margin-inline-start: auto;
 
-
-}
-
-.color-note-btn{
-    grid-area: pickColor;
-}
-
-
-.pinned {
-    opacity: 1 !important;
-}
-
-.pinnedpin-note-btn .un-pin {
-    display: none;
-}
-
-.pinnedpin-note-btn:hover .un-pin {
-    display: inline-block;
-}
-
-.duplicate-note-btn {
-    grid-area: duplicate;
 }

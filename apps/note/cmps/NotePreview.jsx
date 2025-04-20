@@ -39,24 +39,38 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
 
 
     return (
-        <article className="note-preview" style={noteStyle} onClick={() => {onOpenNote(note.id)}} >
-            <NoteType note={note} updateTodo={updateTodo} />
-
-            <button className="delete-note-btn icon-btn trash-can" onClick={(e) => {e.stopPropagation()
-                onRemove(note.id)}}></button>
-            <button className={`pin-note-btn icon-btn pin ${note.isPinned ? 'pinned' : ''}`} onClick={(e) => {e.stopPropagation()
-                 onSetPin(note.id)}}></button>
-            <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
+        <article className="note-preview" style={noteStyle} onClick={() => { onOpenNote(note.id) }} >
+            <button className={`pin-note-btn icon-btn medium pin ${note.isPinned ? 'pinned' : ''}`} onClick={(e) => {
                 e.stopPropagation()
-                onDuplicate(note.id)}}></button>
+                onSetPin(note.id)
+            }}></button>
 
+            <div className="note-content-wraper">
+                <NoteType note={note} updateTodo={updateTodo} />
+            </div>
 
-            <button
-                className="color-note-btn icon-btn palette"
-                onClick={(e) => {{e.stopPropagation()
-                    setOpenColorNoteId(isColorPalleteOpen ? null : note.id)
-                }}}
-            ></button>
+            <div className="action-btns flex">
+
+                <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
+                    e.stopPropagation()
+                    onDuplicate(note.id)
+                }}></button>
+
+                <button
+                    className="color-note-btn icon-btn palette"
+                    onClick={(e) => {
+                        {
+                            e.stopPropagation()
+                            setOpenColorNoteId(isColorPalleteOpen ? null : note.id)
+                        }
+                    }}
+                ></button>
+
+                <button className="delete-note-btn icon-btn trash-can" onClick={(e) => {
+                    e.stopPropagation()
+                    onRemove(note.id)
+                }}></button>
+            </div>
 
             {isColorPalleteOpen && (
                 <ColorInput note={note} onSetColorStyle={onSetColorStyle} backgroundColor={noteStyle.backgroundColor} />

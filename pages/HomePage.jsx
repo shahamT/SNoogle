@@ -5,7 +5,7 @@ const { useEffect, useRef } = React
 const { useNavigate } = ReactRouterDOM
 
 // === Services
-import { animateCSS } from "../services/util.service.js"
+import { animateCSS } from "../../services/util.service.js"
 
 // === Child Components
 

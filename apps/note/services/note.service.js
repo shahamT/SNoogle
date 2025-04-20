@@ -25,13 +25,35 @@ function query(filterBy = { txt: '' }) {
     .then(notes => {
       notes.sort((a, b) => (b.isPinned === true) - (a.isPinned === true))
 
-      if (!filterBy.txt) return notes
-      const regExp = new RegExp(filterBy.txt, 'i')
-      return notes.filter(note =>
-        regExp.test(note.type) ||
-        regExp.test(note.info.txt || '') ||
-        regExp.test(note.info.title || '')
-      )
+      if (filterBy.txt) {
+        const regExp = new RegExp(filterBy.txt, 'i')
+        notes.filter(note =>
+          regExp.test(note.type) ||
+          regExp.test(note.info.txt || '') ||
+          regExp.test(note.info.title || '')
+        )
+      }
+
+      if (filterBy.status) {
+        switch (filterBy.status) {
+          case "main":
+            break
+          case "texts":
+            notes = notes.filter(note => note.type === 'NoteTxt'
+            )
+            break
+          case "images":
+            notes = notes.filter(note => note.type === 'NoteImg'
+            )
+            break
+          case "todos":
+            notes = notes.filter(note => note.type === 'NoteTodos'
+            )
+            break
+        }
+      }
+      return notes
+
     })
 }
 function post(noteId) {

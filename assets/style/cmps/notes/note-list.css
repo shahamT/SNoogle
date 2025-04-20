@@ -1,9 +1,7 @@
+.note-list {
+  padding-inline: 80px;
+  column-width: 200px;    
+  column-gap: 16px;
+  
 
-
-.note-list{
-  grid-auto-flow: dense;
-
-  grid-template-columns: repeat(auto-fit, 200px);
-  gap: 16px;
-  justify-content: center;
 }

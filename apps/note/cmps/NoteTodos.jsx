@@ -18,11 +18,10 @@ export function NoteTodos({ note, updateTodo }) {
 
     return (
         <article className='note-todos'>
-
-            <h1>{title}</h1>
+            <h3 className='title'>{title}</h3>
             {todos.map((todo, index) => (
                 <div key={index} className={`todo-line ${(todo.doneAt !== null) ? '--crossed-todo' : ''} `}>
-                    <input type="checkbox" name="doneAt" checked={!!todo.doneAt}
+                    <input className='checkbox' type="checkbox" name="doneAt" checked={!!todo.doneAt}
                         onClick={e => e.stopPropagation()}
                         onChange={e => {
                             e.stopPropagation()

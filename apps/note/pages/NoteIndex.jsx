@@ -34,7 +34,7 @@ export function NoteIndex({ isSideNavPinned }) {
 
     useEffect(() => {
 
-        const m = pathname.match(/^\/notes\/(todos|images|archive|trash|main)/)
+        const m = pathname.match(/^\/notes\/(todos|images|texts|main)/)
         if (!m) return
         const newStatus = m[1]
 

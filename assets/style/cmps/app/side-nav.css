@@ -151,6 +151,14 @@
     content: "\f0e0";
     font-family: fa-regular;
 }
+.side-nav .side-nav-list a.txt-btn::before {
+    content: "\f036";
+    font-family: fa;
+}
+.side-nav .side-nav-list a.todos-btn::before {
+    content: "\f14a";
+    font-family: fa-regular;
+}
 
 
 

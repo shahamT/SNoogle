@@ -29,6 +29,18 @@
 
 .main-header-content-wraper .side-nav-btn {
     padding-top: 4px;
-    height: 50px ;
-    width: 50px ;
+    height: 50px;
+    width: 50px;
+}
+
+
+.main-header .apps-menu-btn {
+    padding-top: 6px;
+    margin-inline-start: auto;
+    height: 50px;
+    width: 50px;
+}
+
+.main-header .apps-menu-btn svg {
+    stroke: var(--clr-accent-base);
 }

@@ -1,16 +1,11 @@
 // === React
 const { useState, useEffect, useRef } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { useSearchParams, useParams, useLocation } = ReactRouterDOM
-
 
 // === Services
 import { mailService } from "../services/mail.service.js"
 import { debounce } from "../../../services/util.service.js"
 import { useEffectUpdate } from "../../../custom-hooks/useEffectUpdate.js"
-
-// === Child Components
-
 
 
 
@@ -20,7 +15,6 @@ import { useEffectUpdate } from "../../../custom-hooks/useEffectUpdate.js"
 export function MailCompose({ isComposeOpen, onCloseCompose, saveDraft }) {
     // === Hooks
     const [searchParams, setSearchParams] = useSearchParams()
-    // const { mailId, NoteAppMail } = useParams()
 
     const [mail, setMail] = useState(mailService.getEmptyMail())
     const [mailToEdit, setMailToEdit] = useState({ ...mail })
@@ -40,10 +34,6 @@ export function MailCompose({ isComposeOpen, onCloseCompose, saveDraft }) {
         setMailToEdit({ ...mail })
     }, [])
 
-
-    // useEffectUpdate(() => {
-    //     debouncedSaveDraft(mailToEdit)
-    // }, [setMailToEdit])
 
     useEffect(() => {
         const composeParam = searchParams.get('compose')

@@ -3,7 +3,7 @@
 import { mailService } from "../services/mail.service.js"
 
 // const { useState, useEffect, useRef } = React
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 // const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { useSearchParams } = ReactRouterDOM
 
@@ -30,11 +30,13 @@ export function MailFilterBar({
 
     // === Effects
     useEffect(() => {
-        const fromParam = searchParams.get('filterfrom')
-        const toParam = searchParams.get('filterto')
-        setStartDate(fromParam)
-        setEndDate(toParam)
-    }, [searchParams])
+        const fromParam = searchParams.get('filterfrom') || '';
+        const toParam = searchParams.get('filterto') || '';
+
+        setStartDate(isValidDate(fromParam) ? fromParam : '');
+        setEndDate(isValidDate(toParam) ? toParam : '');
+    }, [searchParams]);
+
 
     // === Functions
 
@@ -51,39 +53,57 @@ export function MailFilterBar({
         return params
     }
 
-    // function addParam(key, value) {
-    //     const params = mailService.getParamsFromSearchParams(searchParams)
-    //     params[key] = value
-    //     setSearchParams(params)
-    //     return params
-    // }
+    function isValidDate(str) {
+        const isoPattern = /^\d{4}-\d{2}-\d{2}$/
+        return isoPattern.test(str) && !Number.isNaN(Date.parse(str))
+    }
 
+
+
+    // FROM picker changed
     function handleStartChange(ev) {
-        const newStart = ev.target.value
+        const rawStart = ev.target.value;
+        const newStart = isValidDate(rawStart) ? rawStart : ''
+
+        // keep range valid
         const newEnd = endDate && newStart > endDate ? newStart : endDate
 
         setStartDate(newStart)
         setEndDate(newEnd)
-        addParams([{ filterfrom: newStart }, { filterto: newEnd }])
+
+        addParams([
+            { filterfrom: newStart },
+            { filterto: newEnd }
+        ]);
     }
 
+    // Clear FROM picker
     function onClearStartDate() {
-        setStartDate(null)
-        addParams([{ filterfrom: undefined }])
+        setStartDate('');
+        addParams([{ filterfrom: '' }])
     }
 
+    // TO picker changed
     function handleEndChange(ev) {
-        const newEnd = ev.target.value
+        const rawEnd = ev.target.value;
+        const newEnd = isValidDate(rawEnd) ? rawEnd : ''
+
+        // keep range valid
         const newStart = startDate && newEnd < startDate ? newEnd : startDate
 
         setStartDate(newStart)
         setEndDate(newEnd)
-        addParams([{ filterfrom: newStart }, { filterto: newEnd }])
+
+        addParams([
+            { filterfrom: newStart },
+            { filterto: newEnd }
+        ]);
     }
 
+    // Clear TO picker
     function onClearEndDate() {
-        setEndDate(null)
-        addParams([{ filterto: undefined }])
+        setEndDate('');
+        addParams([{ filterto: '' }])
     }
 
 
@@ -108,7 +128,8 @@ export function MailFilterBar({
                 <label>From</label>
                 <div className="input-wraper">
                     {startDate && <button className="clear-btn icon-btn medium xmark" onClick={onClearStartDate}></button>}
-                    <input type="date"
+                    <NativeDateInput
+                        type="date"
                         value={startDate}
                         max={endDate || undefined}
                         onChange={handleStartChange}
@@ -118,9 +139,10 @@ export function MailFilterBar({
                 <label>To </label>
                 <div className="input-wraper">
                     {endDate && <button className="clear-btn icon-btn medium xmark" onClick={onClearEndDate}></button>}
-                    <input type="date"
-                        value={endDate}
-                        min={startDate || undefined}
+                    <NativeDateInput
+                        type="date"
+                        value={startDate}
+                        max={endDate || undefined}
                         onChange={handleEndChange}
                     />
                 </div>
@@ -128,4 +150,25 @@ export function MailFilterBar({
 
         </section>
     )
+}
+
+
+
+
+export function NativeDateInput(props) {
+    const ref = useRef(null);
+
+    function openPicker() {
+        if (ref.current && typeof ref.current.showPicker === 'function') {
+            ref.current.showPicker();
+        }
+    }
+
+    return (
+        <input
+            {...props}
+            ref={ref}
+            onClick={openPicker}
+        />
+    );
 }

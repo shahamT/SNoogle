@@ -1,16 +1,11 @@
-.main-logo-wraper{
-min-width: fit-content;
+.main-logo-wraper {
+    min-width: fit-content;
     justify-self: start;
-cursor: pointer;
+    cursor: pointer;
 }
 
-.main-logo{
+.main-logo {
     height: 50px;
     object-fit: contain;
- 
+
 }
-/* .main-logo.app{
-    width: 300px;
-    object-fit: contain;
- 
-} */

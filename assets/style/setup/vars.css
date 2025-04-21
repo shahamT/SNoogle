@@ -25,18 +25,6 @@
 
   /* buttons */
   --clr-icn-btn-hover: rgba(0, 0, 0, 0.05);
-  --clr-secondary-l: ;
-  --clr-secondary-d: ;
-
-  /* brand */
-  --clr-br-green-base: ;
-  --clr-br-green-l: ;
-  --clr-br-green-d: ;
-
-  /* accent */
-  --clr-accent-base: ;
-  --clr-accent-l: ;
-  --clr-accent-d: ;
 
 
   /* === Grayscale === */
@@ -52,43 +40,9 @@
 
   /* bg colors */
   --clr-bg-light-base: #F8FAFD;
-  --clr-bg-light-l: ;
-  --clr-bg-light-d: ;
-
-  --clr-bg-dark-base: ;
-  --clr-bg-dark-l: ;
-  --clr-bg-dark-d: ;
-
-  --clr-bg-header: ;
-  --clr-bg-nav: ;
-  --clr-bg-card: ;
-  --clr-bg-modal: ;
-
-  /* success */
-
-  --clr-success-base: ;
-  --clr-success-l: ;
-  --clr-success-d: ;
-
-  /* error */
-  --clr-error-base: ;
-  --clr-error-l: ;
-  --clr-error-d: ;
-
-  /* warning */
-  --clr-warning-base: ;
-  --clr-warning-l: ;
-  --clr-warning-d: ;
-
-  /* disabled */
-  --clr-disabled-base: ;
-
-
-
 
   /* ============ FONTS ============ */
   --font-primary: Roboto, sans-serif;
-
 
 
   /* ============ SPACING ============ */
@@ -109,8 +63,6 @@
   --rem-spacing-lg: 2rem;
 
 
-  /* ============ SIZING / LAYOUT ============ */
-
   /* ============ BORDER & RADIUS ============ */
 
   --border-radius-sm: 4px;
@@ -120,10 +72,9 @@
 
 
   /* ============ SHADOWS ============ */
-  --box-shadow-1: inset 1px 0 0 rgb(218,220,224),inset -1px 0 0 rgb(218,220,224),0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15)
-  ;
-  --box-shadow-2:  rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  ;
+  --box-shadow-1: inset 1px 0 0 rgb(218, 220, 224), inset -1px 0 0 rgb(218, 220, 224), 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+  --box-shadow-2: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  
   --box-shadow-3: ;
   /* ============ Z-INDEX ============ */
 
@@ -140,5 +91,4 @@
   --transition-medium: 0.5s;
   --transition-slow: 0.7s;
   --transition-extra-slow: 1s;
-
 }

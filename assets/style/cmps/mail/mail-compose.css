@@ -22,7 +22,6 @@
 
     height: 44px;
     background-color: var(--clr-gray-100);
-
 }
 
 .mail-compose .compose-header .compose-title {
@@ -31,7 +30,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-
 }
 
 .mail-compose .compose-form {
@@ -39,7 +37,6 @@
 
     padding-inline: var(--px-spacing-md);
     padding-block-start: var(--px-spacing-sm);
-
 }
 
 .mail-compose .compose-form input,

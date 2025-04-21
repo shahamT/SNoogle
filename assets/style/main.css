@@ -61,7 +61,6 @@
 
 /* Mail Cmps */
 @import 'cmps/mail/mail-list.css';
-@import 'cmps/mail/mail-side-nav.css';
 @import 'cmps/mail/mail-filter-bar.css';
 @import 'cmps/mail/mail-preview.css';
 @import 'cmps/mail/mail-compose.css';

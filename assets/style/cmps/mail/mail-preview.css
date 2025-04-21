@@ -96,7 +96,6 @@
 
 .mail-preview .mail-action-btns{
     display: none;
-    
 }
 
 .mail-preview:hover .mail-action-btns{
@@ -108,7 +107,6 @@
 /* isRead */
 .mail-preview.is-read {
     background-color: #f2f6fc;
-
 }
 
 .mail-preview.is-read .mail-subject,

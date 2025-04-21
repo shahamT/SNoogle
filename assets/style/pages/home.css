@@ -39,7 +39,7 @@
 
 
 .home-page .apps-wraper {
-   grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 60px;
 }
 
@@ -99,4 +99,4 @@
 
 .home-page .hidden-before-anim {
     opacity: 0;
-  }
+}

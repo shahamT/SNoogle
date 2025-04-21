@@ -4,8 +4,6 @@
    grid-template-rows: auto auto 1fr;
    background-color: var(--clr-white);
    transition: grid-template-columns 0.2s;
-
-
 }
 
 

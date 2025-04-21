@@ -13,7 +13,6 @@
 
     height: 56px;
     padding-inline: var(--px-spacing-md);
-
 }
 
 
@@ -27,9 +26,6 @@
 
 
 
-
-
-
 /* ===== mail content ======== */
 .mail-view .mail-content {
     grid-template-columns: auto 1fr;
@@ -38,7 +34,6 @@
 
     padding-block-start: var(--px-spacing-mdl);
     padding-inline: var(--px-spacing-mdl);
-
 }
 
 .mail-view .mail-subject {
@@ -98,7 +93,6 @@
     color: var(--clr-gray-400);
 
     padding-block-end: var(--px-spacing-mdl);
-
 }
 
 .mail-view .mail-body {

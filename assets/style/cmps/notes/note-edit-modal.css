@@ -12,12 +12,11 @@
   align-items: center;
   z-index: 1000;
 
-input[type="text"]{
-  font-size: 1.5em;
-  margin-bottom: 1em;
+  input[type="text"] {
+    font-size: 1.5em;
+    margin-bottom: 1em;
 
-}
-
+  }
 
 
   input[type="checkbox"] {
@@ -39,7 +38,7 @@ input[type="text"]{
     background-color: transparent;
   }
 
-  textarea{
+  textarea {
     height: 100%;
   }
 
@@ -98,6 +97,7 @@ input[type="text"]{
 .modal-actions .icon-btn:hover {
   background-color: #f1f3f4;
 }
+
 .note-dialog {
   padding: 0;
   margin: 0;
@@ -106,10 +106,10 @@ input[type="text"]{
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
-.modal-notes-upload{
+.modal-notes-upload {
   display: flex;
   font-size: inherit;
   justify-content: space-around;
@@ -118,7 +118,6 @@ input[type="text"]{
   input[type="file"] {
     display: none;
   }
-
 }
 
 .img-modal .img-upload-btn {
@@ -136,11 +135,12 @@ input[type="text"]{
 }
 
 .img-modal .img-upload-btn:hover {
-background-color: var(--clr-gray-100);
-border-color: var(--clr-gray-300);;
+  background-color: var(--clr-gray-100);
+  border-color: var(--clr-gray-300);
+  ;
 }
 
-.img-modal .img-Preview{
+.img-modal .img-Preview {
   justify-self: center;
   border-radius: 16px;
 }

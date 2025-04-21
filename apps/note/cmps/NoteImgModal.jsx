@@ -31,7 +31,7 @@ export function NoteImagModal({ note, onSaveNoteEdit, onCloseModal }) {
     if (!note) return <div>Loading...</div>
 
     return (
-        <dialog open className="note-dialog">
+        <dialog open className="note-dialog img-modal">
             <div className="modal-backdrop">
                 <form
                     className="modal-window"

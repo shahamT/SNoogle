@@ -110,7 +110,6 @@ input[type="text"]{
 }
 
 .modal-notes-upload{
-  grid-area: img;
   display: flex;
   font-size: inherit;
   justify-content: space-around;
@@ -120,4 +119,28 @@ input[type="text"]{
     display: none;
   }
 
+}
+
+.img-modal .img-upload-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 80px;
+  border: 3px dashed var(--clr-gray-200);
+
+  border-radius: 16px;
+  color: var(--clr-gray-400);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.img-modal .img-upload-btn:hover {
+background-color: var(--clr-gray-100);
+border-color: var(--clr-gray-300);;
+}
+
+.img-modal .img-Preview{
+  justify-self: center;
+  border-radius: 16px;
 }

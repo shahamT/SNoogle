@@ -16,7 +16,7 @@
 
 .note-index .note-side-nav {
    grid-column: 1;
-   grid-row: 1/4;
+   grid-row: 1/5;
 }
 
 .note-index .note-search-bar {
@@ -30,7 +30,12 @@
 
 }
 
-.note-index .note-list {
+.note-index .note-list.pinned {
    grid-column: 2;
    grid-row: 3;
+}
+
+.note-index .note-list.regular {
+   grid-column: 2;
+   grid-row: 4;
 }

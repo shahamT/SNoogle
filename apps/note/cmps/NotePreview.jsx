@@ -26,7 +26,6 @@ export function NotePreview({
     const isColorPalleteOpen = openColorNoteId === note.id
 
     function onSetColorStyle(newStyle) {
-        // setNoteStyle(prevStyle => ({ ...prevStyle, ...newStyle }))
         const updatedNote = {
             ...note,
             style: {
@@ -81,12 +80,6 @@ export function NotePreview({
             </div>
 
             <div className="action-btns flex">
-
-                <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
-                    e.stopPropagation()
-                    onDuplicate(note.id)
-                }}></button>
-
                 <button
                     className="color-note-btn icon-btn palette"
                     onClick={(e) => {
@@ -96,6 +89,10 @@ export function NotePreview({
                         }
                     }}
                 ></button>
+                <button className={`duplicate-note-btn icon-btn duplicate`} onClick={(e) => {
+                    e.stopPropagation()
+                    onDuplicate(note.id)
+                }}></button>
 
                 <button
                     className="send-email-note-btn icon-btn envelope"

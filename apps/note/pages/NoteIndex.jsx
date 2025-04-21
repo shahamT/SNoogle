@@ -190,17 +190,12 @@ export function NoteIndex({ isSideNavPinned }) {
         return params
     }
 
-    // function onCloseModal(){
-    //     setNoteToEdit(null)
-    //     setNoteToEditId(null)
-    //     searchParams.delete('edit')
-    //     setSearchParams(searchParams)
-
-    // }
 
     function onClose() {
         navigate('/notes/main')
     }
+
+
 
     function onCloseModal() {
         setNoteToEdit(null)
@@ -220,9 +215,9 @@ export function NoteIndex({ isSideNavPinned }) {
             <NoteList onStyleSave={onStyleSave} notes={notes} openColorNoteId={openColorNoteId} setOpenColorNoteId={setOpenColorNoteId} onRemove={onRemove} onDuplicate={onDuplicate} updateTodo={updateTodo} onSetPin={onSetPin} />
             {editNoteId && noteToEdit && (
                 <NoteEditModal
-                    note={noteToEdit}
-                    onStyleSave={onStyleSave}
-                    onCloseModal={onCloseModal}
+                note={noteToEdit}
+                onStyleSave={onStyleSave}
+                onCloseModal={onCloseModal}
                 />
             )}
         </div>

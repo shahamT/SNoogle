@@ -1,9 +1,9 @@
 import { noteService } from "../services/note.service.js"
 
 const { useState, useEffect } = React
-const { Routes, Route, useNavigate } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
-export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit }) {
+export function NoteTxtCreate({ onSaveNote, handleChange, onClose,noteToEdit }) {
     // === Hooks
     const navigate = useNavigate()
     const [noteTxtEdit, setNoteTxtEdit] = useState(noteToEdit)
@@ -21,12 +21,31 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
         }))
     }
 
+    function hendlePinChange(ev) {
+        ev.preventDefault()
+        setNoteTxtEdit(prev => {
+            const update ={
+                ...prev,
+                isPinned: !prev.isPinned
+            }
+            return update
+        })
+    
+    }
 
+
+    function handleReset(ev) {
+        ev.preventDefault()
+        setNoteTxtEdit(prev => ({
+            ...prev,
+            info: { title: '', txt: '' }
+        }))
+    }
 
 
     const { title, txt } = noteTxtEdit.info
-    console.log(noteTxtEdit.info)
-    // if (!noteTxtEdit.info) return <div>Loading...</div>
+    const { isPinned } = noteTxtEdit
+    if (!noteTxtEdit) return <div>Loading...</div>
     return (
 
         <form onSubmit={(ev) => { onSaveNote(ev, noteTxtEdit) }}
@@ -34,7 +53,7 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
 
             <div className="header flex">
                 <input className="add-title clean-input" value={title} onChange={handleChange} type="text" name="title" id="title" placeholder="Title" />
-                <button className="pin-add-btn medium icon-btn pin" name="isPinned" onClick={() => setIsPinned(prev => !prev)}></button>
+                <button className={`pin-note-btn icon-btn medium ${isPinned ? 'un-pin' : 'pin'}`} name="isPinned" onClick={hendlePinChange}></button>
             </div>
 
             <textarea
@@ -48,7 +67,7 @@ export function NoteTxtCreate({ onSaveNote, handleChange, onClose, noteToEdit })
             />
 
             <div className="action-btns flex">
-                <button className="add-reset text-btn" type="reset">Reset</button>
+                <button className="add-reset text-btn" type="reset" onClick={handleReset}>Reset</button>
                 <button className="add-submit text-btn" type="submit">Save</button>
                 <button className="create-close-btn text-btn" type="button" onClick={onClose}>Close</button>
             </div>

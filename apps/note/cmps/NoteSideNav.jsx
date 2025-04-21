@@ -1,14 +1,6 @@
 // === React
-// const { useState, useEffect, useRef } = React
 const { useRef } = React
-// const { Routes, Route, Navigate, useParams, useNavigate, Link, useSearchParams } = ReactRouterDOM
 const { NavLink } = ReactRouterDOM
-
-// === Services
-
-// === Child Components
-
-
 
 
 // ====== Component ======
@@ -17,7 +9,7 @@ const { NavLink } = ReactRouterDOM
 export function NoteSideNav({ onOpenCompose, isSideNavPinned }) {
     // === Hooks
 const intervalId = useRef()
-    // === Effects
+ 
 
     // === Functions
     function onOpenSideNav() {
@@ -36,7 +28,6 @@ const intervalId = useRef()
     }
 
 
-    // if (!data) return <div>Loading...</div>
     return (
         <section className="note-side-nav side-nav flex flex-column">
 

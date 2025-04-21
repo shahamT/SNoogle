@@ -1,9 +1,4 @@
-
-
 export function NoteFilter() {
-
-
-
 
     return (
     <section className="note-filter ">
@@ -13,7 +8,5 @@ export function NoteFilter() {
       </div>
      
     </section>
-
-
     )
 }

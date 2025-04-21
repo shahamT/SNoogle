@@ -1,4 +1,4 @@
-const { useParams, useNavigate } = ReactRouterDOM
+const {useNavigate } = ReactRouterDOM
 
 
 import { LongTxt } from '../../../cmps/general/LongTxt.jsx'

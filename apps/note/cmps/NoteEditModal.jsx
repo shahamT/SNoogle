@@ -1,6 +1,6 @@
 
-const {useState,useEffect,useRef} = React
-const {useParams,useNavigate} = ReactRouterDOM
+const {useEffect,useRef} = React
+const {useNavigate} = ReactRouterDOM
 
 import { noteService } from "../services/note.service.js"
 
@@ -12,24 +12,12 @@ export function NoteEditModal({onCloseModal,onStyleSave,note}){
     const navigate = useNavigate()
     
     const dialogRef = useRef()
-    // const {noteId} = useParams()
-    // const[note,setNote] = useState(null)
-    
-    // useEffect(()=>{
-    //     loadNote()
-    // },[noteId])
-
 
 
     useEffect(() => {
         if (note && dialogRef.current) dialogRef.current.showModal()
       }, [note])
 
-    // function loadNote(){
-    //     noteService.get(noteId)
-    //     .then(note=>setNote(note))
-    //     .catch(err => console.log('err:', err))
-    // }
 
     function onSaveNoteEdit(ev, note) {
         ev.preventDefault()

@@ -1,12 +1,9 @@
 
 const { useState, useEffect } = React
-const {useNavigate} = ReactRouterDOM
 export function NoteTxtModal({ note,onSaveNoteEdit,onCloseModal }) {
 
     const [title, setTitle] = useState('')
     const [txt, setTxt] = useState('')
-
-    // const navigate = useNavigate()
 
     useEffect(() => {
         if (note) {
@@ -21,12 +18,10 @@ export function NoteTxtModal({ note,onSaveNoteEdit,onCloseModal }) {
     function handleReset(ev) {
         ev.preventDefault()
         setTitle('')
-        // setIsPinned(false)
         setTxt('')
       }
 
 
-    // const {title, txt} = note
     if (!note) return <div>Loading...</div>
     return (
       <dialog open className="note-dialog">

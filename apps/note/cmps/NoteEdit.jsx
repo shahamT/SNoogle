@@ -1,13 +1,5 @@
-
-
 export function NoteEdit({txt,title,onSaveNote,onClose, handleChange}) {
-    // === Hooks
 
-    // === Effects
-
-    // === Functions
-
-    // if (!data) return <div>Loading...</div>
     return (
         <form onSubmit={onSaveNote} className="add-note-create-container">
         <button className="pin-add-btn icon-btn pin" name="isPinned" onClick={handleChange}></button>

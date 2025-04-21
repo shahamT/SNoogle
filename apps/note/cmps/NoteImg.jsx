@@ -1,4 +1,3 @@
-
 export function NoteImg({ note }) {
     const { title, url } = note.info
 

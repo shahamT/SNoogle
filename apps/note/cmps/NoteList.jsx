@@ -1,14 +1,9 @@
-
 import { NotePreview } from "./NotePreview.jsx"
 
 
 export function NoteList({ onStyleSave, openColorNoteId, setOpenColorNoteId, notes, onRemove, onSetPin, updateTodo, onDuplicate }) {
         const pinnedNotes = notes.filter(note => note.isPinned)
         const unpinnedNotes = notes.filter(note => !note.isPinned)
-
-
-
-
 
 
         return (<React.Fragment>

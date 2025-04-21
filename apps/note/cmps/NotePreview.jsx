@@ -1,7 +1,6 @@
-const { useState, useEffect } = React
-const { useNavigate, useSearchParams } = ReactRouterDOM
+const { useState } = React
+const { useNavigate } = ReactRouterDOM
 import { ColorInput } from "./dynamic-inputs/ColorInput.jsx"
-import { NoteEditModal } from "./NoteEditModal.jsx"
 import { NoteImg } from "./NoteImg.jsx"
 import { NoteTodos } from "./NoteTodos.jsx"
 import { NoteTxt } from "./NoteTxt.jsx"
@@ -45,8 +44,6 @@ export function NotePreview({
 
     }
     
-    // http://127.0.0.1:5501/#/mail/inbox?compose=new&newsubject=hi&newbody=yo
-
     function sendNoteAsEmail() {
         switch (note.type) {
             case 'NoteTxt':

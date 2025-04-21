@@ -33,6 +33,8 @@ export function MailView({
         mailService.get(mailId)
             .then(mail => setMail(mail))
             .catch(err => console.log("err: ", err))
+            showErrorMsg(`somthing went wrong, could not load emails`)
+
     }
 
 

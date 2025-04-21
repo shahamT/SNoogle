@@ -76,7 +76,11 @@ export function MailIndex({ isSideNavPinned }) {
                 setIsLoading(false)
                 console.log("mails: ", mails)
             })
-            .catch(err => console.log("err: ", err))
+            .catch(err => {
+                console.log("err: ", err)
+                showErrorMsg(`somthing went wrong, could not load mails`)
+
+    })
     }
 
     function loadUnreadByStatus() {
@@ -143,6 +147,7 @@ export function MailIndex({ isSideNavPinned }) {
                     prevMails.find(mail => mail.id === mailToMark.id).isRead = false
                     return [...prevMails]
                 })
+                showErrorMsg(`somthing went wrong, could not mark mail as read`)
             })
     }
 
@@ -168,6 +173,7 @@ export function MailIndex({ isSideNavPinned }) {
                     prevMails.find(mail => mail.id === mailToMark.id).isRead = true
                     return [...prevMails]
                 })
+                showErrorMsg(`somthing went wrong, could not mark as unread`)
             })
     }
 
@@ -192,6 +198,7 @@ export function MailIndex({ isSideNavPinned }) {
                     prevMails.find(mail => mail.id === mailToStar.id).isStarred = boolean
                     return [...prevMails]
                 })
+                showErrorMsg(`somthing went wrong could not star/unstar`)
             })
     }
 

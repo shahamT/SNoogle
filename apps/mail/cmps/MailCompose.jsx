@@ -101,7 +101,7 @@ export function MailCompose({ isComposeOpen, onCloseCompose, saveDraft }) {
             })
             .catch(err => {
                 console.log("err: ", err)
-                showErrorMsg(`somthing went wrong ${err}`)
+                showErrorMsg(`somthing went wrong, could not save as draft`)
             })
     }
 

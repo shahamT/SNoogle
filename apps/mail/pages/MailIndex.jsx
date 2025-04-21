@@ -42,7 +42,11 @@ export function MailIndex({ isSideNavPinned }) {
         if (!m) return
         const newStatus = m[1]
 
-        setIsLoading(true)
+        // don't show loading i'f i'm writing an email...
+        const composeParam = searchParams.get('compose')
+        if (!composeParam){
+            setIsLoading(true)
+        }
 
         const params = addParam('status', newStatus) //TODO fix this
         loadMails(params)

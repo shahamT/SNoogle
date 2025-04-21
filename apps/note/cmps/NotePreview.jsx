@@ -6,7 +6,16 @@ import { NoteImg } from "./NoteImg.jsx"
 import { NoteTodos } from "./NoteTodos.jsx"
 import { NoteTxt } from "./NoteTxt.jsx"
 
-export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, note, onRemove, onSetPin, updateTodo, onDuplicate }) {
+export function NotePreview({
+    note,
+    onStyleSave,
+    openColorNoteId,
+    setOpenColorNoteId,
+    onRemove,
+    onSetPin,
+    updateTodo,
+    onDuplicate
+}) {
 
 
     const [noteStyle, setNoteStyle] = useState(note.style || { backgroundColor: 'white' })
@@ -36,6 +45,28 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
         navigate(`/notes/main?edit=${noteId}`)
 
     }
+    
+    // http://127.0.0.1:5501/#/mail/inbox?compose=new&newsubject=hi&newbody=yo
+
+    function sendNoteAsEmail() {
+        switch (note.type) {
+            case 'NoteTxt':
+                navigate(`/mail/inbox?compose=new&newsubject=${encodeURIComponent(note.info.title)}&newbody=${encodeURIComponent(note.info.txt)}`)
+                break
+            case 'NoteTodos':
+                let todosSTR = ''
+                note.info.todos.map(todo => {
+                    todosSTR+= todo.doneAt ? '✓ ' : '□ '
+                    todosSTR += todo.txt
+                    todosSTR += '\n'
+                })
+                navigate(`/mail/inbox?compose=new&newsubject=${encodeURIComponent(note.info.title)}&newbody=${encodeURIComponent(todosSTR)}`)
+                break
+            case 'NoteImg':
+                navigate(`/mail/inbox?compose=new&newsubject=${encodeURIComponent(note.info.title)}&newbody=${encodeURIComponent(note.info.url)}`)
+                break
+        }
+    }
 
 
     return (
@@ -62,6 +93,16 @@ export function NotePreview({ onStyleSave, openColorNoteId, setOpenColorNoteId, 
                         {
                             e.stopPropagation()
                             setOpenColorNoteId(isColorPalleteOpen ? null : note.id)
+                        }
+                    }}
+                ></button>
+
+                <button
+                    className="send-email-note-btn icon-btn envelope"
+                    onClick={(e) => {
+                        {
+                            e.stopPropagation()
+                            sendNoteAsEmail()
                         }
                     }}
                 ></button>
